@@ -7,5 +7,6 @@ import geektextteam9.com.geektext.model.Book;
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	public Book findByIsbn(String isbn);
+	public Book findByDescription (String description);
 
 }
