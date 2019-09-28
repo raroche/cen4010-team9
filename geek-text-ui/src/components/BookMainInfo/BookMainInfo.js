@@ -26,8 +26,8 @@ export default class BookMainInfo extends Component {
         <span className="mr-3">Genre: Novel</span>
         <span>|</span>
         <span className="ml-3"> Language: English</span>
-        <p>
-          <h5>Author: Deborah Shapiro (bio)</h5>
+        <p className="mt-2">
+          <strong>Author: Deborah Shapiro (bio)</strong>
         </p>
         <p>
           Deborah Shapiro was born and raised outside of Boston, Massachusetts.
