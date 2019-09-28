@@ -1,11 +1,5 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-
-import Image from "react-bootstrap/Image";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 export default class BookCard extends Component {
   render() {
@@ -14,7 +8,7 @@ export default class BookCard extends Component {
         <Card style={{ width: "18rem" }}>
           <Card.Img
             variant="top"
-            src="./imgs/Genre-Cover-200x300.png"
+            src="./book-cover.jpg"
             width="auto"
             height="250px"
           />
