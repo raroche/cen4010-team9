@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import NavBar from "./components/NavBar";
+import BooksGrid from "./components/BooksGrid";
 
 function App() {
   return (
     <div>
       <NavBar />
-      <div className="App">
-        <h1>Geek Text App - App.js</h1>
-      </div>
+      <BooksGrid />
     </div>
   );
 }

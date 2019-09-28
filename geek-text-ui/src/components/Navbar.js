@@ -11,7 +11,7 @@ export default class NavBar extends Component {
           <Navbar.Brand href="#home">Geek Text</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
+            <Nav className="mr-auto ml-5">
               <Nav.Link href="#features">Books</Nav.Link>
               <Nav.Link href="#pricing">Genres</Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
