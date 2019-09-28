@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <NavBar />
       <div className="App">
         <h1>Geek Text App - App.js</h1>
       </div>
