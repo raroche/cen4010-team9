@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 import BannerPhoto from "./BannerPhoto";
 
 function BannerCard(props) {
@@ -14,11 +15,15 @@ function BannerCard(props) {
     </div>
   );
 }
+=======
+import BannerCard from "./BannerCard";
+>>>>>>> Added Banner under navbar
 
 class Banner extends Component {
   constructor() {
     super();
     this.state = {
+<<<<<<< HEAD
       book: []
     };
   }
@@ -52,6 +57,22 @@ class Banner extends Component {
             cover={this.state.book.img_url}
             title={this.state.book.title}
           />
+=======
+      Books: [],
+      isLoading: false
+    };
+  }
+
+  render() {
+    return (
+      <div class="jumbotron jumbtron-fluid-sm transparent" type="../../App.css">
+        <h1>Recent Releases</h1>
+        <div class="row">
+          <BannerCard />
+          <BannerCard />
+          <BannerCard />
+          <BannerCard />
+>>>>>>> Added Banner under navbar
         </div>
       </div>
     );

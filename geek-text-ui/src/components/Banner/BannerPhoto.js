@@ -23,7 +23,11 @@ export default class BannerPhoto extends Component {
       <div>
         <a type="button" onClick={() => this.setState({ isOpen: true })}>
           <img
+<<<<<<< HEAD
             src={this.props.cover}
+=======
+            src={images[0]}
+>>>>>>> Added Banner under navbar
             height="150"
             width="100"
             padding="20px"
