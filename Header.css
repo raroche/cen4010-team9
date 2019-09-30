@@ -1,0 +1,28 @@
+.navbar {
+    width: 100%;
+    position: fixed;
+    background: #ffffff;
+    top: 0;
+    left: 0;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    justify-content: space-between;
+}
+
+.headerlogo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+}
+
+.navcontent {
+    width: 100%;
+    padding: 0px 20px 0px 0px;
+    display: flex;
+    float: right;
+    text-align: right;
+    justify-content: flex-end;
+}
