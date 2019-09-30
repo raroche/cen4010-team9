@@ -1,0 +1,9 @@
+li {
+  list-style-type: none;
+}
+
+.boxbg {
+  background-color: #f7f2ff;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 20px;
+}
