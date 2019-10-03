@@ -8,7 +8,7 @@ export default class BookCard extends Component {
         <Card style={{ width: "18rem" }}>
           <Card.Img
             variant="top"
-            src="./book-cover.jpg"
+            src="./imgs/book-small-Cover-200x300.png"
             width="auto"
             height="250px"
           />
