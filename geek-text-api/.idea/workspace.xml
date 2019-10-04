@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="877ff186-cddf-4daf-bc17-d8d625207fda" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/GeekTextApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/GeekTextApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/ws/BookRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/ws/BookRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../geek-text-ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../geek-text-ui/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../geek-text-ui/src/components/BookDetails/BookDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/../geek-text-ui/src/components/BookDetails/BookDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../geek-text-ui/src/components/NavBar/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../geek-text-ui/src/components/NavBar/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../geek-text-ui/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../geek-text-ui/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../geek-text-ui/src/components/BookMainContainer/BookMainContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../geek-text-ui/src/components/BookMainContainer/BookMainContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../geek-text-ui/src/components/BookMainInfo/BookMainInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../geek-text-ui/src/components/BookMainInfo/BookMainInfo.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -63,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/model/Book.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
@@ -89,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/ws/BookRestController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="e#975#976#0" expanded="true" />
                 <element signature="e#1030#1031#0" expanded="true" />
@@ -244,12 +241,12 @@
       <option name="presentableId" value="Default" />
       <updated>1568515339817</updated>
       <workItem from="1568515343766" duration="7587000" />
-      <workItem from="1570157154122" duration="1287000" />
+      <workItem from="1570157154122" duration="1801000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8874000" />
+    <option name="totallyTimeSpent" value="9388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="159" y="23" width="1821" height="1494" extended-state="0" />
@@ -350,13 +347,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/model/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/service/BookService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -394,13 +384,20 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/ws/BookRestController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1030#1031#0" expanded="true" />
             <element signature="e#1126#1127#0" expanded="true" />
             <element signature="e#1183#1184#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/model/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
         </state>
       </provider>
     </entry>

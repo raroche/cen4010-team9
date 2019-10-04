@@ -21,7 +21,7 @@ public class BookRestController {
 	public ResponseEntity<Book> save(@RequestBody Book book) {
 		return ResponseEntity.ok(bookService.save(book));
 	}
-	
+
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Book> findById(@PathVariable Integer id) {
 		return ResponseEntity.ok(bookService.findById(id));
