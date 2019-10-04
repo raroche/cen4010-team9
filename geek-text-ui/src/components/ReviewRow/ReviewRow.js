@@ -4,23 +4,23 @@ export default class ReviewRow extends Component {
   render() {
     return (
       <div>
-        <div class="container">
-          <div class="mt-5 justify-content-start">
+        <div className="container">
+          <div className="mt-5 justify-content-start">
             <ul>
-              <li class="boxbg">
+              <li className="boxbg">
                 <div>
                   <strong>
                     <span>A stunningly accurate portrayl of friendship</span>
                   </strong>
                   <span>by John Adams</span>
                   <br />
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
                   <span>4.7 out of 5 starts</span>
-                  <div class="mb-1 mt-4 ">
+                  <div className="mb-1 mt-4 ">
                     <p>
                       There are parts of this book so poignant they made me
                       weep, but almost none of them had to do with the

@@ -5,8 +5,8 @@ export default class ReviewsHeader extends Component {
     return (
       <div>
         <div className="container">
-          <div class="row">
-            <div class="col-8">
+          <div className="row">
+            <div className="col-8">
               <div className="mt-5 justify-content-start "></div>
               <h5>
                 <strong>Book Reviews:</strong>
@@ -22,7 +22,7 @@ export default class ReviewsHeader extends Component {
                 <p>20 Customer Reviews</p>
               </div>
             </div>
-            <div class="col-4">
+            <div className="col-4">
               <div className="d-flex justify-content-end">
                 <button type="button" className="btn btn-primary ml-5 ">
                   Write a Review
