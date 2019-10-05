@@ -5,19 +5,19 @@ import { NavLink } from "react-router-dom";
 export default class BookCard extends Component {
   render() {
     return (
-      <NavLink exact to="/book">
+      <NavLink exact to="/books">
         <div>
-          <Card style={{ width: "18rem" }}>
+          <Card style={{ width: "14rem" }}>
             <Card.Img
               variant="top"
-              src="./imgs/book-small-Cover-200x300.png"
+              src="./imgs/Book.jpg"
               width="auto"
-              height="250px"
+              height="260px"
             />
             <Card.Body>
-              <Card.Title>This is the book Title</Card.Title>
+              <Card.Title>Book Title</Card.Title>
               <Card.Text>Reviews</Card.Text>
-              <Card.Text>Price: $24.99</Card.Text>
+              <Card.Text>Price: $19.99</Card.Text>
             </Card.Body>
           </Card>
         </div>
