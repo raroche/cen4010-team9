@@ -2,81 +2,34 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
-import createAccount from './components/createAccount';
-import SidePanel from './components/SidePanel/SidePanel';
-import BackDrop from './components/BackDrop/BackDrop';
-import UserDropDown from './components/UserMenu/UserDropDown';
-import UserButton from './components/UserMenu/UserButton';
+import CreateAccount from './components/CreateAccount/CreateAccount';
+import LoginRegister from './components/LoginRegister/LoginRegister';
+import HomePage from './components/HomePage/HomePage';
+import BookGrid from './components/BookGrid/BookGrid';
+import BookPage from './components/BookPage/BookPage';
 
 class App extends Component {
-  
-  state = {
-    sidePanelOpen: false
-  };
-
-  openPanel = () => {
-    this.setState((prevState) => {
-      return {sidePanelOpen: !prevState.sidePanelOpen}
-    });
-  };
-
-  closePanel = () => {
-    this.setState({sidePanelOpen: false});
-  };
-
-  // user button
-  state = {
-    userMenuOpen: false
-  };
-
-  userMenuToggle = () => {
-    this.setState((prevState) => {
-      return {userMenuOpen: !prevState.userMenuOpen}
-    });
-  };
 
   render() {
-    let backdrop;
-
-    if (this.state.sidePanelOpen) {
-      backdrop = <BackDrop click={this.closePanel}/>;
-    }
-
-    let usermenu;
-
-    if (this.state.userMenuOpen) {
-      usermenu = <UserDropDown click={this.userMenuToggle}/>;
-    }
 
     return (
       <Router>
         <div style={{height:'100%'}}>
-          <Header clickPanel={this.openPanel} clickUser={this.userMenuToggle} />
+          <Header />
+          
+          <main style={{marginTop: '50px'}}>  
+            <div style={{height: '50px'}}></div>
+            <Route exact path="/" render={props =>(<HomePage />)} />
+            <Route path="/createaccount" component={CreateAccount} />
+            <Route path="/login" component={LoginRegister} />
+            <Route path="/bookgrid" component={BookGrid} />
+            <Route exact path="/books" component={BookPage} />
 
-          <SidePanel show={this.state.sidePanelOpen} />
-
-          
-          {backdrop}
-          
-        <main style={{marginTop: '50px'}}>
-          
-          {usermenu}
-          
-          <div style={{height: '50px'}}></div>
-
-            <Route exact path="/" render={props =>(
-              <React.Fragment>
-                <h1> Welcome to GeekText!! </h1> <br/>
-                <h2>Featured Books</h2><br/>
-                <p>Most Popular</p><br/>
-                <p>Geek's Px</p>
-              </React.Fragment>
-            )} />
-            <Route path="/createaccount" component={createAccount} />
-        </main>
+          </main>
         </div>
       </Router>
     );
   }
 }
+
 export default App;

@@ -10,16 +10,16 @@ const Header = props => (
   <header>
     <nav className="navbar">
     
-        <SidePanelButton click={props.clickPanel} />
+        <SidePanelButton />
     
-      <div className="headerlogo">
-        <a href="/"><img src={Logo} alt="Geek Text" style={{height: '40px'}} /></a>
-      </div>
+        <div className="headerlogo">
+          <a href="/"><img src={Logo} alt="Geek Text" style={{height: '40px'}} /></a>
+        </div>
 
-      <div className="navcontent"> 
-        <UserButton click={props.clickUser} />
-        <SignOutButton />
-      </div>
+        <div className="navcontent"> 
+          <UserButton />
+          <SignOutButton />
+        </div>
 
     </nav>
             
