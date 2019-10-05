@@ -24,10 +24,14 @@ export default class BannerPhoto extends Component {
         <a type="button" onClick={() => this.setState({ isOpen: true })}>
           <img
 <<<<<<< HEAD
+<<<<<<< HEAD
             src={this.props.cover}
 =======
             src={images[0]}
 >>>>>>> Added Banner under navbar
+=======
+            src={this.props.cover}
+>>>>>>> Added a header for recent releases for the homepage, wishlist using a mock database must implement delete list, change between list, move to cart and improve the ui
             height="150"
             width="100"
             padding="20px"
