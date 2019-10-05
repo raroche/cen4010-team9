@@ -9,7 +9,7 @@ function ListCard(props) {
     <div>
       <Card
         className="p-3"
-        style={{ top: "40px", width: "900px", left: "500px" }}
+        style={{ top: "40px", width: "800px", left: "500px" }}
       >
         <Card.Body>
           <img
@@ -46,8 +46,8 @@ class WishList extends Component {
   constructor() {
     super();
     this.state = {
-      Lists: [],
-      books: []
+      Lists: [Toread, Dystopian],
+      books: Toread
     };
     this.handleClick = this.handleClick.bind(this);
   }

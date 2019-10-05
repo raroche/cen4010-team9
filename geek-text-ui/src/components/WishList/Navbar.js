@@ -127,17 +127,19 @@ function Navbar(props) {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <InputGroup
-                className="mb-3"
-                onClick={e => props.handleClick("tests", true)}
-              >
+              <InputGroup className="mb-3">
                 <FormControl
                   placeholder="List name"
                   aria-label="ListName"
                   aria-describedby="ListName"
                 />
                 <InputGroup.Append>
-                  <InputGroup.Text id="ListName">Create List</InputGroup.Text>
+                  <InputGroup.Text
+                    onClick={e => props.handleClick("tests", true)}
+                    id="ListName"
+                  >
+                    Create List
+                  </InputGroup.Text>
                 </InputGroup.Append>
               </InputGroup>
             </Modal.Body>
