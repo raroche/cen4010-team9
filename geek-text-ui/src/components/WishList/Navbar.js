@@ -1,13 +1,17 @@
 import React from "react";
 import {
-  Card,
   ButtonToolbar,
   ToggleButton,
   ToggleButtonGroup,
-  Button
+  Modal,
+  Button,
+  InputGroup,
+  FormControl
 } from "react-bootstrap";
 
 function Navbar(props) {
+  const [modalShow, setModalShow] = React.useState(false);
+
   if (props.Lists.length === 3) {
     return (
       <ButtonToolbar>
@@ -22,12 +26,63 @@ function Navbar(props) {
               variant="light"
               value={props.Lists[0].ListName}
               onClick={e => {
-                props.handleClick(item[0].Listid);
+                props.handleClick(item[0].Listid, false);
               }}
             >
               {item[0].ListName}
             </ToggleButton>
           ))}
+        </ToggleButtonGroup>
+      </ButtonToolbar>
+    );
+  } else if (props.Lists.length === 0) {
+    return (
+      <ButtonToolbar>
+        <ToggleButtonGroup
+          style={{ top: "40px", width: "900px", left: "500px" }}
+          type="radio"
+          name="options"
+          defaultValue={"Create List"}
+        >
+          <ToggleButton
+            variant="light"
+            value={"Create List"}
+            onClick={() => setModalShow(true)}
+          >
+            Add List
+          </ToggleButton>
+
+          <Modal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
+                Add List
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <InputGroup
+                className="mb-3"
+                onClick={e => props.handleClick("tests", true)}
+              >
+                <FormControl
+                  placeholder="List name"
+                  aria-label="ListName"
+                  aria-describedby="ListName"
+                />
+                <InputGroup.Append>
+                  <InputGroup.Text id="ListName">Create List</InputGroup.Text>
+                </InputGroup.Append>
+              </InputGroup>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={props.onHide}>Cancel </Button>
+            </Modal.Footer>
+          </Modal>
         </ToggleButtonGroup>
       </ButtonToolbar>
     );
@@ -45,7 +100,7 @@ function Navbar(props) {
               variant="light"
               value={props.Lists[0].ListName}
               onClick={e => {
-                props.handleClick(item[0].Listid);
+                props.handleClick(item[0].Listid, false);
               }}
             >
               {item[0].ListName}
@@ -54,10 +109,42 @@ function Navbar(props) {
           <ToggleButton
             variant="light"
             value={"Create List"}
-            onClick={e => props.handleClick("Create List")}
+            onClick={() => setModalShow(true)}
           >
             Add List
           </ToggleButton>
+
+          <Modal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
+                Add List
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <InputGroup
+                className="mb-3"
+                onClick={e => props.handleClick("tests", true)}
+              >
+                <FormControl
+                  placeholder="List name"
+                  aria-label="ListName"
+                  aria-describedby="ListName"
+                />
+                <InputGroup.Append>
+                  <InputGroup.Text id="ListName">Create List</InputGroup.Text>
+                </InputGroup.Append>
+              </InputGroup>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={props.onHide}>Cancel </Button>
+            </Modal.Footer>
+          </Modal>
         </ToggleButtonGroup>
       </ButtonToolbar>
     );

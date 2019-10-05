@@ -25,14 +25,16 @@ function ListCard(props) {
           >
             Move to cart
           </Button>
+          <br />
+          <p1 style={{ position: "absolute", right: "50px", top: "130px" }}>
+            ${props.price}
+          </p1>
           <Card.Text
             className="text-center"
             style={{ position: "absolute", top: "70px", left: "200px" }}
           >
             <h1 style={{ fontweight: "bold" }}>{props.bookName} </h1>
             {props.author}
-            <br />
-            <p1 style={{ left: "200px" }}> {props.price} </p1>
           </Card.Text>
         </Card.Body>
       </Card>
@@ -44,21 +46,20 @@ class WishList extends Component {
   constructor() {
     super();
     this.state = {
-      Lists: [Toread, Dystopian],
-      books: Toread
+      Lists: [],
+      books: []
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(props) {
-    console.log(props);
-    if (props === "Create List") {
+  handleClick(listName, newList) {
+    if (newList === true) {
       let temp = this.state.Lists;
       const newElement = [
         {
           id: 1,
           Listid: 3,
-          ListName: "Test",
+          ListName: listName,
           bookName: "The Martian",
           author: "Andy Weir",
           price: "14.95",
@@ -81,16 +82,15 @@ class WishList extends Component {
         Lists: temp,
         books: newElement
       });
-    } else if (props === this.state.Lists[0][0].Listid) {
-      console.log(1);
+    } else if (listName === this.state.Lists[0][0].Listid) {
       this.setState({
         books: this.state.Lists[0]
       });
-    } else if (props === this.state.Lists[1][0].Listid) {
+    } else if (listName === this.state.Lists[1][0].Listid) {
       this.setState({
         books: this.state.Lists[1]
       });
-    } else if (props === this.state.Lists[2][0].Listid) {
+    } else if (listName === this.state.Lists[2][0].Listid) {
       this.setState({
         books: this.state.Lists[2]
       });
@@ -112,7 +112,9 @@ class WishList extends Component {
         <Navbar
           Lists={this.state.Lists}
           handleClick={this.handleClick}
-          default={this.state.Lists[0].ListName}
+          default={
+            this.state.Lists.length > 0 ? this.state.Lists[0].ListName : null
+          }
         />
 
         {listCard}
