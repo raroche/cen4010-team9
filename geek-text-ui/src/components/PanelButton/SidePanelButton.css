@@ -1,0 +1,12 @@
+.panelButton {
+    font-size: 25px;
+    cursor: pointer;
+    background-color: transparent;
+    color: rgb(80, 80, 80);
+    padding: 10px 15px;
+    border: none;
+  }
+
+  .panelButton:hover {
+    color: rgb(39, 39, 39);
+  }

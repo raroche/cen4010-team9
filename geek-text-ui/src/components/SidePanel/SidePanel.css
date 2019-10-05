@@ -1,0 +1,42 @@
+.sidePanel {
+    height: 100%; /* Specify a height */
+    width: 200px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 200; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #eee; /* White*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 1.5s; /* 0.5 second transition effect to slide in the sidepanel */
+    /*transform: translateX(0%); /*hide*/
+    transition: 0.5s ease-out;
+}
+  
+.sidePanel.open {
+    transform: translateX(0);
+}
+
+  /* The sidepanel links */
+  .sidePanel a {
+    padding: 18px;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: "Verdana", Geneva, sans-serif;
+    color: #444;
+    display: block;
+    
+}
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidePanel a:hover {
+    background-color: #ccc;
+  }
+
+  .closePanelButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    margin-left: 50px;
+  }
