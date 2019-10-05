@@ -34,7 +34,7 @@ export default class NavBar extends Component {
             <Nav>
               <Nav.Link href="#wl">Wish List</Nav.Link>
               <Nav.Link href="#wl">Login</Nav.Link>
-              <Nav.Link href="#wl">Cart</Nav.Link>
+              <Nav.Link href="cart">Cart</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
