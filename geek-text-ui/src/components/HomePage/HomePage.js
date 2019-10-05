@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import BookGrid from '../BooksGrid/BooksGrid';
 import './HomePage.css';
 
 class HomePage extends Component {
@@ -10,10 +10,10 @@ class HomePage extends Component {
 
     render() {
         return(
-            <div>
+            <div className="homepage">
                 <h1> Welcome to GeekText!! </h1> <br/>
                 <h2>Featured Books</h2><br/>
-                <p>Most Popular</p><br/>
+                <p><BookGrid /></p><br/>
                 <p>Roland loves Bootstrap</p>
             </div>
         );

@@ -17,7 +17,7 @@ const UserDropDown = props => {
                 <a href="/">Favorites</a>
                 <a href="/">Wishlist</a>
                 <a href="/createaccount">Create an Account</a>
-                <a href="/">Cart</a>
+                <a href="/cart">Cart</a>
             </div>
         </div>
     );
