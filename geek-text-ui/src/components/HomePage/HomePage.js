@@ -11,9 +11,11 @@ class HomePage extends Component {
     render() {
         return(
             <div className="homepage">
+                <div className="home-title">
                 <h1> Welcome to GeekText!! </h1> <br/>
                 <h2>Featured Books</h2><br/>
-                <p><BookGrid /></p><br/>
+                </div>
+                <BookGrid /><br/>
                 <p>Roland loves Bootstrap</p>
             </div>
         );

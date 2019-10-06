@@ -14,10 +14,11 @@ body{
   height: 100%;
 }
 
-main{
+.main{
   width: 800px;
   margin: 50px;
   margin-top: 50px;
+  justify-content: center;
 }
 
 a{

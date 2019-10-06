@@ -13,19 +13,14 @@ import { Route } from "react-router-dom";
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>      
-        <div style={{height:'100%'}}>
+      <BrowserRouter> 
           <Header />
-            <main>  
               <div style={{height: '50px'}}></div>
               <Route exact path="/" render={props =>(<HomePage />)} />
-              <Route path="/createaccount" component={CreateAccount} />
               <Route path="/login" component={LoginRegister} />
               <Route path="/bookgrid" component={BooksGrid} />
               <Route path="/book" component={BookDetails} />
               <Route path="/cart" component = {Cart}/>
-            </main>
-        </div> 
       </BrowserRouter>
     );
   }
