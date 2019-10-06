@@ -16,7 +16,7 @@ const SidePanel = props => {
             <button className="closePanelButton"><FontAwesomeIcon icon={faTimes} /></button>
             <a href="/">Home</a>
             <a href="/">About</a>
-            <a href="/">Books</a>
+            <a href="/books">Books</a>
             <a href="/">Authors</a>
             <a href="/">Summer Specials</a>
             <a href="/">Contact</a>
