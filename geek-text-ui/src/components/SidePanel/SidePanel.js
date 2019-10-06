@@ -9,7 +9,6 @@ const SidePanel = props => {
   if (props.show) {
     panelClasses = "sidePanel open";
   }
-
   return (
     <nav className={panelClasses}>
       <button className="closePanelButton">
@@ -23,6 +22,7 @@ const SidePanel = props => {
       <a href="/">Contact</a>
     </nav>
   );
+
 };
 
 export default SidePanel;
