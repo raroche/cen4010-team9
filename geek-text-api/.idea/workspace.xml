@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="877ff186-cddf-4daf-bc17-d8d625207fda" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/GeekTextApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/GeekTextApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../geek-text-ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../geek-text-ui/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../geek-text-ui/src/components/SidePanel/SidePanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../geek-text-ui/src/components/SidePanel/SidePanel.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -17,7 +18,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/GeekTextApplication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -84,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/ws/BookRestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="480">
+              <caret line="39" column="1" lean-forward="true" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
               <folding>
                 <element signature="e#975#976#0" expanded="true" />
                 <element signature="e#1030#1031#0" expanded="true" />
@@ -125,10 +126,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="159" />
-    <option name="y" value="23" />
-    <option name="width" value="1821" />
-    <option name="height" value="1494" />
+    <option name="y" value="75" />
+    <option name="width" value="2055" />
+    <option name="height" value="1377" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -244,13 +244,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9575000" />
+    <option name="totallyTimeSpent" value="10716000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="159" y="23" width="1821" height="1494" extended-state="0" />
+    <frame x="0" y="75" width="2055" height="1377" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2568859" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22702435" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -260,7 +260,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3109843" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33929962" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -369,8 +369,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/geektextteam9/com/geektext/ws/BookRestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="480">
+          <caret line="39" column="1" lean-forward="true" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
           <folding>
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1030#1031#0" expanded="true" />

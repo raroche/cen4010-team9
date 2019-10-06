@@ -6,7 +6,7 @@ export default class BookMainInfo extends Component {
   render() {
     return (
       <div className="col-md-8">
-        <h2>{this.props.book.title}</h2>
+        <h2> {this.props.book.title} </h2>
         <div>
           <ReviewStars />
         </div>
