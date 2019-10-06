@@ -18,7 +18,9 @@ export default class BookPage extends Component {
             </Col>
             <Col xs={6} md={3}>
               <Book />
-
+              </Col>
+            <Col xs={6} md={3}>
+              <Book />
               <br></br>
             </Col>
             
@@ -33,9 +35,20 @@ export default class BookPage extends Component {
             </Col>
             <Col xs={6} md={3}>
               <Book />
+              <br></br>
             </Col>
             <Col xs={6} md={3}>
               <Book />
+            </Col>
+            <Col xs={6} md={3}>
+              <Book/>
+            </Col>
+            <Col xs={6} md={3}>
+              <Book />
+            </Col>
+            <Col xs={6} md={3}>
+              <Book />
+              <br></br>
             </Col>
           </Row>
         </Container>
