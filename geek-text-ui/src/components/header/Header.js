@@ -7,23 +7,24 @@ import SignOutButton from '../SignOut/SignOutButton';
 
 
 const Header = props => (
-  <header>
-    <nav className="navbar">
+    <nav className="navigation">
     
-        <SidePanelButton />
-    
-        <div className="headerlogo">
-          <a href="/"><img src={Logo} alt="Geek Text" style={{height: '40px'}} /></a>
-        </div>
+        <SidePanelButton />   
 
         <div className="navcontent"> 
+            <a href="/">GeekText</a>
+            <a href="/">About</a>
+            <a href="/books">Books</a>
+            <a href="/">Summer Specials</a>
+            <a href="/">Contact</a>
+        </div>
+        
+        <div className="usercontent">    
           <UserButton />
           <SignOutButton />
         </div>
 
     </nav>
-            
-  </header>
 
 )
 
