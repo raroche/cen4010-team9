@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added a header for recent releases for the homepage, wishlist using a mock database must implement delete list, change between list, move to cart and improve the ui
+=======
+>>>>>>> 897a40d07088c2edc94e249b1e97007a5c7812a7
 import BannerPhoto from "./BannerPhoto";
 
 function BannerCard(props) {
@@ -19,11 +22,14 @@ function BannerCard(props) {
   );
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import BannerCard from "./BannerCard";
 >>>>>>> Added Banner under navbar
 =======
 >>>>>>> Added a header for recent releases for the homepage, wishlist using a mock database must implement delete list, change between list, move to cart and improve the ui
+=======
+>>>>>>> 897a40d07088c2edc94e249b1e97007a5c7812a7
 
 class Banner extends Component {
   constructor() {
@@ -31,6 +37,9 @@ class Banner extends Component {
     this.state = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 897a40d07088c2edc94e249b1e97007a5c7812a7
       book: []
     };
   }
@@ -64,6 +73,7 @@ class Banner extends Component {
             cover={this.state.book.img_url}
             title={this.state.book.title}
           />
+<<<<<<< HEAD
 =======
       Books: [],
       isLoading: false
@@ -110,6 +120,8 @@ class Banner extends Component {
             title={this.state.book.title}
           />
 >>>>>>> Added a header for recent releases for the homepage, wishlist using a mock database must implement delete list, change between list, move to cart and improve the ui
+=======
+>>>>>>> 897a40d07088c2edc94e249b1e97007a5c7812a7
         </div>
       </div>
     );
