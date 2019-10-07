@@ -67,7 +67,7 @@ function WishlistNavbar(props) {
             <Modal.Body>
               <InputGroup
                 className="mb-3"
-                onClick={e => props.handleClick("tests", true)}
+                onClick={e => props.handleClick("Drama", true)}
               >
                 <FormControl
                   placeholder="List name"
@@ -132,10 +132,11 @@ function WishlistNavbar(props) {
                   placeholder="List name"
                   aria-label="ListName"
                   aria-describedby="ListName"
+                  style={{ width: "500px" }}
                 />
                 <InputGroup.Append>
                   <InputGroup.Text
-                    onClick={e => props.handleClick("tests", true)}
+                    onClick={e => props.handleClick("Drama", true)}
                     id="ListName"
                   >
                     Create List
