@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
 import Toread from "./Books";
 import Dystopian from "./Books2";
-import Navbar from "./Navbar";
+import WishNavbar from "./WishlistNavbarvbar";
 
 function ListCard(props) {
   return (
@@ -109,7 +109,7 @@ class WishList extends Component {
     ));
     return (
       <div>
-        <Navbar
+        <WishlistNavbar
           Lists={this.state.Lists}
           handleClick={this.handleClick}
           default={

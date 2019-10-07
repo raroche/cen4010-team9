@@ -9,7 +9,7 @@ import {
   FormControl
 } from "react-bootstrap";
 
-function Navbar(props) {
+function WishlistNavbar(props) {
   const [modalShow, setModalShow] = React.useState(false);
 
   if (props.Lists.length === 3) {
@@ -153,4 +153,4 @@ function Navbar(props) {
   }
 }
 
-export default Navbar;
+export default WishlistNavbar;
