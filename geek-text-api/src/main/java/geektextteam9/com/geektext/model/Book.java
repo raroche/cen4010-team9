@@ -1,10 +1,13 @@
 package geektextteam9.com.geektext.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
 @Entity
+@Table(name="book")
 public class Book {
 
     @Id
@@ -22,7 +25,7 @@ public class Book {
     private String description;
 
     @Column
-    private String price;
+    private Double price;
 
     @Column
     private Date date;
@@ -39,11 +42,35 @@ public class Book {
     @Column
     private boolean featured;
 
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Review> reviews;
 
-    public Book(String isbn, String title, String description, String price, Date date, float rating,
-                    String img_url, boolean top_seller, boolean featured, List<Review> reviews) {
+    @ManyToMany(mappedBy = "books")
+    @JsonManagedReference
+    private List<Author> authors;
+
+    @ManyToMany(mappedBy = "books")
+    @JsonManagedReference
+    private List<Publisher> publishers;
+
+    public Book() {
+        this.isbn = "";
+        this.title = "";
+        this.description = "";
+        this.price = 0.0;
+        this.date = null;
+        this.rating = 0;
+        this.img_url = "";
+        this.top_seller = false;
+        this.featured = false;
+        this.reviews = null;
+        this.authors = null;
+        this.publishers = null;
+    }
+
+    public Book(String isbn, String title, String description, double price, Date date, float rating, String img_url,
+                boolean top_seller, boolean featured, List<Review> reviews, List<Author> authors, List<Publisher> publishers) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
@@ -54,6 +81,24 @@ public class Book {
         this.top_seller = top_seller;
         this.featured = featured;
         this.reviews = reviews;
+        this.authors = authors;
+        this.publishers = publishers;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public List<Publisher> getPublishers() {
+        return publishers;
+    }
+
+    public void setPublishers(List<Publisher> publishers) {
+        this.publishers = publishers;
     }
 
     public List<Review> getReviews() {
@@ -65,11 +110,11 @@ public class Book {
         this.reviews = reviews;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
