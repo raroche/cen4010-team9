@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
+@Table(name="book")
 public class Book {
 
     @Id
@@ -39,11 +40,17 @@ public class Book {
     @Column
     private boolean featured;
 
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
-    public Book(String isbn, String title, String description, String price, Date date, float rating,
-                    String img_url, boolean top_seller, boolean featured, List<Review> reviews) {
+    @ManyToMany(mappedBy = "books")
+    private List<Author> authors;
+
+    @ManyToMany(mappedBy = "books")
+    private List<Publisher> publishers;
+
+    public Book(String isbn, String title, String description, String price, Date date, float rating, String img_url,
+                boolean top_seller, boolean featured, List<Review> reviews, List<Author> authors, List<Publisher> publishers) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
@@ -54,6 +61,24 @@ public class Book {
         this.top_seller = top_seller;
         this.featured = featured;
         this.reviews = reviews;
+        this.authors = authors;
+        this.publishers = publishers;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public List<Publisher> getPublishers() {
+        return publishers;
+    }
+
+    public void setPublishers(List<Publisher> publishers) {
+        this.publishers = publishers;
     }
 
     public List<Review> getReviews() {

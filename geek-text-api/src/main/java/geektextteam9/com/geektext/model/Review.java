@@ -2,6 +2,8 @@ package geektextteam9.com.geektext.model;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "review")
 public class Review {
 
     @Id
@@ -10,13 +12,12 @@ public class Review {
     private Integer id;
 
     @Column
-    private float rating;
+    private Float rating;
 
     @Column
     private String comment;
 
     @ManyToOne
-    @JoinColumn // Indicate the Foreign key in in this table
     @JoinColumn(name="book_id")
     private Book book;
 
