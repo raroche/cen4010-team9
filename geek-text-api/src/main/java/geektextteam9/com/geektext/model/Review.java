@@ -1,5 +1,7 @@
 package geektextteam9.com.geektext.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,16 +14,23 @@ public class Review {
     private Integer id;
 
     @Column
-    private Float rating;
+    private Double rating;
 
     @Column
     private String comment;
 
     @ManyToOne
     @JoinColumn(name="book_id")
+    @JsonBackReference
     private Book book;
 
-    public Review(float rating, String comment, Book book) {
+    private Review() {
+        this.rating = 0.0;
+        this.comment = "";
+        this.book = null;
+    }
+
+    private Review(double rating, String comment, Book book) {
         this.rating = rating;
         this.comment = comment;
         this.book = book;
@@ -35,11 +44,11 @@ public class Review {
         this.id = id;
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

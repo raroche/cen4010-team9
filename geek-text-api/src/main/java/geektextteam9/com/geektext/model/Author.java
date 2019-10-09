@@ -1,5 +1,7 @@
 package geektextteam9.com.geektext.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,7 +25,14 @@ public class Author {
     @JoinTable(name = "author_book",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
+    @JsonBackReference
     private List<Book> books;
+
+    private Author() {
+        this.name = "";
+        this.bio = "";
+        this.books = null;
+    }
 
     public Author(String name, String bio, List<Book> books) {
         this.name = name;
