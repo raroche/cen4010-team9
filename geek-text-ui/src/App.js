@@ -14,15 +14,16 @@ import { Route } from "react-router-dom";
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>  
+      <BrowserRouter>
         <Header />
-          <div style={{height: '50px'}}></div>
-          <Route exact path="/" render={props =><HomePage />} />
-          <Route path="/login" component={LoginRegister} />
-          <Route path="/bookgrid" component={BooksGrid} />
-          <Route path="/books" component={BookPage} />
-          <Route path="/book" component={BookDetails} />
-          <Route path="/cart" component = {Cart}/>
+        <div style={{ height: "50px" }}></div>
+        <Route exact path="/" render={props => <HomePage />} />
+        <Route path="/login" component={LoginRegister} />
+        <Route path="/bookgrid" component={BooksGrid} />
+        <Route path="/books" component={BookPage} />
+        <Route path="/book" component={BookDetails} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/wishlist" component={WishList} />
       </BrowserRouter>
     );
   }
