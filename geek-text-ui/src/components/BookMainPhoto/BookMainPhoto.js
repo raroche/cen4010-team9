@@ -20,7 +20,7 @@ export default class BookMainPhoto extends Component {
     const { photoIndex, isOpen } = this.state;
 
     return (
-      <div>
+      <div className="mr-4 mt-5">
         <a type="button" onClick={() => this.setState({ isOpen: true })}>
           <img src={images[0]} height="500" alt="book cover" />
         </a>

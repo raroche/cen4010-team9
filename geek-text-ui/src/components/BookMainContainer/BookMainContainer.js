@@ -7,9 +7,9 @@ export default class BookMainContainer extends Component {
     return (
       <div>
         <div className="container mt-5">
-          <div className="row">
+          <div className="row mt-4">
             <BookMainPhoto />
-            <BookMainInfo />
+            <BookMainInfo state={this.props.state} />
           </div>
         </div>
       </div>

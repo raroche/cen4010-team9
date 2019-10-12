@@ -4,21 +4,27 @@ import ReviewStars from "../ReviewStars/ReviewStars";
 
 export default class BookMainInfo extends Component {
   render() {
+    const book = this.props.state.book;
+    const loading = this.props.state.loading;
+    const error = this.props.state.error;
+
     return (
-      <div className="col-md-8">
-        <h1>The Sun in Your Eyes</h1>
+      <div className="col-md-8 mt-5">
+        {error ? <h2> {error.message}</h2> : null}
+        {loading ? <h2> {spinner()} </h2> : <h2> {book.title} </h2>}
+
         <div>
           <ReviewStars />
         </div>
-        <h5>Price: $25.99</h5>
+        <h5>Price: ${loading ? spinner() : book.price}</h5>
         <button type="button" className="btn btn-primary">
-          Add to Cart
+          <strong>Add to Cart</strong>
         </button>
         <span className="ml-3">
-          <i className="fa fa-heart-o wishList"></i>
+          <i className="fa fa-heart-o wishList mr-1 ml-3"></i>
           Add to my WishList
         </span>
-        <p className="mt-1">Get it as soon as Oct. 4</p>
+        <p className="mt-1">Get it as soon as {deliveryDate()}</p>
         <p className="mt-1">ISBN: 0062435590</p>
         <p className="mt-1">
           Publisher: William Morrow Paperbacks; Reprint edition (March 28, 2017)
@@ -42,4 +48,29 @@ export default class BookMainInfo extends Component {
       </div>
     );
   }
+}
+
+function spinner() {
+  return (
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  );
+}
+
+function addDays(date, days) {
+  const copy = new Date(Number(date));
+  copy.setDate(date.getDate() + days);
+  return copy;
+}
+
+function deliveryDate() {
+  const days = 3;
+  const date = new Date();
+  const newDate = addDays(date, days);
+  return newDate
+    .toUTCString()
+    .split(" ")
+    .slice(0, 4)
+    .map(a => a.concat(" "));
 }
