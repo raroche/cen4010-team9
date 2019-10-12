@@ -16,7 +16,7 @@ function Navbar(props) {
     return (
       <ButtonToolbar>
         <ToggleButtonGroup
-          style={{ top: "40px", width: "900px", left: "500px" }}
+          style={{ top: "80px", width: "800px", left: "500px" }}
           type="radio"
           name="options"
           defaultValue={1}
@@ -39,7 +39,7 @@ function Navbar(props) {
     return (
       <ButtonToolbar>
         <ToggleButtonGroup
-          style={{ top: "40px", width: "900px", left: "500px" }}
+          style={{ top: "80px", width: "800px", left: "500px" }}
           type="radio"
           name="options"
           defaultValue={"Create List"}
@@ -90,7 +90,7 @@ function Navbar(props) {
     return (
       <ButtonToolbar>
         <ToggleButtonGroup
-          style={{ top: "40px", width: "900px", left: "500px" }}
+          style={{ top: "80px", width: "800px", left: "500px" }}
           type="radio"
           name="options"
           defaultValue={props.default}

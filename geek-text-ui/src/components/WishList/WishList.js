@@ -9,7 +9,7 @@ function ListCard(props) {
     return (
       <Card
         className="p-3"
-        style={{ top: "40px", width: "800px", left: "500px" }}
+        style={{ top: "80px", width: "800px", left: "500px" }}
       >
         <Card.Body>
           <h1>List is empty</h1>
@@ -21,7 +21,7 @@ function ListCard(props) {
       <div>
         <Card
           className="p-3"
-          style={{ top: "40px", width: "800px", left: "500px" }}
+          style={{ top: "80px", width: "800px", left: "500px" }}
         >
           <Card.Body>
             <img

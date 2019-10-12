@@ -8,6 +8,7 @@ import BookPage from "./components/BookPage/BookPage";
 import BookDetails from "./components/BookDetails/BookDetails";
 import Header from "./components/header/Header";
 import Cart from "./components/Cart/Cart";
+import WishList from "./components/WishList/WishList";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
 
