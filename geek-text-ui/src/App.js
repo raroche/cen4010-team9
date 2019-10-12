@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <BrowserRouter>  
         <Header />
-          <div style={{height: '50px'}}></div>
+          <div style={{height: '120px'}}></div>
           <Route exact path="/" render={props =><HomePage />} />
           <Route path="/login" component={LoginRegister} />
           <Route path="/bookgrid" component={BooksGrid} />
