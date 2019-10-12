@@ -1,11 +1,8 @@
 import React from 'react';
 import './Header.css';
-import Logo from './Logo.jpeg';
 import SidePanelButton from '../PanelButton/SidePanelButton';
 import UserButton from '../UserMenu/UserButton';
 import SignOutButton from '../SignOut/SignOutButton';
-import NavBar from '../NavBar/NavBar';
-
 
 const Header = props => (
     <nav className="navigation">

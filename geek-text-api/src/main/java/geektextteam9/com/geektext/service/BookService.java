@@ -10,7 +10,7 @@ import geektextteam9.com.geektext.model.Filter;
 import geektextteam9.com.geektext.repository.BookRepository;
 
 @Service
-public class BookService {
+public class tBookService {
 
 	@Autowired
 	private BookRepository bookRepository;
