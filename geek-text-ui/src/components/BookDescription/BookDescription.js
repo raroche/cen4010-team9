@@ -5,7 +5,7 @@ export default class BookDescription extends Component {
     return (
       <div className="container">
         <div className="mt-5">
-          <h5>
+          <h5 >
             <strong>Book Description:</strong>
           </h5>
           <br />

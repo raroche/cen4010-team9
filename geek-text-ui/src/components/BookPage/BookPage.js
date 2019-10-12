@@ -1,45 +1,30 @@
-import React, { Component } from "react";
-import Book from "../Book/Book";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { Component } from 'react';
+import BookSection from './BookSection';
+import './BookPage.css';
+import BookDescription from "../BookDescription/BookDescription";
+import ReviewsSection from "../ReviewsSection/ReviewsSection";
 
-export default class BookPage extends Component {
-  render() {
-    return (
-      <div className="mt-4">
-        <Container>
-          <Row>
-            <Col xs={6} md={3}>
-              <Book />
-            </Col>
-            <Col xs={6} md={3}>
-              <Book />
-            </Col>
-            <Col xs={6} md={3}>
-              <Book />
+class BookPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 
-              <br></br>
-            </Col>
-            
-            <Col xs={6} md={3}>
-              <Book />
-            </Col>
-            <Col xs={6} md={3}>
-              <Book/>
-            </Col>
-            <Col xs={6} md={3}>
-              <Book />
-            </Col>
-            <Col xs={6} md={3}>
-              <Book />
-            </Col>
-            <Col xs={6} md={3}>
-              <Book />
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
+    render() {
+        return(
+            <div className="bookpage">
+                <div className="books-title">
+                  <h1> The Book Store </h1> <br/>
+                  <h2>Featured Books</h2><br/>
+                </div>
+                  <BookSection /><br/>
+
+
+                
+                
+            </div>
+        );
+    }
 }
+
+export default BookPage;

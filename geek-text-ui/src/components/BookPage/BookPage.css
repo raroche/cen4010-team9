@@ -1,10 +1,10 @@
-.homepage {
+.bookpage {
     z-index: 0;
-    padding: 50px;
+    padding: 100px;
     position: relative;
 }
 
-.home-title {
+.books-title {
     padding: 10px;
     width: 80%;
     justify-items: center;
@@ -13,4 +13,14 @@
     position: relative;
     margin: 0 auto;
     z-index: 0;
+}
+
+#BookReviews {
+    padding-top: 75px;
+    margin-top: -75px;
+}
+
+#BookDescription {
+    padding-top: 75px;
+    margin-top: -75px;
 }
