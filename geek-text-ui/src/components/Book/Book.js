@@ -21,6 +21,7 @@ export default class BookCard extends Component {
             <p> Book Title <br/>
               by <a href="/Authors/#John Doe"> Author</a>
             </p>
+          </div>
           
         </div>
       
