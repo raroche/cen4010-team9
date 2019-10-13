@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import BookCard from "../BookCard/BookCard";
+import Book from "../Book/Book";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -11,13 +11,13 @@ export default class BooksGrid extends Component {
         <Container>
           <Row>
             <Col xs={6} md={4}>
-              <BookCard />
+              <Book />
             </Col>
             <Col xs={6} md={4}>
-              <BookCard />
+              <Book />
             </Col>
             <Col xs={6} md={4}>
-              <BookCard />
+              <Book />
             </Col>
           </Row>
         </Container>

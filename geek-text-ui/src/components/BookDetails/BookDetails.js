@@ -8,22 +8,37 @@ export default class BookDetails extends Component {
   constructor() {
     super();
     this.state = {
-      book: {}
+      book: {},
+      loading: false,
+      error: null
     };
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
+
     fetch("http://localhost:8090/api/books/1")
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Somethign went wrong while fetching the data");
+        }
+      })
       .then(data => {
-        this.setState({ book: data });
+        this.setState({ book: data, loading: false });
+      })
+      .catch(error => {
+        this.setState({ error, isLoading: false });
+        console.log("error!");
+        console.error(error);
       });
   }
 
   render() {
     return (
       <div>
-        <BookMainContainer book={this.state.book} />
+        <BookMainContainer state={this.state} />
         <BookDescription />
         <ReviewsSection />
         <ReviewRow />
@@ -32,3 +47,4 @@ export default class BookDetails extends Component {
     );
   }
 }
+

@@ -1,0 +1,16 @@
+.scroll {
+    width: 90%;
+    height: 360px;
+    position: relative;
+    padding: 15px;
+    left: 5%;
+   
+    
+    
+}
+.card-columns {
+    
+    display: inline-block;
+  } 
+
+  
