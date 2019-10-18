@@ -1,12 +1,13 @@
 .bookpage {
     z-index: 0;
-    padding: 100px;
+    padding: 15px;
     position: relative;
 }
 
 .books-title {
     padding: 10px;
     width: 80%;
+    height: 140px;
     justify-items: center;
     align-items: center;
     text-align: center;
@@ -15,12 +16,14 @@
     z-index: 0;
 }
 
-#BookReviews {
-    padding-top: 75px;
-    margin-top: -75px;
-}
-
-#BookDescription {
-    padding-top: 75px;
-    margin-top: -75px;
-}
+h1 {
+    font-weight: bold;
+    margin: 0 auto;
+    font-size: 60px;
+  }
+  
+  h2 {
+    
+    
+    font-size: 30px;
+  }
