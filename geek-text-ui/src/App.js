@@ -9,6 +9,7 @@ import Header from "./components/header/Header";
 import Cart from "./components/Cart/Cart";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
+import MyAccount from './components/MyAccount/MyAccount';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
           <div style={{height: '120px'}}></div>
           <Route exact path="/" render={props =><HomePage />} />
           <Route path="/login" component={LoginRegister} />
+          <Route path="/myaccount" component={MyAccount} />
           <Route path="/bookgrid" component={BooksGrid} />
           <Route path="/books" component={BookPage} />
           <Route path="/book" component={BookDetails} />

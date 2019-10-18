@@ -13,7 +13,7 @@ const UserDropDown = props => {
         <div className={userClasses}>
             <div className="dropdown-user">
                 <a href="/login">Sign In</a>
-                <a href="/">My Account</a>
+                <a href="/myaccount">My Account</a>
                 <a href="/">Favorites</a>
                 <a href="/">Wishlist</a>
                 <a href="/login">Create an Account</a>

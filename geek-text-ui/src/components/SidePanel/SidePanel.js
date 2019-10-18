@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "./SidePanel.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -14,12 +15,11 @@ const SidePanel = props => {
       <button className="closePanelButton">
         <FontAwesomeIcon icon={faTimes} />
       </button>
-      <a href="/">Home</a>
-      <a href="/">About</a>
-      <a href="/books">Books</a>
-      <a href="/">Authors</a>
-      <a href="/">Summer Specials</a>
-      <a href="/">Contact</a>
+      <Link to="/">Home</Link>
+      <Link to="/">About</Link>
+      <Link to="/books">Books</Link>
+      <Link to="/">Summer Specials</Link>
+      <Link to="/">Contact</Link>
     </nav>
   );
 

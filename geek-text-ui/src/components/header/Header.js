@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import SidePanelButton from '../PanelButton/SidePanelButton';
 import UserButton from '../UserMenu/UserButton';
@@ -11,11 +12,11 @@ const Header = props => (
         <SidePanelButton />   
 
         <div className="navcontent"> 
-            <a href="/">GeekText</a>
-            <a href="/">About</a>
-            <a href="/books">Books</a>
-            <a href="/">Summer Specials</a>
-            <a href="/">Contact</a>
+            <Link to="/">GeekText</Link>
+            <Link to="/">About</Link>
+            <Link to="/books">Books</Link>
+            <Link to="/">Summer Specials</Link>
+            <Link to="/">Contact</Link>
         </div>
         
         <div className="usercontent">    
