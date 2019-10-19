@@ -1,113 +1,97 @@
 import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
-import Toread from "./Books";
-import Dystopian from "./Books2";
+import Lists from "./Lists";
 import WishlistNavbar from "./WishlistNavbar";
-
-function ListCard(props) {
-  if (props.ListEmpty === true) {
-    return (
-      <Card
-        className="p-3"
-        style={{ top: "80px", width: "800px", left: "500px" }}
-      >
-        <Card.Body>
-          <h1>List is empty</h1>
-        </Card.Body>
-      </Card>
-    );
-  } else {
-    return (
-      <div>
-        <Card
-          className="p-3"
-          style={{ top: "80px", width: "800px", left: "500px" }}
-        >
-          <Card.Body>
-            <img
-              src={props.cover}
-              height="150"
-              width="100"
-              padding="20px"
-              alt="book cover"
-            />
-            <Button
-              variant="primary"
-              style={{ position: "absolute", right: "50px", top: "90px" }}
-            >
-              Move to cart
-            </Button>
-            <br />
-            <p1 style={{ position: "absolute", right: "50px", top: "130px" }}>
-              ${props.price}
-            </p1>
-            <Card.Text
-              className="text-center"
-              style={{ position: "absolute", top: "70px", left: "200px" }}
-            >
-              <h1 style={{ fontweight: "bold" }}>{props.bookName} </h1>
-              {props.author}
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </div>
-    );
-  }
-}
+import WishlistCards from "./WishlistCards";
 
 class WishList extends Component {
   constructor() {
     super();
     this.state = {
-      Lists: [Toread, Dystopian],
-      books: Toread
+      Lists: Lists,
+      currentList: 0
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleMove = this.handleMove.bind(this);
+    this.handleMoveToCart = this.handleMoveToCart(this);
   }
 
   handleClick(listName, newList) {
     if (newList === true) {
       let temp = this.state.Lists;
-      const newElement = [
-        {
-          id: 1,
-          Listid: 3,
-          ListName: listName,
-          ListEmpty: true
-        }
-      ];
+      const newElement = {
+        id: this.state.Lists.length,
+        ListName: listName,
+        Books: []
+      };
       temp.push(newElement);
       console.log(temp);
       this.setState({
         Lists: temp,
-        books: newElement
+        currentList: temp.length - 1
       });
-    } else if (listName === this.state.Lists[0][0].Listid) {
+    } else if (listName === this.state.Lists[0].ListName) {
       this.setState({
-        books: this.state.Lists[0]
+        currentList: 0
       });
-    } else if (listName === this.state.Lists[1][0].Listid) {
+    } else if (listName === this.state.Lists[1].ListName) {
       this.setState({
-        books: this.state.Lists[1]
+        currentList: 1
       });
-    } else if (listName === this.state.Lists[2][0].Listid) {
+    } else if (listName === this.state.Lists[2].ListName) {
       this.setState({
-        books: this.state.Lists[2]
+        currentList: 2
       });
     }
   }
 
+  handleDelete(book_id) {
+    const temp = this.state.Lists[this.state.currentList].Books.filter(
+      book => book.id !== book_id
+    );
+    let newState = this.state.Lists;
+    newState[this.state.currentList].Books = temp;
+    this.setState({
+      Lists: newState
+    });
+  }
+
+  handleMoveToCart() {
+    console.log("To be implemented");
+  }
+
+  handleMove(destList, book_id) {
+    let book = {};
+    book = {
+      id: this.state.Lists[this.state.currentList].Books.length + 1,
+      bookName: this.state.Lists[this.state.currentList].Books[book_id - 1]
+        .bookName,
+      author: this.state.Lists[this.state.currentList].Books[book_id - 1]
+        .author,
+      price: this.state.Lists[this.state.currentList].Books[book_id - 1].price,
+      cover: this.state.Lists[this.state.currentList].Books[book_id - 1].cover
+    };
+    book.id = this.state.Lists[this.state.currentList].Books.length + 1;
+    let newState = this.state.Lists;
+    newState[destList].Books.push(book);
+    this.setState({
+      Lists: newState
+    });
+    this.handleDelete(book_id);
+  }
+
   render() {
-    let listCard = this.state.books.map(item => (
-      <ListCard
-        key={item.id}
-        ListEmpty={item.ListEmpty}
-        author={item.author}
-        cover={item.cover}
-        price={item.price}
-        bookName={item.bookName}
-      />
-    ));
+    let Options = [{}];
+    for (let i = 0; i < this.state.Lists.length; i++) {
+      if (i !== this.state.currentList) {
+        Options.push({
+          listName: this.state.Lists[i].ListName,
+          listid: this.state.Lists[i].id
+        });
+      }
+    }
+
     return (
       <div>
         <WishlistNavbar
@@ -117,8 +101,13 @@ class WishList extends Component {
             this.state.Lists.length > 0 ? this.state.Lists[0].ListName : null
           }
         />
-
-        {listCard}
+        <WishlistCards
+          Books={this.state.Lists[this.state.currentList].Books}
+          handleDelete={this.handleDelete}
+          handleMove={this.handleMove}
+          handleMoveToCart={this.handleMoveToCart}
+          Options={Options}
+        />
       </div>
     );
   }

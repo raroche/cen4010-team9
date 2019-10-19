@@ -32,7 +32,7 @@ class WishlistNavbar extends Component {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "500px" }}
+            style={{ top: "80px", width: "800px", left: "20%" }}
             type="radio"
             name="options"
             defaultValue={1}
@@ -40,12 +40,12 @@ class WishlistNavbar extends Component {
             {this.state.Lists.map(item => (
               <ToggleButton
                 variant="light"
-                value={this.state.Lists[0].ListName}
+                value={item.ListName}
                 onClick={e => {
-                  this.state.handleClick(item[0].Listid, false);
+                  this.state.handleClick(item.ListName, false);
                 }}
               >
-                {item[0].ListName}
+                {item.ListName}
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
@@ -55,7 +55,7 @@ class WishlistNavbar extends Component {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "500px" }}
+            style={{ top: "80px", width: "800px", left: "20%" }}
             type="radio"
             name="options"
             defaultValue={"Create List"}
@@ -86,7 +86,7 @@ class WishlistNavbar extends Component {
                     placeholder="List name"
                     aria-label="ListName"
                     aria-describedby="ListName"
-                    style={{ width: "500px" }}
+                    style={{ width: "300px" }}
                     value={this.state.newList}
                     onChange={this.handleChange}
                   />
@@ -113,7 +113,7 @@ class WishlistNavbar extends Component {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "500px" }}
+            style={{ top: "80px", width: "800px", left: "20%" }}
             type="radio"
             name="options"
             defaultValue={this.state.default}
@@ -123,10 +123,10 @@ class WishlistNavbar extends Component {
                 variant="light"
                 value={this.state.Lists[0].ListName}
                 onClick={e => {
-                  this.state.handleClick(item[0].Listid, false);
+                  this.state.handleClick(item.ListName, false);
                 }}
               >
-                {item[0].ListName}
+                {item.ListName}
               </ToggleButton>
             ))}
             <ToggleButton
@@ -155,7 +155,7 @@ class WishlistNavbar extends Component {
                     placeholder="List name"
                     aria-label="ListName"
                     aria-describedby="ListName"
-                    style={{ width: "500px" }}
+                    style={{ width: "300px" }}
                     value={this.state.newList}
                     onChange={this.handleChange}
                   />
