@@ -1,3 +1,4 @@
+
 package geektextteam9.com.geektext.model;
 
 import geektextteam9.com.geektext.service.WishlistService;
