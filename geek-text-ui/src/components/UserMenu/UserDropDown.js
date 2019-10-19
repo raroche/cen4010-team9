@@ -1,13 +1,12 @@
-import React from 'react';
-import './UserDropDown.css';
-
+import React from "react";
+import "./UserDropDown.css";
 
 const UserDropDown = props => {
-    let userClasses = 'userDropDown';
+  let userClasses = "userDropDown";
 
-    if(props.show) {
-        userClasses = 'userDropDown open';
-    }
+  if (props.show) {
+    userClasses = "userDropDown open";
+  }
 
     return (
         <div className={userClasses}>
@@ -21,7 +20,7 @@ const UserDropDown = props => {
             </div>
         </div>
     );
-};
 
+};
 
 export default UserDropDown;
