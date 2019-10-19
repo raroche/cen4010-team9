@@ -1,14 +1,12 @@
 import React from "react";
-import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Tooltip from "@material-ui/core/Tooltip";
 import Button from "@material-ui/core/Button";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
-export default function ReviewStars(props) {
+export default function PublisherInfo(props) {
   const [open, setOpen] = React.useState(false);
-  const roundedrating = Math.round(props.avgRating * 10) / 10;
 
   const handleTooltipClose = () => {
     setOpen(false);
@@ -22,41 +20,40 @@ export default function ReviewStars(props) {
     tooltip: {
       backgroundColor: "#f5f5f9",
       color: "rgba(0, 0, 0, 0.87)",
-      maxWidth: 220,
+      maxWidth: 600,
       fontSize: theme.typography.pxToRem(12),
       border: "1px solid #dadde9",
       bottom: 0,
       left: 0,
-      margin: "-75px 0"
+      margin: "-150px 50px"
     }
   }))(Tooltip);
 
+  const buttonStyle = { padding: "6px 0px" };
+
   return (
-    <div>
-      <Box component="span" mb={3} borderColor="transparent">
-        {
-          // Hover rating Average out of 5 starts
-        }
+    <span>
+      <Box
+        kkey={props.publisher.id}
+        component="span"
+        mb={3}
+        borderColor="transparent"
+        className="mr-1"
+      >
         <HtmlTooltip
           title={
             <React.Fragment>
-              <Typography color="inherit">
-                {roundedrating + " out of 5"}
+              <Typography component="span" className="ml-2">
+                {props.publisher.description}
               </Typography>
             </React.Fragment>
           }
         >
-          <Button>
-            <Rating value={Math.floor(props.avgRating)} readOnly />
+          <Button style={buttonStyle}>
+            <Typography component="span">{props.publisher.name} |</Typography>
           </Button>
         </HtmlTooltip>
-
-        <Typography component="span" className="ml-2">
-          ({props.totalReviews} Reviews){" "}
-        </Typography>
       </Box>
-    </div>
+    </span>
   );
 }
-
-function displayRating() {}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./BookMainInfo.css";
 import ReviewStars from "../ReviewStars/ReviewStars";
+import BookDetailsPublishers from "../BookDetailsPublishers/BookDetailsPublishers";
 
 export default class BookMainInfo extends Component {
   render() {
@@ -8,13 +9,22 @@ export default class BookMainInfo extends Component {
     const loading = this.props.state.loading;
     const error = this.props.state.error;
 
+    let totalReviews;
+    let avgRating;
+    if (this.props.state.book.reviews !== undefined) {
+      const reviews = this.props.state.book.reviews;
+      totalReviews = reviews.length;
+
+      avgRating = calculateAvgRating(reviews, totalReviews);
+    }
+
     return (
       <div className="col-md-8 mt-5">
         {error ? <h2> {error.message}</h2> : null}
         {loading ? <h2> {spinner()} </h2> : <h2> {book.title} </h2>}
 
         <div>
-          <ReviewStars />
+          <ReviewStars totalReviews={totalReviews} avgRating={avgRating} />
         </div>
         <h5>Price: ${loading ? spinner() : book.price}</h5>
         <button type="button" className="btn btn-primary">
@@ -25,15 +35,26 @@ export default class BookMainInfo extends Component {
           Add to my WishList
         </span>
         <p className="mt-1">Get it as soon as {deliveryDate()}</p>
-        <p className="mt-1">ISBN: 0062435590</p>
         <p className="mt-1">
-          Publisher: William Morrow Paperbacks; Reprint edition (March 28, 2017)
+          <span className="font-weight-bold">ISBN: </span>{" "}
+          {loading ? spinner() : book.isbn}
         </p>
-        <span className="mr-3">Genre: Novel</span>
+        <p className="mt-1 ">
+          <BookDetailsPublishers
+            bookPublishers={book.publishers ? book.publishers : undefined}
+          />
+        </p>
+        <span className="mr-3">
+          <span className="font-weight-bold">Genre: </span> Novel
+        </span>
         <span>|</span>
-        <span className="ml-3"> Language: English</span>
+        <span className="ml-3">
+          {" "}
+          <span className="font-weight-bold">Language: </span> English
+        </span>
         <p className="mt-2">
-          <strong>Author: Deborah Shapiro (bio)</strong>
+          <span className="font-weight-bold">Author: </span>Deborah Shapiro
+          (bio)
         </p>
         <p>
           Deborah Shapiro was born and raised outside of Boston, Massachusetts.
@@ -73,4 +94,14 @@ function deliveryDate() {
     .split(" ")
     .slice(0, 4)
     .map(a => a.concat(" "));
+}
+
+function calculateAvgRating(reviews, totalReviews) {
+  let sum = 0;
+
+  for (let counter = 0; counter < totalReviews; counter++) {
+    let review = reviews[counter];
+    sum += review.rating;
+  }
+  return parseInt(sum, 10) / totalReviews;
 }
