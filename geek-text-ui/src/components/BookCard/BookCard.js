@@ -6,7 +6,7 @@ export default class BookCard extends Component {
   render() {
     return (
       <NavLink exact to="/book">
-        <div>
+        <div className="mt-4 mb-2 ml-2 mr-2">
           <Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
