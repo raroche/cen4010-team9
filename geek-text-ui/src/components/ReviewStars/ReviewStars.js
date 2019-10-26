@@ -20,8 +20,8 @@ export default function ReviewStars(props) {
 
   const HtmlTooltip = withStyles(theme => ({
     tooltip: {
-      backgroundColor: "#f5f5f9",
-      color: "rgba(0, 0, 0, 0.87)",
+      backgroundColor: "black",
+      color: "white",
       maxWidth: 220,
       fontSize: theme.typography.pxToRem(12),
       border: "1px solid #dadde9",
@@ -31,13 +31,9 @@ export default function ReviewStars(props) {
     }
   }))(Tooltip);
 
-  var styles1 = {
-    paddingBottom: 5
-  };
-
   return (
-    <div style={styles1}>
-      <Box component="span" mb={3} borderColor="transparent">
+    <div>
+      <Box component="span" borderColor="transparent">
         {
           // Hover rating Average out of 5 starts
         }
@@ -45,7 +41,9 @@ export default function ReviewStars(props) {
           title={
             <React.Fragment>
               <Typography color="inherit">
-                {roundedrating + " out of 5"}
+                {isNaN(roundedrating)
+                  ? "0 out of 5"
+                  : roundedrating + " out of 5"}
               </Typography>
             </React.Fragment>
           }
@@ -55,7 +53,7 @@ export default function ReviewStars(props) {
           </span>
         </HtmlTooltip>
 
-        <Typography component="span" className="ml-2" style={styles1}>
+        <Typography component="span" className="ml-2">
           ({props.totalReviews} Reviews){" "}
         </Typography>
       </Box>
