@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 
-const images = [
-  "https://jonathanlaing.co.uk/wp-content/uploads/2016/09/Book-Cover.jpeg"
-];
-
 export default class BookMainPhoto extends Component {
   constructor(props) {
     super(props);
@@ -17,10 +13,11 @@ export default class BookMainPhoto extends Component {
   }
 
   render() {
+    const images = [this.props.photoURL];
     const { photoIndex, isOpen } = this.state;
 
     return (
-      <div className="mr-4 mt-5">
+      <div className="mt-5">
         <a type="button" onClick={() => this.setState({ isOpen: true })}>
           <img src={images[0]} height="500" alt="book cover" />
         </a>

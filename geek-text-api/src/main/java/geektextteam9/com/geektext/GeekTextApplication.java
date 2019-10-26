@@ -13,6 +13,4 @@ public class GeekTextApplication {
 		SpringApplication.run(GeekTextApplication.class, args);
 	}
 
-
-
 }

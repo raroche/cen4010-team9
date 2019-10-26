@@ -19,7 +19,7 @@ export default class BookMainInfo extends Component {
     }
 
     return (
-      <div className="col-md-8 mt-5">
+      <div className="mt-5">
         {error ? <h2> {error.message}</h2> : null}
         {loading ? <h2> {spinner()} </h2> : <h2> {book.title} </h2>}
 
