@@ -2,6 +2,8 @@
 # Created by https://www.gitignore.io/api/maven,eclipse,java-web,reactnative,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=maven,eclipse,java-web,reactnative,visualstudiocode
 
+geek-text-api/.idea
+
 ### Eclipse ###
 .metadata
 bin/
