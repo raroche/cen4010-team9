@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Header />
-        <MainBanner />
+        <Route path="/" exact component={MainBanner} />
         <div style={{ height: "50px" }}></div>
         <Route exact path="/" render={props => <HomePage />} />
         <Route path="/login" component={LoginRegister} />
