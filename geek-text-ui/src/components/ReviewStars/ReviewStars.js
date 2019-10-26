@@ -20,8 +20,8 @@ export default function ReviewStars(props) {
 
   const HtmlTooltip = withStyles(theme => ({
     tooltip: {
-      backgroundColor: "#f5f5f9",
-      color: "rgba(0, 0, 0, 0.87)",
+      backgroundColor: "black",
+      color: "white",
       maxWidth: 220,
       fontSize: theme.typography.pxToRem(12),
       border: "1px solid #dadde9",
@@ -33,7 +33,7 @@ export default function ReviewStars(props) {
 
   return (
     <div>
-      <Box component="span" mb={3} borderColor="transparent">
+      <Box component="span" borderColor="transparent">
         {
           // Hover rating Average out of 5 starts
         }

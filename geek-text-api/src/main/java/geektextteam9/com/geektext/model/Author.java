@@ -21,6 +21,9 @@ public class Author {
     @Column
     private String bio;
 
+    @Column(name = "photo_url")
+    private String photoUrl;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "author_book",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
@@ -32,12 +35,22 @@ public class Author {
         this.name = "";
         this.bio = "";
         this.books = null;
+        this.photoUrl = "";
     }
 
-    public Author(String name, String bio, List<Book> books) {
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public Author(String name, String bio, String photoUrl, List<Book> books) {
         this.name = name;
         this.bio = bio;
         this.books = books;
+        this.photoUrl = photoUrl;
     }
 
     public Integer getId() {

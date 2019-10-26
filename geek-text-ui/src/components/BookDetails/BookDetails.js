@@ -57,7 +57,7 @@ export default class BookDetails extends Component {
     return (
       <div>
         <BookMainContainer state={this.state} />
-        <BookDescription />
+        <BookDescription description={this.state.book.description} />
         <ReviewsSection />
         <ReviewRow />
         <ReviewRow />
