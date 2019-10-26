@@ -1,6 +1,7 @@
 package geektextteam9.com.geektext.ws;
 
 
+import geektextteam9.com.geektext.model.Book;
 import geektextteam9.com.geektext.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,12 @@ import java.util.List;
 @RequestMapping(value = "/")
 public class HomeRestController {
 
+
     @Autowired
     private HomeService homeService;
 
-    @GetMapping(path = "/")
-    public ResponseEntity<List> findByFeatured() {
+    @GetMapping(path = "")
+    public ResponseEntity<List<Book>> findByFeatured() {
         return ResponseEntity.ok(homeService.findAllByFeatured());
     }
 }

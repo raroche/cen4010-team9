@@ -8,7 +8,6 @@ import BookPage from "./components/BookPage/BookPage";
 import BookDetails from "./components/BookDetails/BookDetails";
 import AuthorDetails from "./components/AuthorDetails/AuthorDetails";
 import Header from "./components/header/Header";
-import MainBanner from "./components/MainBanner/MainBanner";
 
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
@@ -20,16 +19,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Header />
-        <Route path="/" exact component={MainBanner} />
-        <div style={{ height: "50px" }}></div>
-        <Route exact path="/" render={props => <HomePage />} />
-        <Route path="/login" component={LoginRegister} />
 
+        <Route exact path="/" render={props => <HomePage />} />
+
+        <Route path="/login" component={LoginRegister} />
         <Route path="/bookgrid" component={BooksGrid} />
         <Route path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />
         <Route path="/wishlist" component={WishList} />
-        <Route path="/book" component={BookDetails} />
+        <Route path="/book/:bookId" component={BookDetails} />
         <Route path="/author" component={AuthorDetails} />
       </BrowserRouter>
     );

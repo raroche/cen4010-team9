@@ -3,6 +3,7 @@ import BookMainContainer from "../BookMainContainer/BookMainContainer";
 import BookDescription from "../BookDescription/BookDescription";
 import ReviewsSection from "../ReviewsSection/ReviewsSection";
 import ReviewRow from "../ReviewRow/ReviewRow";
+import { Link } from "react-router-dom";
 
 export default class BookDetails extends Component {
   constructor(props) {
@@ -21,7 +22,13 @@ export default class BookDetails extends Component {
   // Fetch a book from the API
   async fetchData() {
     try {
-      const response = await fetch("http://localhost:8090/api/books/1");
+      let {
+        match: { params }
+      } = this.props;
+
+      const response = await fetch(
+        `http://localhost:8090/api/books/${params.bookId}`
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -37,6 +44,10 @@ export default class BookDetails extends Component {
   }
 
   async componentDidMount() {
+    let {
+      match: { params }
+    } = this.props;
+
     this.setState({ loading: true });
     this.fetchData();
     this.setState({ loading: false });
