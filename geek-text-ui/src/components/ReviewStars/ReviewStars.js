@@ -31,12 +31,8 @@ export default function ReviewStars(props) {
     }
   }))(Tooltip);
 
-  var styles1 = {
-    paddingBottom: 5
-  };
-
   return (
-    <div style={styles1}>
+    <div>
       <Box component="span" mb={3} borderColor="transparent">
         {
           // Hover rating Average out of 5 starts
@@ -45,7 +41,9 @@ export default function ReviewStars(props) {
           title={
             <React.Fragment>
               <Typography color="inherit">
-                {roundedrating + " out of 5"}
+                {isNaN(roundedrating)
+                  ? "0 out of 5"
+                  : roundedrating + " out of 5"}
               </Typography>
             </React.Fragment>
           }
@@ -55,7 +53,7 @@ export default function ReviewStars(props) {
           </span>
         </HtmlTooltip>
 
-        <Typography component="span" className="ml-2" style={styles1}>
+        <Typography component="span" className="ml-2">
           ({props.totalReviews} Reviews){" "}
         </Typography>
       </Box>
