@@ -1,0 +1,19 @@
+.SortButton {
+    background-color: transparent;
+    color: rgb(80, 80, 80);
+    padding: 40px 10px 0px 0px;
+    font-size: 20px;
+    border: none;
+    right: 0;
+    position: sticky;
+    outline: none;
+}
+
+.SortButton:active {
+    outline: none;
+    border: none;
+}
+  
+.SortButton:focus {
+    outline: none;
+}
