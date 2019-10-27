@@ -20,28 +20,15 @@ class App extends Component {
       <BrowserRouter>
         <Header />
 
-<<<<<<< HEAD
-          <div style={{height: '120px'}}></div>
-          <Route exact path="/" render={props =><HomePage />} />
-          <Route path="/login" component={LoginRegister} />
-          <Route path="/myaccount" component={MyAccount} />
-          <Route path="/bookgrid" component={BooksGrid} />
-          <Route path="/books" component={BookPage} />
-          <Route path="/book" component={BookDetails} />
-          <Route path="/cart" component = {Cart}/>
-        <Route path="/wishlist" component={WishList} />
-
-=======
         <Route exact path="/" render={props => <HomePage />} />
-
         <Route path="/login" component={LoginRegister} />
+        <Route path="/myaccount" component={MyAccount} />
         <Route path="/bookgrid" component={BooksGrid} />
         <Route path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />
         <Route path="/wishlist" component={WishList} />
         <Route path="/book/:bookId" component={BookDetails} />
         <Route path="/author" component={AuthorDetails} />
->>>>>>> d0925e79939ef4ad1b0c00d8f669390d1947a9d0
       </BrowserRouter>
     );
   }

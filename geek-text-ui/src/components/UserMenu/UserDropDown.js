@@ -1,5 +1,7 @@
 import React from "react";
 import "./UserDropDown.css";
+import { Link } from 'react-router-dom';
+
 
 const UserDropDown = props => {
   let userClasses = "userDropDown";
@@ -11,12 +13,12 @@ const UserDropDown = props => {
     return (
         <div className={userClasses}>
             <div className="dropdown-user">
-                <a href="/login">Sign In</a>
-                <a href="/myaccount">My Account</a>
-                <a href="/">Favorites</a>
-                <a href="/">Wishlist</a>
-                <a href="/login">Create an Account</a>
-                <a href="/cart">Cart</a>
+                <Link to="/login">Sign In</Link>
+                <Link to="/myaccount">My Account</Link>
+                <Link to="/">Favorites</Link>
+                <Link to="/">Wishlist</Link>
+                <Link to="/login">Create an Account</Link>
+                <Link to="/cart">Cart</Link>
             </div>
         </div>
     );
