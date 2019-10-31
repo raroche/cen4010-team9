@@ -1,0 +1,73 @@
+package geektextteam9.com.geektext.model;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name="wishlist")
+public class Wishlist {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Integer id;
+
+    @Column
+    private String name;
+
+    @ManyToMany(mappedBy = "wishlist")
+    @JsonManagedReference
+    private List<Book_in_Wishlist> books;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_wishlist",
+            joinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    @JsonBackReference
+    private List<User_Wishlist> user;
+
+    public Wishlist() {
+        this.name = null;
+        this.books = null;
+        this.user = null;
+    }
+
+    public Wishlist(String name, List<Book_in_Wishlist> books) {
+        this.name = name;
+        this.books = books;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Book_in_Wishlist> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book_in_Wishlist> books) {
+        this.books = books;
+    }
+
+    public List<User_Wishlist> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User_Wishlist> user) {
+        this.user = user;
+    }
+}

@@ -31,6 +31,13 @@ public class Author {
     @JsonBackReference
     private List<Book> books;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_in_wishlist",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
+    @JsonBackReference
+    private List<Book_in_Wishlist> books_wishlist;
+
     private Author() {
         this.name = "";
         this.bio = "";
