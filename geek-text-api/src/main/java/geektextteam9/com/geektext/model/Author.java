@@ -31,7 +31,7 @@ public class Author {
     @JsonBackReference
     private List<Book> books;
 
-    private Author() {
+    public Author() {
         this.name = "";
         this.bio = "";
         this.books = null;
