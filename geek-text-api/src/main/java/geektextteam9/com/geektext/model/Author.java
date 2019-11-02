@@ -5,7 +5,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,10 +29,15 @@ public class Author {
 
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private Set<AuthorBook> books;
 
-    public Author(){}
+    public Author() {
+        this.name = "";
+        this.bio = "";
+        this.books = null;
+        this.photoUrl = "";
+    }
 
     public String getPhotoUrl() {
         return photoUrl;
