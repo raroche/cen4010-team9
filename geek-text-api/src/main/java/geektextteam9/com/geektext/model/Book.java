@@ -1,5 +1,6 @@
 package geektextteam9.com.geektext.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -54,6 +55,10 @@ public class Book {
     @JsonManagedReference
     private List<Publisher> publishers;
 
+    @ManyToMany(mappedBy = "books")
+    @JsonBackReference
+    private List<Wishlist> wishlist;
+
     public Book() {
         this.isbn = "";
         this.title = "";
@@ -67,10 +72,10 @@ public class Book {
         this.reviews = null;
         this.authors = null;
         this.publishers = null;
+        this.wishlist = null;
     }
 
-    public Book(String isbn, String title, String description, double price, Date date, float rating, String img_url,
-                boolean top_seller, boolean featured, List<Review> reviews, List<Author> authors, List<Publisher> publishers) {
+    public Book(String isbn, String title, String description, Double price, Date date, float rating, String img_url, boolean top_seller, boolean featured, List<Review> reviews, List<Author> authors, List<Publisher> publishers, List<Wishlist> wishlist) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
@@ -83,6 +88,7 @@ public class Book {
         this.reviews = reviews;
         this.authors = authors;
         this.publishers = publishers;
+        this.wishlist = wishlist;
     }
 
     public List<Author> getAuthors() {
@@ -192,4 +198,11 @@ public class Book {
         this.description = description;
     }
 
+    public List<Wishlist> getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(List<Wishlist> wishlist) {
+        this.wishlist = wishlist;
+    }
 }

@@ -13,7 +13,10 @@ public class User_Wishlist {
     @Column(columnDefinition = "serial")
     private Integer id;
 
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_wishlist",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
     @JsonManagedReference
     private List<Wishlist> wishlists;
 

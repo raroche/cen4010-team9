@@ -17,14 +17,16 @@ public class Wishlist {
     @Column
     private String name;
 
-    @ManyToMany(mappedBy = "wishlist")
-    @JsonManagedReference
-    private List<Book_in_Wishlist> books;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_wishlist",
+    @JoinTable(name = "book_in_wishlist",
             joinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    @JsonManagedReference
+    private List<Book> books;
+
+
+    @ManyToMany(mappedBy = "wishlists")
     @JsonBackReference
     private List<User_Wishlist> user;
 
@@ -34,7 +36,7 @@ public class Wishlist {
         this.user = null;
     }
 
-    public Wishlist(String name, List<Book_in_Wishlist> books) {
+    public Wishlist(String name, List<Book> books) {
         this.name = name;
         this.books = books;
     }
@@ -55,11 +57,11 @@ public class Wishlist {
         this.name = name;
     }
 
-    public List<Book_in_Wishlist> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book_in_Wishlist> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Card, Button } from "react-bootstrap";
-import Lists from "./Lists";
 import WishlistNavbar from "./WishlistNavbar";
 import WishlistCards from "./WishlistCards";
 
@@ -8,85 +6,125 @@ class WishList extends Component {
   constructor() {
     super();
     this.state = {
-      Lists: Lists,
+      Lists: [{ books: [] }],
       currentList: 0
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.handleMoveToCart = this.handleMoveToCart(this);
+    this.fetchWishlists = this.fetchWishlists.bind(this);
   }
 
-  handleClick(listName, newList) {
+  async fetchWishlists() {
+    try {
+      const response = await fetch("http://localhost:8090/api/user/wishlist/1");
+
+      if (response.ok) {
+        const data = await response.json();
+        this.setState({ Lists: data });
+      } else {
+        throw new Error("Something went wrong while fetching the data");
+      }
+    } catch (error) {
+      this.setState({ error, isLoading: false });
+      console.log("error!");
+      console.error(error);
+    }
+  }
+
+  async componentDidMount() {
+    this.setState({ loading: true });
+    this.fetchWishlists();
+    this.setState({ loading: false });
+  }
+
+  async handleClick(listName, newList) {
     if (newList === true) {
-      let temp = this.state.Lists;
-      const newElement = {
-        id: this.state.Lists.length,
-        ListName: listName,
-        Books: []
-      };
-      temp.push(newElement);
-      console.log(temp);
-      this.setState({
-        Lists: temp,
-        currentList: temp.length - 1
-      });
-    } else if (listName === this.state.Lists[0].ListName) {
+      try {
+        const response = await fetch(
+          `http://localhost:8090/api/user/addWishlist/${listName}/1`,
+          { method: "PUT" }
+        );
+
+        if (response.ok) {
+          let temp = await response.json();
+          this.setState({ Lists: temp, currentList: temp.length - 1 });
+        } else {
+          throw new Error("Something went wrong while fetching the data");
+        }
+      } catch (error) {
+        this.setState({ error, isLoading: false });
+        console.log("error!");
+        console.error(error);
+      }
+    } else if (listName === this.state.Lists[0].name) {
       this.setState({
         currentList: 0
       });
-    } else if (listName === this.state.Lists[1].ListName) {
+    } else if (listName === this.state.Lists[1].name) {
       this.setState({
         currentList: 1
       });
-    } else if (listName === this.state.Lists[2].ListName) {
+    } else if (listName === this.state.Lists[2].name) {
       this.setState({
         currentList: 2
       });
     }
   }
 
-  handleDelete(book_id) {
-    const temp = this.state.Lists[this.state.currentList].Books.filter(
-      book => book.id !== book_id
-    );
-    let newState = this.state.Lists;
-    newState[this.state.currentList].Books = temp;
-    this.setState({
-      Lists: newState
-    });
+  async handleDelete(book_id) {
+    try {
+      const response = await fetch(
+        `http://localhost:8090/api/wishlist/removeBook/${this.state.Lists[this.state.currentList].id}/${book_id}`,
+        { method: "PUT" }
+      );
+
+      if (response.ok) {
+        let temp = this.state.Lists;
+        temp[this.state.currentList] = await response.json();
+        this.setState({ Lists: temp });
+      } else {
+        throw new Error("Something went wrong while fetching the data");
+      }
+    } catch (error) {
+      this.setState({ error, isLoading: false });
+      console.log("error!");
+      console.error(error);
+    }
   }
 
   handleMoveToCart() {
     console.log("To be implemented");
   }
 
-  handleMove(destList, book_id) {
-    let book = {};
-    book = {
-      id: this.state.Lists[this.state.currentList].Books.length + 1,
-      bookName: this.state.Lists[this.state.currentList].Books[book_id - 1]
-        .bookName,
-      author: this.state.Lists[this.state.currentList].Books[book_id - 1]
-        .author,
-      price: this.state.Lists[this.state.currentList].Books[book_id - 1].price,
-      cover: this.state.Lists[this.state.currentList].Books[book_id - 1].cover
-    };
-    book.id = this.state.Lists[this.state.currentList].Books.length + 1;
-    let newState = this.state.Lists;
-    newState[destList].Books.push(book);
-    this.setState({
-      Lists: newState
-    });
-    this.handleDelete(book_id);
+  async handleMove(destList, book_id) {
+    try {
+      const response = await fetch(
+        `http://localhost:8090/api/wishlist/moveBook/${this.state.Lists[this.state.currentList].id}/${destList}/${book_id}/1`,
+        { method: "PUT" }
+      );
+
+      if (response.ok) {
+        let temp = await response.json();
+        this.setState({ Lists: temp });
+      } else {
+        throw new Error("Something went wrong while fetching the data");
+      }
+    } catch (error) {
+      this.setState({ error, isLoading: false });
+      console.log("error!");
+      console.error(error);
+    }
   }
 
   render() {
     let Options = [{}];
+    console.log("Length" + this.state.Lists.length);
     for (let i = 0; i < this.state.Lists.length; i++) {
       if (i !== this.state.currentList) {
         Options.push({
-          listName: this.state.Lists[i].ListName,
+          listName: this.state.Lists[i].name,
           listid: this.state.Lists[i].id
         });
       }
@@ -102,7 +140,7 @@ class WishList extends Component {
           }
         />
         <WishlistCards
-          Books={this.state.Lists[this.state.currentList].Books}
+          Books={this.state.Lists[this.state.currentList].books}
           handleDelete={this.handleDelete}
           handleMove={this.handleMove}
           handleMoveToCart={this.handleMoveToCart}
