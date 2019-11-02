@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./BookMainInfo.css";
 import ReviewStars from "../ReviewStars/ReviewStars";
+import BookDetailsPublishers from "../BookDetailsPublishers/BookDetailsPublishers";
+import { NavLink } from "react-router-dom";
 
 export default class BookMainInfo extends Component {
   render() {
@@ -8,42 +10,66 @@ export default class BookMainInfo extends Component {
     const loading = this.props.state.loading;
     const error = this.props.state.error;
 
+    let totalReviews;
+    let avgRating;
+    if (this.props.state.book.reviews !== undefined) {
+      const reviews = this.props.state.book.reviews;
+      totalReviews = reviews.length;
+
+      avgRating = calculateAvgRating(reviews, totalReviews);
+    }
+
     return (
-      <div className="col-md-8 mt-5">
+      <div className="mt-5">
         {error ? <h2> {error.message}</h2> : null}
         {loading ? <h2> {spinner()} </h2> : <h2> {book.title} </h2>}
 
-        <div>
-          <ReviewStars />
+        <div className="mt-3">
+          <ReviewStars totalReviews={totalReviews} avgRating={avgRating} />
         </div>
-        <h5>Price: ${loading ? spinner() : book.price}</h5>
-        <button type="button" className="btn btn-primary">
+        <h5 className="mt-3">Price: ${loading ? spinner() : book.price}</h5>
+        <button type="button" className="btn btn-primary btn-lg mt-3 mb-3">
           <strong>Add to Cart</strong>
         </button>
         <span className="ml-3">
           <i className="fa fa-heart-o wishList mr-1 ml-3"></i>
           Add to my WishList
         </span>
-        <p className="mt-1">Get it as soon as {deliveryDate()}</p>
-        <p className="mt-1">ISBN: 0062435590</p>
         <p className="mt-1">
-          Publisher: William Morrow Paperbacks; Reprint edition (March 28, 2017)
+          <i class="fab fa-usps fa-2x text-primary mr-2 "></i>
+          Get it as soon as {deliveryDate()}
         </p>
-        <span className="mr-3">Genre: Novel</span>
-        <span>|</span>
-        <span className="ml-3"> Language: English</span>
-        <p className="mt-2">
-          <strong>Author: Deborah Shapiro (bio)</strong>
+        <p className="mt-1">
+          <span className="font-weight-bold">ISBN: </span>{" "}
+          {loading ? spinner() : book.isbn}
         </p>
-        <p>
-          Deborah Shapiro was born and raised outside of Boston, Massachusetts.
-          She spent a number of years in New York working at magazines,
-          including New York and ELLE, and her writing has appeared in The New
-          York Times Book Review, Los Angeles Review of Books, Sight Unseen,
-          Chicago Magazine, Literary Hub, Washington Square Review, and
-          elsewhere. Her first novel, The Sun In Your Eyes, was published in
-          2016. Her new novel, The Summer Demands was published by Catapult
-          Books in 2019. She lives with her husband and son in Chicago.{" "}
+        <p className="mt-1 ">
+          <BookDetailsPublishers
+            bookPublishers={book.publishers ? book.publishers : undefined}
+          />
+        </p>
+        <span className="mr-3">
+          <span className="font-weight-bold">Genre: </span> Novel
+        </span>
+        <p className="mt-3">
+          <span className="font-weight-bold">Language: </span> English
+        </p>
+        <p className="mt-3">
+          <span className="font-weight-bold">Author: </span>
+
+          {book.authors
+            ? book.authors.map(author => {
+                return (
+                  <NavLink
+                    exact
+                    to={"/author/" + author.id}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <span className="mr-3">{author.name}</span>
+                  </NavLink>
+                );
+              })
+            : undefined}
         </p>
       </div>
     );
@@ -73,4 +99,14 @@ function deliveryDate() {
     .split(" ")
     .slice(0, 4)
     .map(a => a.concat(" "));
+}
+
+function calculateAvgRating(reviews, totalReviews) {
+  let sum = 0;
+
+  for (let counter = 0; counter < totalReviews; counter++) {
+    let review = reviews[counter];
+    sum += review.rating;
+  }
+  return parseInt(sum, 10) / totalReviews;
 }
