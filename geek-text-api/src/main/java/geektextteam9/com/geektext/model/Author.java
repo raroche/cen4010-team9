@@ -1,9 +1,13 @@
 package geektextteam9.com.geektext.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "author")
@@ -24,19 +28,12 @@ public class Author {
     @Column(name = "photo_url")
     private String photoUrl;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "author_book",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
+    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Book> books;
+    private Set<AuthorBook> books;
 
-    public Author() {
-        this.name = "";
-        this.bio = "";
-        this.books = null;
-        this.photoUrl = "";
-    }
+    public Author(){}
 
     public String getPhotoUrl() {
         return photoUrl;
@@ -46,7 +43,7 @@ public class Author {
         this.photoUrl = photoUrl;
     }
 
-    public Author(String name, String bio, String photoUrl, List<Book> books) {
+    public Author(String name, String bio, String photoUrl, Set<AuthorBook> books) {
         this.name = name;
         this.bio = bio;
         this.books = books;
@@ -77,11 +74,11 @@ public class Author {
         this.bio = bio;
     }
 
-    public List<Book> getBooks() {
+    public Set<AuthorBook> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<AuthorBook> books) {
         this.books = books;
     }
 }

@@ -1,10 +1,14 @@
 package geektextteam9.com.geektext.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="book")
@@ -42,17 +46,18 @@ public class Book {
     @Column
     private boolean featured;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book")
     @JsonManagedReference
     private List<Review> reviews;
 
-    @ManyToMany(mappedBy = "books")
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Author> authors;
+    private Set<AuthorBook> authors;
 
     @ManyToMany(mappedBy = "books")
     @JsonManagedReference
-    private List<Publisher> publishers;
+    private Set<Publisher> publishers;
 
     public Book() {
         this.isbn = "";
@@ -65,12 +70,12 @@ public class Book {
         this.top_seller = false;
         this.featured = false;
         this.reviews = null;
-        this.authors = null;
-        this.publishers = null;
+        this.authors = new HashSet<>();
+        this.publishers = new HashSet<>();
     }
 
     public Book(String isbn, String title, String description, double price, Date date, float rating, String img_url,
-                boolean top_seller, boolean featured, List<Review> reviews, List<Author> authors, List<Publisher> publishers) {
+                boolean top_seller, boolean featured, List<Review> reviews, Set<AuthorBook> authors, Set<Publisher> publishers) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
@@ -85,19 +90,19 @@ public class Book {
         this.publishers = publishers;
     }
 
-    public List<Author> getAuthors() {
+    public Set<AuthorBook> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(Set<AuthorBook> authors) {
         this.authors = authors;
     }
 
-    public List<Publisher> getPublishers() {
+    public Set<Publisher> getPublishers() {
         return publishers;
     }
 
-    public void setPublishers(List<Publisher> publishers) {
+    public void setPublishers(Set<Publisher> publishers) {
         this.publishers = publishers;
     }
 
