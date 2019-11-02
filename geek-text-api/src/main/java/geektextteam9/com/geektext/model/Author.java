@@ -1,9 +1,12 @@
 package geektextteam9.com.geektext.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "author")
@@ -24,12 +27,9 @@ public class Author {
     @Column(name = "photo_url")
     private String photoUrl;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "author_book",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
-    @JsonBackReference
-    private List<Book> books;
+    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "id.author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<AuthorBook> books;
 
     public Author() {
         this.name = "";
@@ -46,7 +46,7 @@ public class Author {
         this.photoUrl = photoUrl;
     }
 
-    public Author(String name, String bio, String photoUrl, List<Book> books) {
+    public Author(String name, String bio, String photoUrl, Set<AuthorBook> books) {
         this.name = name;
         this.bio = bio;
         this.books = books;
@@ -77,11 +77,11 @@ public class Author {
         this.bio = bio;
     }
 
-    public List<Book> getBooks() {
+    public Set<AuthorBook> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<AuthorBook> books) {
         this.books = books;
     }
 }

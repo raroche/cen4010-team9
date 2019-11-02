@@ -1,10 +1,13 @@
 package geektextteam9.com.geektext.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="book")
@@ -46,9 +49,9 @@ public class Book {
     @JsonManagedReference
     private List<Review> reviews;
 
-    @ManyToMany(mappedBy = "books")
-    @JsonManagedReference
-    private List<Author> authors;
+    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "id.book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<AuthorBook> authors;
 
     @ManyToMany(mappedBy = "books")
     @JsonManagedReference
@@ -70,7 +73,7 @@ public class Book {
     }
 
     public Book(String isbn, String title, String description, double price, Date date, float rating, String img_url,
-                boolean top_seller, boolean featured, List<Review> reviews, List<Author> authors, List<Publisher> publishers) {
+                boolean top_seller, boolean featured, List<Review> reviews, Set<AuthorBook> authors, List<Publisher> publishers) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
@@ -85,11 +88,11 @@ public class Book {
         this.publishers = publishers;
     }
 
-    public List<Author> getAuthors() {
+    public Set<AuthorBook> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(Set<AuthorBook> authors) {
         this.authors = authors;
     }
 
