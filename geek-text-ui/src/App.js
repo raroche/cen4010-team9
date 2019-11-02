@@ -19,15 +19,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Header />
-<<<<<<< HEAD
-          <div style={{height: '120px'}}></div>
-          <Route exact path="/" render={props =><HomePage />} />
-          <Route path="/login" component={LoginRegister} />
-          <Route path="/bookgrid" component={BooksGrid} />
-          <Route path="/books" component={BookPage} />
-          <Route path="/book" component={BookDetails} />
-          <Route path="/cart" component = {Cart}/>
-=======
 
         <Route exact path="/" render={props => <HomePage />} />
         <Route path="/login" component={LoginRegister} />
@@ -38,7 +29,6 @@ class App extends Component {
         <Route path="/wishlist" component={WishList} />
         <Route path="/book/:bookId" component={BookDetails} />
         <Route path="/author" component={AuthorDetails} />
->>>>>>> f71d7543bdffb6be0e0aedf576a64729b30688ba
       </BrowserRouter>
     );
   }
