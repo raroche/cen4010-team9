@@ -51,6 +51,7 @@ public class Book {
 
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "id.book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<AuthorBook> authors;
 
     @ManyToMany(mappedBy = "books")

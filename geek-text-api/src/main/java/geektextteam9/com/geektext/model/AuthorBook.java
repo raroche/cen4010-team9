@@ -25,6 +25,14 @@ public class AuthorBook {
         @JoinColumn(name = "book_id")
         private Book book;
 
+        public AuthorBookId() {
+
+        }
+
+        public AuthorBookId(Author author, Book book) {
+            this.author = author;
+            this.book = book;
+        }
 
         public Author getAuthor() {
             return author;
@@ -41,6 +49,10 @@ public class AuthorBook {
         public void setBook(Book book) {
             this.book = book;
         }
+    }
+
+    public AuthorBook() {
+
     }
 
     public AuthorBook(AuthorBookId id) {

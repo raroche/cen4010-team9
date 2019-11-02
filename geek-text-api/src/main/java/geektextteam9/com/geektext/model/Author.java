@@ -1,6 +1,7 @@
 package geektextteam9.com.geektext.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -29,6 +30,7 @@ public class Author {
 
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "id.author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<AuthorBook> books;
 
     public Author() {
