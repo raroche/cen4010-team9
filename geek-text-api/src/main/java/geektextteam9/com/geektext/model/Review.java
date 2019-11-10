@@ -14,6 +14,9 @@ public class Review {
     private Integer id;
 
     @Column
+    private String title;
+
+    @Column
     private Double rating;
 
     @Column
@@ -24,16 +27,15 @@ public class Review {
     @JsonBackReference
     private Book book;
 
-    private Review() {
-        this.rating = 0.0;
-        this.comment = "";
-        this.book = null;
+    public Review() {
+
     }
 
-    private Review(double rating, String comment, Book book) {
+    private Review(double rating, String comment, Book book, String title) {
         this.rating = rating;
         this.comment = comment;
         this.book = book;
+        this.title = title;
     }
 
     public Integer getId() {
@@ -44,11 +46,19 @@ public class Review {
         this.id = id;
     }
 
-    public double getRating() {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
