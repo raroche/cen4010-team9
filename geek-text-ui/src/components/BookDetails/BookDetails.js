@@ -66,9 +66,7 @@ export default class BookDetails extends Component {
       <div>
         <BookMainContainer state={this.state} />
         <BookDescription description={this.state.book.description} />
-        <ReviewsSection />
-        <ReviewRow />
-        <ReviewRow />
+        <ReviewsSection book={this.state.book} />
       </div>
     );
   }

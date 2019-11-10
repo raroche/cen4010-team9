@@ -37,7 +37,7 @@ export default class BookMainInfo extends Component {
           Add to my WishList
         </span>
         <p className="mt-1">
-          <i class="fab fa-usps fa-2x text-primary mr-2 "></i>
+          <i className="fab fa-usps fa-2x text-primary mr-2 "></i>
           Get it as soon as {deliveryDate()}
         </p>
         <p className="mt-1">
@@ -65,8 +65,9 @@ export default class BookMainInfo extends Component {
                     exact
                     to={"/author/" + author.id}
                     style={{ textDecoration: "none" }}
+                    id={author.id}
                   >
-                    <span className="mr-3">{author.name}</span>
+                    <span className="mr-3">{author.name} </span>
                   </NavLink>
                 );
               })
@@ -79,8 +80,8 @@ export default class BookMainInfo extends Component {
 
 function spinner() {
   return (
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
+    <div className="spinner-border text-primary" role="status">
+      <span className="sr-only">Loading...</span>
     </div>
   );
 }
