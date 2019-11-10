@@ -50,7 +50,7 @@ class HomePage extends Component {
             <h2>Featured Books</h2>
             <br />
           </div>
-          <BookGrid data={this.state} />
+          <BookGrid data={this.state.books} />
           <br />
         </div>
       </div>

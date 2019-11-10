@@ -1,195 +1,160 @@
 package geektextteam9.com.geektext.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name="book")
 public class Book {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(columnDefinition = "serial")
+	private Integer id;
 
-    @Column
-    private String isbn;
+	@Column
+	private String isbn;
 
-    @Column
-    private String title;
+	@Column
+	private String title;
 
-    @Column
-    private String description;
+	@Column
+	private String description;
 
-    @Column
-    private Double price;
+	@Column
+	private Double price;
 
-    @Column
-    private Date date;
+	@Column
+	private Date date;
 
-    @Column
-    private float rating;
+	@Column
+	private float rating;
 
-    @Column
-    private String img_url;
+	@Column
+	private String img_url;
 
-    @Column
-    private boolean top_seller;
+	@Column
+	private boolean top_seller;
 
-    @Column
-    private boolean featured;
+	@Column
+	private boolean featured;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Review> reviews;
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Review> reviews;
 
-    @ManyToMany(mappedBy = "books")
-    @JsonManagedReference
-    private List<Author> authors;
+	@ManyToMany(mappedBy = "books")
+	@JsonManagedReference
+	private List<Publisher> publishers;
 
-    @ManyToMany(mappedBy = "books")
-    @JsonManagedReference
-    private List<Publisher> publishers;
+	public Book() {
+		super();
+	}
 
-    public Book() {
-        this.isbn = "";
-        this.title = "";
-        this.description = "";
-        this.price = 0.0;
-        this.date = null;
-        this.rating = 0;
-        this.img_url = "";
-        this.top_seller = false;
-        this.featured = false;
-        this.reviews = null;
-        this.authors = null;
-        this.publishers = null;
-    }
+	public List<Publisher> getPublishers() {
+		return publishers;
+	}
 
-    public Book(String isbn, String title, String description, double price, Date date, float rating, String img_url,
-                boolean top_seller, boolean featured, List<Review> reviews, List<Author> authors, List<Publisher> publishers) {
-        this.isbn = isbn;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.date = date;
-        this.rating = rating;
-        this.img_url = img_url;
-        this.top_seller = top_seller;
-        this.featured = featured;
-        this.reviews = reviews;
-        this.authors = authors;
-        this.publishers = publishers;
-    }
+	public void setPublishers(List<Publisher> publishers) {
+		this.publishers = publishers;
+	}
 
-    public List<Author> getAuthors() {
-        return authors;
-    }
+	public List<Review> getReviews() {
+		return reviews;
+	}
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 
-    public List<Publisher> getPublishers() {
-        return publishers;
-    }
+	public double getPrice() {
+		return price;
+	}
 
-    public void setPublishers(List<Publisher> publishers) {
-        this.publishers = publishers;
-    }
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
+	public Date getDate() {
+		return date;
+	}
 
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
+	public float getRating() {
+		return rating;
+	}
 
-    public double getPrice() {
-        return price;
-    }
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	public String getImg_url() {
+		return img_url;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public void setImg_url(String img_url) {
+		this.img_url = img_url;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public boolean isTop_seller() {
+		return top_seller;
+	}
 
-    public float getRating() {
-        return rating;
-    }
+	public void setTop_seller(boolean top_seller) {
+		this.top_seller = top_seller;
+	}
 
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
+	public boolean isFeatured() {
+		return featured;
+	}
 
-    public String getImg_url() {
-        return img_url;
-    }
+	public void setFeatured(boolean featured) {
+		this.featured = featured;
+	}
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public boolean isTop_seller() {
-        return top_seller;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setTop_seller(boolean top_seller) {
-        this.top_seller = top_seller;
-    }
+	public String getIsbn() {
+		return isbn;
+	}
 
-    public boolean isFeatured() {
-        return featured;
-    }
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
 
-    public void setFeatured(boolean featured) {
-        this.featured = featured;
-    }
+	public String getTitle() {
+		return title;
+	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
+	public String getDescription() {
+		return description;
+	}
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription (String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 }

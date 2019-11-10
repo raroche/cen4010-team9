@@ -1,40 +1,53 @@
 import React from "react";
+import BooksGrid from "../BooksGrid/BooksGrid";
 
-export default function AuthorProfile() {
+export default function AuthorProfile(props) {
+  const author = props.state.author;
+  const rawBooks = props.state.author.books;
+
+  let books = new Array();
+
+  if (rawBooks) {
+    books = getListOfBooks(rawBooks);
+  }
+  //console.log(books);
   return (
     <div>
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-sm-4 ">
-            <img
-              src="https://pbs.twimg.com/profile_images/1151868565559156736/8ggbTCKJ_400x400.png"
-              alt="avatar"
-              class="avatar"
-            />
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-sm-4 ">
+            <img src={author.photoUrl} alt="avatar" className="avatar" />
           </div>
-          <div class="col-sm-8 mt-3">
+          <div className="col-sm-8 mt-3">
             <strong>
               <span>Author Name:</span>
             </strong>
-            <span class="ml-2">Deborah Shapiro</span>
+            <span className="ml-2">{author.name}</span>
 
             <strong>
-              <p class="mt-3">BIO:</p>
+              <p className="mt-3">BIO:</p>
             </strong>
-            <p>
-              Deborah Shapiro was born and raised outside of Boston,
-              Massachusetts. She spent a number of years in New York working at
-              magazines, including New York and ELLE, and her writing has
-              appeared in The New York Times Book Review, Los Angeles Review of
-              Books, Sight Unseen, Chicago Magazine, Literary Hub, Washington
-              Square Review, and elsewhere. Her first novel, The Sun In Your
-              Eyes, was published in 2016. Her new novel, The Summer Demands was
-              published by Catapult Books in 2019. She lives with her husband
-              and son in Chicago.
-            </p>
+            <p>{author.bio}</p>
           </div>
+        </div>
+        <div className="mt-4">
+          <div className="">
+            <h2>Author Books:</h2>
+            <br />
+          </div>
+          <BooksGrid data={books} />
+          <br />
         </div>
       </div>
     </div>
   );
+}
+
+function getListOfBooks(data) {
+  let books = new Array();
+
+  for (let counter = 0; counter < data.length; counter++) {
+    books.push(data[counter].id.book);
+  }
+  return books;
 }
