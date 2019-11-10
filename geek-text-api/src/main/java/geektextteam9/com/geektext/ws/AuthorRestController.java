@@ -15,9 +15,11 @@ import geektextteam9.com.geektext.model.Author;
 import geektextteam9.com.geektext.model.Filter;
 import geektextteam9.com.geektext.service.AuthorService;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/authors")
+@RequestMapping(value = "/author")
 public class AuthorRestController {
 
 	@Autowired
@@ -33,9 +35,9 @@ public class AuthorRestController {
 		return ResponseEntity.ok(authorService.findAll(filter));
 	}
 
-	@PostMapping(path = "/book/{bookId}")
-	public ResponseEntity<Page<Author>> findByBook(@PathVariable Integer bookId, @RequestBody Filter filter) {
-		return ResponseEntity.ok(authorService.findByBook(bookId, filter));
+	@GetMapping(path = "/book/{bookId}")
+	public ResponseEntity<List<Author>> findByBook(@PathVariable Integer bookId) {
+		return ResponseEntity.ok(authorService.findByBook(bookId));
 	}
 
 }

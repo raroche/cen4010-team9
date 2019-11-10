@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import geektextteam9.com.geektext.model.Author;
 
+import java.util.List;
+
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
-	public Page<Author> findByBooksIdBookId(Integer bookId, Pageable pageable);
+	public List<Author> findByBooksIdBookId(Integer bookId);
 }

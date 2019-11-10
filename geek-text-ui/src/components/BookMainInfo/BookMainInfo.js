@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 export default class BookMainInfo extends Component {
   render() {
     const book = this.props.state.book;
+    const authors = this.props.state.authors;
     const loading = this.props.state.loading;
     const error = this.props.state.error;
 
@@ -57,8 +58,8 @@ export default class BookMainInfo extends Component {
         <p className="mt-3">
           <span className="font-weight-bold">Author: </span>
 
-          {book.authors
-            ? book.authors.map(author => {
+          {authors
+            ? authors.map(author => {
                 return (
                   <NavLink
                     exact

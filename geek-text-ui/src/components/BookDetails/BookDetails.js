@@ -11,6 +11,7 @@ export default class BookDetails extends Component {
 
     this.state = {
       book: {},
+      authors: [],
       loading: false,
       error: null
     };
@@ -29,10 +30,17 @@ export default class BookDetails extends Component {
       const response = await fetch(
         `http://localhost:8090/api/books/${params.bookId}`
       );
+      const responseAuthors = await fetch(
+        `http://localhost:8090/api/author/book/${params.bookId}`
+      );
 
-      if (response.ok) {
-        const data = await response.json();
-        this.setState({ book: data });
+      if (response.ok && responseAuthors.ok) {
+        const dataBooks = await response.json();
+        const dataAuthors = await responseAuthors.json();
+        let Authors = getAuthors(dataAuthors);
+
+        this.setState({ book: dataBooks });
+        this.setState({ authors: Authors });
       } else {
         throw new Error("Something went wrong while fetching the data");
       }
@@ -64,4 +72,17 @@ export default class BookDetails extends Component {
       </div>
     );
   }
+}
+
+function getAuthors(data) {
+  let authors = new Array();
+
+  for (let counter = 0; counter < data.length; counter++) {
+    let author = {
+      id: data[counter].id,
+      name: data[counter].name
+    };
+    authors.push(author);
+  }
+  return authors;
 }

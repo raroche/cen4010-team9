@@ -9,6 +9,8 @@ import geektextteam9.com.geektext.model.Author;
 import geektextteam9.com.geektext.model.Filter;
 import geektextteam9.com.geektext.repository.AuthorRepository;
 
+import java.util.List;
+
 @Service
 public class AuthorService {
 
@@ -23,9 +25,8 @@ public class AuthorService {
 		return authorRepository.findAll(PageRequest.of(filter.getPageNumber(), filter.getPageSize()));
 	}
 
-	public Page<Author> findByBook(Integer bookId, Filter filter) {
-		return authorRepository.findByBooksIdBookId(bookId,
-				PageRequest.of(filter.getPageNumber(), filter.getPageSize()));
+	public List<Author> findByBook(Integer bookId) {
+		return authorRepository.findByBooksIdBookId(bookId);
 	}
 
 }
