@@ -26,7 +26,10 @@ export default class BookMainInfo extends Component {
         {loading ? <h2> {spinner()} </h2> : <h2> {book.title} </h2>}
 
         <div className="mt-3">
-          <ReviewStars totalReviews={totalReviews} avgRating={avgRating} />
+          <span>
+            <ReviewStars avgRating={avgRating} />
+          </span>
+          <span>({totalReviews} Reviews)</span>
         </div>
         <h5 className="mt-3">Price: ${loading ? spinner() : book.price}</h5>
         <button type="button" className="btn btn-primary btn-lg mt-3 mb-3">
