@@ -41,7 +41,7 @@ class LoginRegister extends Component {
                 </div>
 
                 <div className="box-container">
-                    {this.state.isLoginOpen && <SignIn />}
+                    {this.state.isLoginOpen && <SignIn handleSuccessfulAccount={this.handleSuccessfulAccount} />}
                     {this.state.isSignUpOpen && <CreateAccount handleSuccessfulAccount={this.handleSuccessfulAccount} />}
                 </div>
         

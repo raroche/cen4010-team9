@@ -3,13 +3,33 @@ import ReactDOM from 'react-dom';
 import './SignIn.css';
 
 class SignIn extends Component {
+    constructor(props){
+        super(props);
 
-    state = {
-        username: "",
-        password: "",
-        loginError: ""
-    };
+        this.state = {
+            username: "",
+            password: "",
+            loginError: "",
+            users: [],
+            error: null
+        };
+        
+        this.handleChange = this.handleChange.bind(this);
+        this.submitLogin = this.submitLogin.bind(this);
+    }
     
+    async componentDidMount(){
+        const url = "http://localhost:8090/api/users/";
+
+        fetch(url).then(res => {
+            if(res.ok){
+                return res.json();
+            }else{
+                throw Error("Error getting your information!")
+            }}).then(users => {
+                this.setState({users:users, loading:false});
+                }).catch(error => this.setState({error:error}))
+    }
 
     handleChange = (e) => {
         this.setState({
@@ -19,6 +39,18 @@ class SignIn extends Component {
 
     submitLogin(e) {
         e.preventDefault();
+        const {username, password} = this.state;
+        this.state.users.map(user => {
+            if(user.username === this.state.username){
+                if(user.password === this.state.password){
+                    this.props.handleSuccessfulAccount(user);
+                }else{
+                    this.setState({loginError: "Incorrect password."}) //fix bug
+                }
+            }else{
+                this.setState({loginError: "Account does not exist."})
+            }
+        })
         console.log(this.state);
     }
 
@@ -38,6 +70,7 @@ class SignIn extends Component {
                             type="text" 
                             id="username" 
                             onChange={this.handleChange}
+                            required
                             className="login-input" 
                             placeholder="Username"/>
                     </div>
@@ -48,11 +81,12 @@ class SignIn extends Component {
                             type="password" 
                             id="password" 
                             onChange={this.handleChange}
+                            required
                             className="login-input" 
                             placeholder="Password"/>
                     </div>
-
-                    <button type="button" className="login-btn" onClick={this.submitLogin.bind(this)}>Sign In</button>
+                    {this.state.loginError}
+                    <button type="button" className="login-btn" onClick={this.submitLogin}>Sign In</button>
 
                 </form>
 

@@ -47,7 +47,7 @@ class CreateAccount extends Component {
             }
             ).then(response => {
                 if(response.status === 200){
-                    this.props.handleSuccessfulAccount(response.config.data);
+                    this.props.handleSuccessfulAccount(response.config.data); //fix bug. data appears under config.data instead of data
                 }
                 console.log("Registration reponse.", response);
             }).catch(error => {

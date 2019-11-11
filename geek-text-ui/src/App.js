@@ -28,7 +28,7 @@ class App extends Component {
 
   handleLoginStatus(data){
     this.setState({
-      loggedInStatus: "Logged in.",
+      loggedInStatus: data.first_name,
       user: data
     });
   }
