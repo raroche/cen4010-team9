@@ -8,6 +8,7 @@ class LoginRegister extends Component {
     constructor(props) {
         super(props);
         this.state = {isLoginOpen: true, isSignUpOpen: false};
+        this.handleSuccessfulAccount = this.handleSuccessfulAccount.bind(this);
     }
 
     showLoginBox() {
@@ -18,10 +19,15 @@ class LoginRegister extends Component {
         this.setState({isSignUpOpen: true, isLoginOpen: false});
     }
 
+    handleSuccessfulAccount(data){
+        this.props.handleLoginStatus(data);
+        this.props.history.push("/myaccount");
+    }
+
     render() {
 
         return (
-            <div className="root-container">
+            <div className="root-container"> 
                 <div className="box-controller">
                     <div className={"controller " + (this.state.isLoginOpen ? "selected-controller" : "")} 
                     onClick={this.showLoginBox.bind(this)}>
@@ -36,7 +42,7 @@ class LoginRegister extends Component {
 
                 <div className="box-container">
                     {this.state.isLoginOpen && <SignIn />}
-                    {this.state.isSignUpOpen && <CreateAccount />}
+                    {this.state.isSignUpOpen && <CreateAccount handleSuccessfulAccount={this.handleSuccessfulAccount} />}
                 </div>
         
             </div>

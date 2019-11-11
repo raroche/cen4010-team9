@@ -1,17 +1,11 @@
 package geektextteam9.com.geektext.repository;
 
 import geektextteam9.com.geektext.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface UserRepository {
-    int insertUser(int id, User user);
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    default int insertUser(User user){
-        int id = (int) (Math.random()*1000); //generate random ID
-        return insertUser(id, user); // return insertUser;
-
-    }
-
-    List<User> selectAllUsers();
 }

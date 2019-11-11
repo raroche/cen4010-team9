@@ -3,62 +3,66 @@ package geektextteam9.com.geektext.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "users")
 public class User {
-    private int id;
-    private String name;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @NotBlank
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "email")
     private String email;
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
+    @Column(name = "nickname")
     private String nickname;
-    private String card;
-    private String shipping;
 
-    public User(@JsonProperty("id") int id,
-                @JsonProperty("name") String name, String email, String username, String password, String nickname, String card, String shipping){
-        this.id = id;
-        this.name = name;
+    public User(@JsonProperty("first_name") String firstName,
+                @JsonProperty("last_name") String lastName,
+                @JsonProperty("email") String email,
+                @JsonProperty("username") String username,
+                @JsonProperty("password") String password,
+                @JsonProperty("nickname") String nickname)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.card = card;
-        this.shipping = shipping;
     }
 
-    public User(int id, String name, String email, String username, String password, String nickname){
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.card = null;
-        this.shipping = null;
-    }
-
-    public User(int id, String name){
-        this.id = id;
-        this.name = name;
+    public User(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = null;
         this.username = null;
         this.password = null;
         this.nickname = null;
-        this.card = null;
-        this.shipping = null;
     }
 
     public User(){
-        this.id = 0;
-        this.name = null;
+        this.firstName = null;
+        this.lastName = null;
         this.email = null;
         this.username = null;
         this.password = null;
         this.nickname = null;
-        this.card = null;
-        this.shipping = null;
     }
 
-    public int getId(){
+    public Integer getId(){
         return id;
     }
 
@@ -66,13 +70,25 @@ public class User {
         this.id = id;
     }
 
-    public String getName(){
-        return name;
+    public String getFirstName(){
+        return firstName;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
     }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+
+//    public String getName(){
+//        return firstName + " " + lastName;
+//    }
 
     public String getEmail(){
         return email;
@@ -104,22 +120,6 @@ public class User {
 
     public void setNickname(String nickname){
         this.nickname = nickname;
-    }
-
-    public String getCard(){
-        return card;
-    }
-
-    public void setCard(String card){
-        this.card = card;
-    }
-
-    public String getShipping(){
-        return shipping;
-    }
-
-    public void setShipping(String shipping){
-        this.shipping = shipping;
     }
 }
 

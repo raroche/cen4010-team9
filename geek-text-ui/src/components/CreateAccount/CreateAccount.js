@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import './CreateAccount.css';
 
 class CreateAccount extends Component {
-    state = {
-        fullName: null,
-        email: null,
-        username: null,
-        password: null,
-        verifyPassword: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstName: "",
+            lastName: "",
+            email: "",
+            username: "",
+            nickname: "",
+            password: "",
+            verifyPassword: "",
+            registerError: ""
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.submitRegister = this.submitRegister.bind(this);
     }
+    
 
     handleChange = (e) => {
         this.setState({
@@ -17,7 +27,32 @@ class CreateAccount extends Component {
     }
 
     submitRegister = (e) => {
-        console.log(this.state);
+        e.preventDefault();
+        const {
+            firstName,
+            lastName,
+            email,
+            username,
+            password,
+            nickname
+        } = this.state;
+        axios.post("http://localhost:8090/api/users/",
+            {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                username: username,
+                password: password,
+                nickname: nickname
+            }
+            ).then(response => {
+                if(response.status === 200){
+                    this.props.handleSuccessfulAccount(response.config.data);
+                }
+                console.log("Registration reponse.", response);
+            }).catch(error => {
+                console.log("Registration error.", error);
+            })
     }
 
     render() {
@@ -30,29 +65,89 @@ class CreateAccount extends Component {
 
                     <form className="box" onSubmit={this.submitRegister}>
                         <div className="input-group">
-                            <label htmlFor="fullName">Full Name</label>
-                            <input type="text" id="fullName" onChange={this.handleChange} className="login-input" placeholder="John Smith"/>
+                            <label htmlFor="firstName">First Name</label>
+                            <input 
+                                type="text" 
+                                id="firstName" 
+                                value={this.state.firstName} 
+                                onChange={this.handleChange} 
+                                required 
+                                className="login-input" 
+                                placeholder="John"
+                            />
+                        </div>
+
+                        <div className="input-group">
+                            <label htmlFor="lastName">Last Name</label>
+                            <input 
+                                type="text" 
+                                id="lastName" 
+                                value={this.state.lastName}
+                                onChange={this.handleChange} 
+                                required
+                                className="login-input" 
+                                placeholder="Smith"/>
                         </div>
 
                         <div className="input-group">
                             <label htmlFor="email">Email Address</label>
-                            <input type="text" id="email" onChange={this.handleChange} className="login-input" placeholder="jsmith@gmail.com"/>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                value={this.state.email}
+                                onChange={this.handleChange} 
+                                required
+                                className="login-input" 
+                                placeholder="jsmith@gmail.com"/>
                         </div>
                     
                         <div className="input-group">
                             <label htmlFor="username">Username</label>
-                            <input type="text" id="username" onChange={this.handleChange} className="login-input" placeholder="Username"/>
+                            <input 
+                                type="text"
+                                id="username"
+                                value={this.state.username}
+                                onChange={this.handleChange} 
+                                required
+                                className="login-input" 
+                                placeholder="Username"/>
+                        </div>
+
+                        <div className="input-group">
+                            <label htmlFor="nickname">Nickname</label>
+                            <input 
+                                type="text"
+                                id="nickname"
+                                value={this.state.nickname}
+                                onChange={this.handleChange} 
+                                required
+                                className="login-input" 
+                                placeholder="Nickname"/>
                         </div>
 
                         <div className="input-group">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" onChange={this.handleChange} className="login-input" placeholder="Password"/>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                value={this.state.password}
+                                onChange={this.handleChange} 
+                                required
+                                className="login-input" 
+                                placeholder="Password"/>
                         </div>
 
-                        <div className="input-group">
+                        {/* <div className="input-group">
                             <label htmlFor="verifyPassword">Verify Password</label>
-                            <input type="password" id="verifyPassword" onChange={this.handleChange} className="login-input" placeholder="Verify Password"/>
-                        </div>
+                            <input 
+                                type="password" 
+                                id="verifyPassword" 
+                                value={this.state.verifyPassword}
+                                onChange={this.handleChange} 
+                                required
+                                className="login-input" 
+                                placeholder="Verify Password"/>
+                        </div> */}
 
 
                         <button type="button" className="login-btn" onClick={this.submitRegister.bind(this)}>Sign Up</button>

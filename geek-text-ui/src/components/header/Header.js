@@ -4,13 +4,14 @@ import './Header.css';
 import SidePanelButton from '../PanelButton/SidePanelButton';
 import UserButton from '../UserMenu/UserButton';
 import SignOutButton from '../SignOut/SignOutButton';
+import { textAlign } from '@material-ui/system';
 
 
 const Header = props => (
     <nav className="navigation">
     
         <SidePanelButton />   
-
+        <div style={{right: '0', position: 'absolute', padding: '50px', paddingBottom: '100px', color: 'deepPink'}}>Hello {props.loggedInStatus} </div>
         <div className="navcontent"> 
             <Link to="/">GeekText</Link>
             <Link to="/">About</Link>
