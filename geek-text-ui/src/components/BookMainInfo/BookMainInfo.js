@@ -47,17 +47,21 @@ export default class BookMainInfo extends Component {
           <span className="font-weight-bold">ISBN: </span>{" "}
           {loading ? spinner() : book.isbn}
         </p>
+        <p className="mt-1">
+          <span className="font-weight-bold">Publication date: </span>{" "}
+          {loading ? spinner() : book.date}
+        </p>
+
         <p className="mt-1 ">
           <BookDetailsPublishers
             bookPublishers={book.publishers ? book.publishers : undefined}
           />
         </p>
         <span className="mr-3">
-          <span className="font-weight-bold">Genre: </span> Novel
+          <span className="font-weight-bold">Genre: </span>{" "}
+          {book.genre ? book.genre.name : undefined}
         </span>
-        <p className="mt-3">
-          <span className="font-weight-bold">Language: </span> English
-        </p>
+
         <p className="mt-3">
           <span className="font-weight-bold">Author: </span>
 
