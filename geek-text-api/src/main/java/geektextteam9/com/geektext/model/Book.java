@@ -3,14 +3,7 @@ package geektextteam9.com.geektext.model;
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -57,8 +50,28 @@ public class Book {
 	@JsonManagedReference
 	private List<Publisher> publishers;
 
+
+	@ManyToOne
+	@JoinColumn(name = "genre_id")
+	private Genre genre;
+
 	public Book() {
 		super();
+	}
+
+	public Book(String isbn, String title, String description, Double price, Date date, float rating, String img_url, boolean top_seller, boolean featured, List<Review> reviews, List<Publisher> publishers, Genre genre) {
+		this.isbn = isbn;
+		this.title = title;
+		this.description = description;
+		this.price = price;
+		this.date = date;
+		this.rating = rating;
+		this.img_url = img_url;
+		this.top_seller = top_seller;
+		this.featured = featured;
+		this.reviews = reviews;
+		this.publishers = publishers;
+		this.genre = genre;
 	}
 
 	public List<Publisher> getPublishers() {
@@ -157,4 +170,11 @@ public class Book {
 		this.description = description;
 	}
 
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
 }
