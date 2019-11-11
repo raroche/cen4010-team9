@@ -30,4 +30,5 @@ public class BookService {
 	public Page<Book> findAll(Filter filter) {
 		return bookRepository.findAll(PageRequest.of(filter.getPageNumber(), filter.getPageSize()));
 	}
+
 }
