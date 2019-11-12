@@ -1,10 +1,15 @@
 package geektextteam9.com.geektext.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -29,12 +34,19 @@ public class User {
     @Column(name = "nickname")
     private String nickname;
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Review> reviews;
+
+
     public User(@JsonProperty("first_name") String firstName,
                 @JsonProperty("last_name") String lastName,
                 @JsonProperty("email") String email,
                 @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
-                @JsonProperty("nickname") String nickname)
+                @JsonProperty("nickname") String nickname,
+                List<Review> reviews)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,6 +54,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
+        this.reviews = reviews;
     }
 
     public User(String firstName, String lastName){
@@ -120,6 +133,14 @@ public class User {
 
     public void setNickname(String nickname){
         this.nickname = nickname;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
 

@@ -1,5 +1,7 @@
 package geektextteam9.com.geektext.service;
 
+import geektextteam9.com.geektext.model.Review;
+import geektextteam9.com.geektext.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +11,9 @@ import geektextteam9.com.geektext.model.Book;
 import geektextteam9.com.geektext.model.Filter;
 import geektextteam9.com.geektext.repository.BookRepository;
 
+import java.util.ArrayList;
+
+
 @Service
 public class BookService {
 
@@ -16,7 +21,29 @@ public class BookService {
 	private BookRepository bookRepository;
 
 	public Book findById(int id) {
-		return bookRepository.getOne(id);
+
+		Book tempBook = bookRepository.getOne(id);
+		ArrayList<Review> reviews = new ArrayList<Review>(tempBook.getReviews());
+		ArrayList<Review> modifiedReviews = new ArrayList<Review>();
+		User tempUser = null;
+
+		for(int counter = 0; counter < reviews.size(); counter ++){
+			tempUser = reviews.get(counter).getUser();
+
+			tempUser.setEmail(null);
+			tempUser.setPassword(null);
+			tempUser.setUsername(null);
+
+			Review tempReview = reviews.get(counter);
+			tempReview.setUser(tempUser);
+
+			modifiedReviews.add(tempReview);
+		}
+
+		tempBook.setReviews(modifiedReviews);
+
+		return tempBook;
+
 	}
 
 	public Book findByIsbn(String isbn) {

@@ -1,6 +1,7 @@
 package geektextteam9.com.geektext.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -27,15 +28,21 @@ public class Review {
     @JsonBackReference
     private Book book;
 
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    @JsonManagedReference
+    private User user;
+
     public Review() {
 
     }
 
-    private Review(double rating, String comment, Book book, String title) {
+    private Review(double rating, String comment, Book book, String title, User user) {
         this.rating = rating;
         this.comment = comment;
         this.book = book;
         this.title = title;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -76,5 +83,13 @@ public class Review {
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
