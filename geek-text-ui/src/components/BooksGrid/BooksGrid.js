@@ -6,9 +6,9 @@ export default function BooksGrid(props) {
   return (
     <div className="mt-5">
       <CardDeck className="justify-content-md-center">
-        {props.data.books.map(book => (
-          <BookCard book={book} />
-        ))}
+        {props.data
+          ? props.data.map(book => <BookCard book={book} key={book.id} />)
+          : undefined}
       </CardDeck>
     </div>
   );

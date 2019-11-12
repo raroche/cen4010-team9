@@ -12,7 +12,7 @@ import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
-import MyAccount from './components/MyAccount/MyAccount';
+import MyAccount from "./components/MyAccount/MyAccount";
 
 class App extends Component {
   render() {
@@ -28,7 +28,7 @@ class App extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/wishlist" component={WishList} />
         <Route path="/book/:bookId" component={BookDetails} />
-        <Route path="/author" component={AuthorDetails} />
+        <Route path="/author/:authorId" component={AuthorDetails} />
       </BrowserRouter>
     );
   }
