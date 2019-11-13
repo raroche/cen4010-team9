@@ -1,14 +1,17 @@
 package geektextteam9.com.geektext.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.Set;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-@Table(name = "author")
 public class Author {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,25 +27,11 @@ public class Author {
     @Column(name = "photo_url")
     private String photoUrl;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "author_book",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
-    @JsonBackReference
-    private List<Book> books;
+    @OneToMany(mappedBy = "id.author", cascade = CascadeType.ALL)
+    private Set<AuthorBook> books;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "book_in_wishlist",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
-    @JsonBackReference
-    private List<Book_in_Wishlist> books_wishlist;
-
-    private Author() {
-        this.name = "";
-        this.bio = "";
-        this.books = null;
-        this.photoUrl = "";
+    public Author() {
+        super();
     }
 
     public String getPhotoUrl() {
@@ -50,13 +39,6 @@ public class Author {
     }
 
     public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    public Author(String name, String bio, String photoUrl, List<Book> books) {
-        this.name = name;
-        this.bio = bio;
-        this.books = books;
         this.photoUrl = photoUrl;
     }
 
@@ -84,11 +66,11 @@ public class Author {
         this.bio = bio;
     }
 
-    public List<Book> getBooks() {
+    public Set<AuthorBook> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<AuthorBook> books) {
         this.books = books;
     }
 }

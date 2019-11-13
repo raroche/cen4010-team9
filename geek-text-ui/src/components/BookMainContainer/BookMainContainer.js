@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import BookMainPhoto from "../BookMainPhoto/BookMainPhoto";
 import BookMainInfo from "../BookMainInfo/BookMainInfo";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 export default class BookMainContainer extends Component {
   render() {

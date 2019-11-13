@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 export default class BookMainInfo extends Component {
   render() {
     const book = this.props.state.book;
+    const authors = this.props.state.authors;
     const loading = this.props.state.loading;
     const error = this.props.state.error;
 
@@ -25,7 +26,10 @@ export default class BookMainInfo extends Component {
         {loading ? <h2> {spinner()} </h2> : <h2> {book.title} </h2>}
 
         <div className="mt-3">
-          <ReviewStars totalReviews={totalReviews} avgRating={avgRating} />
+          <span>
+            <ReviewStars avgRating={avgRating} />
+          </span>
+          <span>({totalReviews} Reviews)</span>
         </div>
         <h5 className="mt-3">Price: ${loading ? spinner() : book.price}</h5>
         <button type="button" className="btn btn-primary btn-lg mt-3 mb-3">
@@ -36,36 +40,41 @@ export default class BookMainInfo extends Component {
           Add to my WishList
         </span>
         <p className="mt-1">
-          <i class="fab fa-usps fa-2x text-primary mr-2 "></i>
+          <i className="fab fa-usps fa-2x text-primary mr-2 "></i>
           Get it as soon as {deliveryDate()}
         </p>
         <p className="mt-1">
           <span className="font-weight-bold">ISBN: </span>{" "}
           {loading ? spinner() : book.isbn}
         </p>
+        <p className="mt-1">
+          <span className="font-weight-bold">Publication date: </span>{" "}
+          {loading ? spinner() : book.date}
+        </p>
+
         <p className="mt-1 ">
           <BookDetailsPublishers
             bookPublishers={book.publishers ? book.publishers : undefined}
           />
         </p>
         <span className="mr-3">
-          <span className="font-weight-bold">Genre: </span> Novel
+          <span className="font-weight-bold">Genre: </span>{" "}
+          {book.genre ? book.genre.name : undefined}
         </span>
-        <p className="mt-3">
-          <span className="font-weight-bold">Language: </span> English
-        </p>
+
         <p className="mt-3">
           <span className="font-weight-bold">Author: </span>
 
-          {book.authors
-            ? book.authors.map(author => {
+          {authors
+            ? authors.map(author => {
                 return (
                   <NavLink
                     exact
                     to={"/author/" + author.id}
                     style={{ textDecoration: "none" }}
+                    id={author.id}
                   >
-                    <span className="mr-3">{author.name}</span>
+                    <span className="mr-3">{author.name} </span>
                   </NavLink>
                 );
               })
@@ -78,8 +87,8 @@ export default class BookMainInfo extends Component {
 
 function spinner() {
   return (
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
+    <div className="spinner-border text-primary" role="status">
+      <span className="sr-only">Loading...</span>
     </div>
   );
 }

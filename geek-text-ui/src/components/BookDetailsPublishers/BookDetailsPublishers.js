@@ -20,7 +20,7 @@ export default function BookDetailsPublishers(props) {
         ? props.bookPublishers.map(publisher => {
             return (
               <span>
-                <PublisherInfo publisher={publisher} />
+                <PublisherInfo publisher={publisher} id={publisher.id} />
               </span>
             );
           })
