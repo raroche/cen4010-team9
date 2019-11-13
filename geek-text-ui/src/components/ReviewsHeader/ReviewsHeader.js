@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReviewStars from "../ReviewStars/ReviewStars";
 
 export default function ReviewsHeader(props) {
   const book = props.book;
@@ -14,13 +15,7 @@ export default function ReviewsHeader(props) {
 
             <div>
               <span className="mr-2">Average Review: </span>
-              <span className="fa fa-star checked"></span>
-              <span className="fa fa-star checked"></span>
-              <span className="fa fa-star"></span>
-              <span className="fa fa-star"></span>
-              <span className="ml-2">
-                {book ? book.rating : undefined} out of 5 starts
-              </span>
+              <ReviewStars avgRating={props.avgRating} />
               <p>{props.totalReviews} Customer Reviews</p>
             </div>
           </div>
