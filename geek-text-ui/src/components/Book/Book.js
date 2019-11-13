@@ -15,6 +15,7 @@ export default class Book extends Component {
             </NavLink>
           </div>
             <p > Book Title <br/>
+              Price: $19.99 <br/>
               by <a href="/Authors/#John Doe"> Author</a>
             </p>
           

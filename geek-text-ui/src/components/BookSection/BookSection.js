@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Book from "../Book/Book";
+import BookCard from "../BookCard/BookCard";
 import './BookSection.css';
 
 export default class BookPage extends Component {
