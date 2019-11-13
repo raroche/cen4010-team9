@@ -1,10 +1,7 @@
 package geektextteam9.com.geektext.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -23,14 +20,22 @@ public class User {
     @NotBlank
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "email")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
+
     @Column(name = "username")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String username;
+
     @Column(name = "password")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;
+
     @Column(name = "nickname")
     private String nickname;
 
