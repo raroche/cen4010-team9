@@ -33,7 +33,7 @@ class WishlistNavbar extends Component {
     });
   }
   render() {
-    if (this.state.Lists.length === 3) {
+    if (this.state.Lists.length >= 3) {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup

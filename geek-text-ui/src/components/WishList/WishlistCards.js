@@ -6,8 +6,6 @@ import {
   Dropdown,
   SplitButton
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import BookCard from "../BookCard/BookCard";
 
 class WishlistCards extends Component {
   constructor(props) {

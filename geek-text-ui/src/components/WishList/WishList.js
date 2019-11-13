@@ -34,30 +34,32 @@ class WishList extends Component {
   }
 
   async componentDidMount() {
-    this.setState({ loading: true });
     this.fetchWishlists();
-    this.setState({ loading: false });
   }
 
-  async handleClick(listName, newList) {
-    if (newList === true) {
-      try {
-        const response = await fetch(
-          `http://localhost:8090/api/user/addWishlist/${listName}/1`,
-          { method: "PUT" }
-        );
-
-        if (response.ok) {
-          let temp = await response.json();
-          this.setState({ Lists: temp, currentList: temp.length - 1 });
-        } else {
-          throw new Error("Something went wrong while fetching the data");
-        }
-      } catch (error) {
-        this.setState({ error, isLoading: false });
-        console.log("error!");
-        console.error(error);
+  async handleCreate(listName) {
+    try {
+      const response = await fetch(
+        `http://localhost:8090/api/user/addWishlist/${listName}/1`,
+        { method: "PUT" }
+      );
+      if (response.ok) {
+        let temp = await response.json();
+        temp[temp.length - 1].books = [];
+        this.setState({ Lists: temp, currentList: temp.length - 1 });
+      } else {
+        throw new Error("Something went wrong while fetching the data");
       }
+    } catch (error) {
+      this.setState({ error, isLoading: false });
+      console.log("error!");
+      console.error(error);
+    }
+  }
+
+  handleClick(listName, newList) {
+    if (newList === true) {
+      this.handleCreate(listName);
     } else if (listName === this.state.Lists[0].name) {
       this.setState({
         currentList: 0
