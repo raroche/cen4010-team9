@@ -12,7 +12,11 @@ export default class BookMainContainer extends Component {
               <BookMainPhoto photoURL={this.props.state.book.img_url} />
             </div>
             <div className="col">
-              <BookMainInfo state={this.props.state} />
+              <BookMainInfo
+                state={this.props.state}
+                loggedIn={this.props.loggedIn}
+                user={this.props.user}
+              />
             </div>
           </div>
         </div>
