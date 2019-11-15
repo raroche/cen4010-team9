@@ -1,14 +1,11 @@
 package geektextteam9.com.geektext.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Author {
@@ -29,6 +26,13 @@ public class Author {
 
     @OneToMany(mappedBy = "id.author", cascade = CascadeType.ALL)
     private Set<AuthorBook> books;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_in_wishlist",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
+    @JsonBackReference
+    private List<Book> books_wishlist;
 
     public Author() {
         super();

@@ -28,7 +28,7 @@ public class Wishlist {
 
     @ManyToMany(mappedBy = "wishlists")
     @JsonBackReference
-    private List<User_Wishlist> user;
+    private List<User> user;
 
     public Wishlist() {
         this.name = null;
@@ -65,11 +65,11 @@ public class Wishlist {
         this.books = books;
     }
 
-    public List<User_Wishlist> getUser() {
+    public List<User> getUser() {
         return user;
     }
 
-    public void setUser(List<User_Wishlist> user) {
+    public void setUser(List<User> user) {
         this.user = user;
     }
 }

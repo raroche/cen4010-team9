@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -53,6 +54,13 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_in_wishlist",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
+    @JsonBackReference
+    private List<Wishlist> wishlist;
 
 	public Book() {
 		super();

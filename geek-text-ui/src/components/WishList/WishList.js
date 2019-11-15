@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import WishlistNavbar from "./WishlistNavbar";
 import WishlistCards from "./WishlistCards";
+import {
+  Card,
+  Button,
+  ButtonToolbar,
+  Dropdown,
+  SplitButton
+} from "react-bootstrap";
 
 class WishList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      Lists: [{ books: [] }],
+      userId: props.user.id,
+      Lists: [],
       currentList: 0
     };
     this.handleClick = this.handleClick.bind(this);
@@ -18,10 +26,14 @@ class WishList extends Component {
 
   async fetchWishlists() {
     try {
-      const response = await fetch("http://localhost:8090/api/user/wishlist/1");
+      const response = await fetch(
+        `http://localhost:8090/api/users/wishlist/${this.state.userId}`
+      );
 
       if (response.ok) {
         const data = await response.json();
+        console.log("user id " + this.state.userId);
+        console.log(data);
         this.setState({ Lists: data });
       } else {
         throw new Error("Something went wrong while fetching the data");
@@ -40,7 +52,7 @@ class WishList extends Component {
   async handleCreate(listName) {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/user/addWishlist/${listName}/1`,
+        `http://localhost:8090/api/users/addWishlist/${listName}/${this.state.userId}`,
         { method: "PUT" }
       );
       if (response.ok) {
@@ -78,7 +90,9 @@ class WishList extends Component {
   async handleDelete(book_id) {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/wishlist/removeBook/${this.state.Lists[this.state.currentList].id}/${book_id}`,
+        `http://localhost:8090/api/wishlist/removeBook/${
+          this.state.Lists[this.state.currentList].id
+        }/${book_id}`,
         { method: "PUT" }
       );
 
@@ -103,7 +117,9 @@ class WishList extends Component {
   async handleMove(destList, book_id) {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/wishlist/moveBook/${this.state.Lists[this.state.currentList].id}/${destList}/${book_id}/1`,
+        `http://localhost:8090/api/wishlist/moveBook/${
+          this.state.Lists[this.state.currentList].id
+        }/${destList}/${book_id}/1`,
         { method: "PUT" }
       );
 
@@ -132,6 +148,33 @@ class WishList extends Component {
       }
     }
 
+    let cards = <h1></h1>;
+    if (this.state.Lists.length === 0) {
+      cards = (
+        <Card
+          className="p-3"
+          style={{
+            top: "80px",
+            width: "800px",
+            left: "20%"
+          }}
+        >
+          <Card.Body>
+            <h1> No lists exists for this user </h1>
+          </Card.Body>
+        </Card>
+      );
+    } else {
+      cards = (
+        <WishlistCards
+          Books={this.state.Lists[this.state.currentList].books}
+          handleDelete={this.handleDelete}
+          handleMove={this.handleMove}
+          handleMoveToCart={this.handleMoveToCart}
+          Options={Options}
+        />
+      );
+    }
     return (
       <div>
         <WishlistNavbar
@@ -141,13 +184,7 @@ class WishList extends Component {
             this.state.Lists.length > 0 ? this.state.Lists[0].ListName : null
           }
         />
-        <WishlistCards
-          Books={this.state.Lists[this.state.currentList].books}
-          handleDelete={this.handleDelete}
-          handleMove={this.handleMove}
-          handleMoveToCart={this.handleMoveToCart}
-          Options={Options}
-        />
+        {cards}
       </div>
     );
   }

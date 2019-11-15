@@ -1,12 +1,10 @@
 package geektextteam9.com.geektext.ws;
 
 import geektextteam9.com.geektext.model.Book;
-import geektextteam9.com.geektext.model.User_Wishlist;
 import geektextteam9.com.geektext.model.Wishlist;
 import geektextteam9.com.geektext.repository.BookRepository;
-import geektextteam9.com.geektext.service.UserWishlistService;
+import geektextteam9.com.geektext.service.UserService;
 import geektextteam9.com.geektext.service.WishlistService;
-import geektextteam9.com.geektext.ws.BookRestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +19,11 @@ public class WishlistRestController {
     WishlistService wishlistService;
 
     @Autowired
-    BookRepository bookRepository;
+    UserService userService;
 
     @Autowired
-    UserWishlistService userWishlistService;
+    BookRepository bookRepository;
+
 
     @GetMapping(path = "{id}")
     public ResponseEntity <Wishlist> findById(@PathVariable Integer id) {
@@ -50,10 +49,10 @@ public class WishlistRestController {
         destination.getBooks().add(book);
         wishlistService.save(original);
         wishlistService.save(destination);
-        return  ResponseEntity.ok(userWishlistService.findById(user_id).getWishlists());
+        return  ResponseEntity.ok(userService.findById(user_id).getWishlists());
     }
 
-    @PutMapping(path = "removeBook/{wishlist_id}/{book_id}")
+    @DeleteMapping(path = "removeBook/{wishlist_id}/{book_id}")
     public ResponseEntity <Wishlist> removeBook(@PathVariable Integer book_id, @PathVariable Integer wishlist_id){
         Book book = bookRepository.getOne(book_id);
         Wishlist wishlist = wishlistService.findById(wishlist_id);
