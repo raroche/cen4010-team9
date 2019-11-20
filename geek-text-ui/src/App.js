@@ -16,7 +16,7 @@ import { Route } from "react-router-dom";
 import MyAccount from "./components/MyAccount/MyAccount";
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       loggedInStatus: "Not logged in",
@@ -25,9 +25,8 @@ class App extends Component {
 
     this.handleLoginStatus = this.handleLoginStatus.bind(this);
   }
-  
 
-  handleLoginStatus(data){
+  handleLoginStatus(data) {
     this.setState({
       loggedInStatus: data.first_name,
       user: data
@@ -37,18 +36,49 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path="/" render={props => <Header {...props} loggedInStatus={this.state.loggedInStatus} /> } />
+        <Route
+          path="/"
+          render={props => (
+            <Header {...props} loggedInStatus={this.state.loggedInStatus} />
+          )}
+        />
 
         <Route exact path="/" render={props => <HomePage />} />
-        <Route path="/login" render={props => <LoginRegister {...props} handleLoginStatus={this.handleLoginStatus} /> } />
-        <Route path="/myaccount" render={props => <MyAccount /> } />
+        <Route
+          path="/login"
+          render={props => (
+            <LoginRegister
+              {...props}
+              handleLoginStatus={this.handleLoginStatus}
+            />
+          )}
+        />
+        <Route path="/myaccount" render={props => <MyAccount />} />
         <Route path="/bookgrid" component={BooksGrid} />
         <Route path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />
-        <Route path="/wishlist" component={WishList} />
         <Route path="/top" component={TopSeller} />
-        <Route path="/Rating" component={HighRating} />
-        <Route path="/book/:bookId" component={BookDetails} />
+        <Route path="/rating" component={HighRating} />
+        <Route
+          path="/wishlist"
+          render={props => (
+            <WishList
+              {...props}
+              loggedInStatus={this.state.loggedInStatus}
+              user={this.state.user}
+            />
+          )}
+        />
+        <Route
+          path="/book/:bookId"
+          render={props => (
+            <BookDetails
+              {...props}
+              loggedIn={this.state.loggedInStatus}
+              user={this.state.user}
+            />
+          )}
+        />
         <Route path="/author/:authorId" component={AuthorDetails} />
       </BrowserRouter>
     );
