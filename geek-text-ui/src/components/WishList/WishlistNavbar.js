@@ -5,6 +5,8 @@ import {
   ToggleButtonGroup,
   Modal,
   Button,
+  Dropdown,
+  DropdownButton,
   InputGroup,
   FormControl
 } from "react-bootstrap";
@@ -15,9 +17,11 @@ class WishlistNavbar extends Component {
 
     this.state = {
       Lists: props.Lists,
+      userId: props.userId,
       newList: "New List",
       modalShow: false,
-      handleClick: props.handleClick
+      handleClick: props.handleClick,
+      handleDelete: props.handleDelete
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -53,6 +57,24 @@ class WishlistNavbar extends Component {
                 {item.name}
               </ToggleButton>
             ))}
+            <DropdownButton
+              id="dropdown-basic-button"
+              title="Delete list"
+              variant="light"
+            >
+              {this.state.Lists.map(item => (
+                <Dropdown.Item
+                  variant="light"
+                  value={item.name}
+                  onClick={e => {
+                    this.state.handleDelete(item.id, this.state.userId);
+                    this.setState({ modalShow: false });
+                  }}
+                >
+                  {item.name}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
           </ToggleButtonGroup>
         </ButtonToolbar>
       );
@@ -180,6 +202,23 @@ class WishlistNavbar extends Component {
                 <Button onClick={this.state.onHide}>Cancel </Button>
               </Modal.Footer>
             </Modal>
+            <DropdownButton
+              id="dropdown-basic-button"
+              title="Delete list"
+              variant="light"
+            >
+              {this.state.Lists.map(item => (
+                <Dropdown.Item
+                  variant="light"
+                  value={item.name}
+                  onClick={e => {
+                    this.state.handleDelete(item.id, this.state.userId);
+                  }}
+                >
+                  {item.name}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
           </ToggleButtonGroup>
         </ButtonToolbar>
       );

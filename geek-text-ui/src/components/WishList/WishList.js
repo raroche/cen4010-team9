@@ -20,7 +20,8 @@ class WishList extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleMove = this.handleMove.bind(this);
-    this.handleMoveToCart = this.handleMoveToCart(this);
+    this.handleMoveToCart = this.handleMoveToCart.bind(this);
+    this.handleDeleteWishlist = this.handleDeleteWishlist.bind(this);
     this.fetchWishlists = this.fetchWishlists.bind(this);
   }
 
@@ -32,7 +33,6 @@ class WishList extends Component {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("user id " + this.state.userId);
         console.log(data);
         this.setState({ Lists: data });
       } else {
@@ -69,6 +69,26 @@ class WishList extends Component {
     }
   }
 
+  async handleDeleteWishlist(list_id, userId) {
+    try {
+      const response = await fetch(
+        `http://localhost:8090/api/users/removeWishlist/${list_id}/${userId}`,
+        { method: "DELETE" }
+      );
+
+      if (response.ok) {
+        let temp = await response.json();
+        this.setState({ currentList: 0 });
+        this.setState({ Lists: temp });
+      } else {
+        throw new Error("Something went wrong while fetching the data");
+      }
+    } catch (error) {
+      console.log("error!");
+      console.error(error);
+    }
+  }
+
   handleClick(listName, newList) {
     if (newList === true) {
       this.handleCreate(listName);
@@ -93,7 +113,7 @@ class WishList extends Component {
         `http://localhost:8090/api/wishlist/removeBook/${
           this.state.Lists[this.state.currentList].id
         }/${book_id}`,
-        { method: "PUT" }
+        { method: "DELETE" }
       );
 
       if (response.ok) {
@@ -138,7 +158,6 @@ class WishList extends Component {
 
   render() {
     let Options = [{}];
-    console.log("Length" + this.state.Lists.length);
     for (let i = 0; i < this.state.Lists.length; i++) {
       if (i !== this.state.currentList) {
         Options.push({
@@ -180,6 +199,8 @@ class WishList extends Component {
         <WishlistNavbar
           Lists={this.state.Lists}
           handleClick={this.handleClick}
+          handleDelete={this.handleDeleteWishlist}
+          userId={this.state.userId}
           default={
             this.state.Lists.length > 0 ? this.state.Lists[0].ListName : null
           }
