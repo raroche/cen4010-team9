@@ -1,25 +1,69 @@
 .nav {
     width: 80%;
-    position: fixed;
-    background-color: rgb(196, 235, 240);
+    position: static;
+    background-color: rgb(18, 4, 104);
     top: 100px;
-    left: 10%;
-    height: 70px;
-    
-    z-index: 200;
-    
-}
-
-
-.navcontent {
-    position: absolute;
-    width: 800%;
-    padding: 0px;
+    margin-left: 10%;
+    height: 55px;
     display: flex;
-    bottom: 0px;
+    z-index: 200;
+    align-items: center;
+    
 }
 
-.navcontent a {
+
+
+.content {
+    bottom: 0;
+    position: relative;
+    width: 800%;
+    padding: 0px 0px 10px 0px;
+    display: flex;
+    float: left;
+    
+    justify-content: space-around;
+    margin: 0 auto;
+    font-size: 20px;
+    z-index: 400;
+    
+    
+    
+  }
+.content a{
+  color: white;
+}
+
+.content a:hover {
+    text-decoration: none;
+    color: rgb(0, 151, 189);
+}
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+    margin: 0 auto;
+    width: 100%;
+}
+
+
+
+.genrecontent {
+    display: flex;
+    justify-content: flex-end;
+    float: left;
+    margin: 0 auto;
+    width: 100%;
+    position: absolute;
+}
+
+@media (max-width: 1000px) {
+    .content {
+        display: none;
+    }
+  }
+
+  .elements {
     bottom: 0px;
     border-bottom: 0px;
     position: relative;
@@ -32,27 +76,3 @@
     float: right;
     margin: 0 auto;
 }
-.button {
-    padding: 0;
-}
-
-.navcontent a:hover {
-    text-decoration: none;
-    color: rgb(0, 151, 189);
-}
-
-.genrecontent {
-    display: flex;
-    justify-content: flex-end;
-    float: left;
-    margin: 0 auto;
-    width: 100%;
-    position: absolute;
-}
-
-@media (max-width: 1000px) {
-    .navcontent {
-        display: none;
-    }
-  }
-

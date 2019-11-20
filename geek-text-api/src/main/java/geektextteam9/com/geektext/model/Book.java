@@ -74,6 +74,7 @@ public class Book {
 		this.genre = genre;
 	}
 
+
 	public List<Publisher> getPublishers() {
 		return publishers;
 	}

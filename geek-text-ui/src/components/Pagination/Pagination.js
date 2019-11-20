@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Book from "../Book/Book";
+
 
 const propTypes = {
     items: PropTypes.array.isRequired,
