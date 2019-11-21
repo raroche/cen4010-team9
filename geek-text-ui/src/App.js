@@ -7,9 +7,10 @@ import BookPage from "./components/BookPage/BookPage";
 import BookDetails from "./components/BookDetails/BookDetails";
 import AuthorDetails from "./components/AuthorDetails/AuthorDetails";
 import Header from "./components/header/Header";
-
+import TopSeller from "./components/TopSeller/TopSeller";
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
+import HighRating from "./components/HighRating/HighRating";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
 import MyAccount from "./components/MyAccount/MyAccount";
@@ -56,6 +57,8 @@ class App extends Component {
         <Route path="/bookgrid" component={BooksGrid} />
         <Route path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />
+        <Route path="/top" component={TopSeller} />
+        <Route path="/rating" component={HighRating} />
         <Route
           path="/wishlist"
           render={props => (
