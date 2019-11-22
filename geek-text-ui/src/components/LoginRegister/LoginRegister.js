@@ -5,11 +5,13 @@ import CreateAccount from "../CreateAccount/CreateAccount";
 import SignIn from "../SignIn/SignIn";
 
 class LoginRegister extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isLoginOpen: true, isSignUpOpen: false };
-    this.handleSuccessfulAccount = this.handleSuccessfulAccount.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {isLoginOpen: true, isSignUpOpen: false};
+        this.handleSuccessfulAccount = this.handleSuccessfulAccount.bind(this);
+        this.showLoginBox = this.showLoginBox.bind(this);
+        this.showSignUpBox = this.showSignUpBox.bind(this);
+    }
 
   showLoginBox() {
     this.setState({ isLoginOpen: true, isSignUpOpen: false });

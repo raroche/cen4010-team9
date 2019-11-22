@@ -2,11 +2,10 @@ package geektextteam9.com.geektext.model;
 
 
 import com.fasterxml.jackson.annotation.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "users")
@@ -16,6 +15,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_shipping_options",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id")
+    )
+    private List<ShippingOption> hasShippingOptions;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_payment_options",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id")
+    )
+    private List<PaymentOption> hasPaymentOptions;
 
     @NotBlank
     @Column(name = "first_name")
@@ -92,10 +107,6 @@ public class User {
         return id;
     }
 
-    public void setId(int id){
-        this.id = id;
-    }
-
     public String getFirstName(){
         return firstName;
     }
@@ -111,10 +122,6 @@ public class User {
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
-
-//    public String getName(){
-//        return firstName + " " + lastName;
-//    }
 
     public String getEmail(){
         return email;
@@ -148,7 +155,41 @@ public class User {
         this.nickname = nickname;
     }
 
-    public List<Review> getReviews() {
+    //Shipping Method getters/setters
+    public List<ShippingOption> getHasShippingOptions(){
+        return hasShippingOptions;
+    }
+
+    public void addShippingOption(ShippingOption newShipping){
+        hasShippingOptions.add(newShipping);
+    }
+
+    public void deleteShippingOptionById(Integer id){
+//        hasShippingOptions.stream().map(shippingOption -> {
+//            if(shippingOption.getId() == id){
+//                return hasShippingOptions.remove(shippingOption);
+//            }else{
+//                return 1;
+//            }
+//        });     //buggy code
+        hasShippingOptions.removeIf(shippingOption -> shippingOption.getId().equals(id));
+
+    }
+
+    //Payment Method getters/setters
+    public List<PaymentOption> getHasPaymentOptions(){
+        return hasPaymentOptions;
+    }
+
+    public void addPaymentOption(PaymentOption newPayment){
+        hasPaymentOptions.add(newPayment);
+    }
+
+    public void deletePaymentOptionById(Integer id) {
+        hasPaymentOptions.removeIf(paymentOption -> paymentOption.getId().equals(id));      //find card by id to delete
+    }
+        
+    public List<Review> getReviews(){
         return reviews;
     }
 

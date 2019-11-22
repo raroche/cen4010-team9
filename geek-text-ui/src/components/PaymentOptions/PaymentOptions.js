@@ -6,13 +6,27 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 class PaymentOptions extends Component {
     state = {
-        cards : [
-            {id: 1, cardName: 'Test', cardNumber: '0000-0000-0000-0000', expiration: '01/20', cvv: 123}
-        ]
+        cards : [],
+        loading: true,
+        error: null
+    }
+
+    async componentDidMount(){
+        const url = "http://localhost:8090/api/users/";
+        var currentUser = this.props.currentUser;
+        const payment = "/payments/";
+        fetch(url+currentUser+payment).then(res => {
+            if(res.ok){
+                return res.json();
+            }else{
+                throw Error("Error getting payment methods!")
+            }
+        }).then(cards => {
+            this.setState({cards:cards, loading:false});
+        }).catch(error => this.setState({error:error}))
     }
 
     addPayment = (card) => {
-        card.id = Math.random();
         let cards = [...this.state.cards, card];
         this.setState({
             cards: cards
@@ -20,12 +34,23 @@ class PaymentOptions extends Component {
     }
     
     deletePayment = (id) => {
-        let cards = this.state.cards.filter(card => {
-            return card.id !== id
-        });
-        this.setState({
-            cards: cards
-        })
+        const url = "http://localhost:8090/api/users/";
+        var currentUser = this.props.currentUser;
+        const payments = "/payments/";
+        
+        if(window.confirm('Are you sure you want to permanently delete?')){
+            let cards = this.state.cards.filter(card => {
+                return card.id !== id
+            });
+            this.setState({
+                cards: cards
+            })
+            fetch(url+currentUser+payments+id,{
+                method: 'delete',
+                headers: { "Content-Type": "application/json; charset=UTF-8" }
+            })
+        }
+        
     }
 
     render() {
@@ -34,8 +59,8 @@ class PaymentOptions extends Component {
             return (
             <div className="options">
                 <div key={card.id}>
-                    <div>Card Name: {card.cardName}</div>
-                    <div>Card Number: {card.cardNumber}</div>
+                    <div>Card Name: {card.card_nickname}</div>
+                    <div>Card Number: {card.card_number}</div>
                     <div>Expiration: {card.expiration}</div>
                     <div>CVV: {card.cvv}</div>
                 </div>
@@ -48,7 +73,7 @@ class PaymentOptions extends Component {
         return (
             <div>
                 { cardlist }
-                <AddPayment addPayment={this.addPayment}/>
+                <AddPayment addPayment={this.addPayment} currentUser={this.props.currentUser} />
             </div>
         )
     }
