@@ -1,6 +1,9 @@
 package geektextteam9.com.geektext.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "shipping_address")
@@ -9,23 +12,29 @@ public class ShippingOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Integer id;
-    @Column(name = "nickname")
-    String shippingNickname;
-    @Column(name = "address")
-    String address;
+    private Integer id;
 
-    public ShippingOption(String shippingNickname, String address){
+    @ManyToMany(mappedBy = "hasShippingOptions")
+    List<User> shipOptions;
+
+    @Column(name = "nickname")
+    private String shippingNickname;
+    @Column(name = "address")
+    private String address;
+
+    public ShippingOption(@JsonProperty("nickname") String shippingNickname,
+                          @JsonProperty("address") String address){
         this.shippingNickname = shippingNickname;
         this.address = address;
     }
 
-    public Integer getId(){
-        return id;
+    public ShippingOption(){
+        this.shippingNickname = "";
+        this.address = "";
     }
 
-    public void setId(int id){
-        this.id = id;
+    public Integer getId(){
+        return id;
     }
 
     public String getShippingNickname(){

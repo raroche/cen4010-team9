@@ -1,7 +1,9 @@
 package geektextteam9.com.geektext.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "payment_method")
@@ -11,6 +13,10 @@ public class PaymentOption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
+    @ManyToMany(mappedBy = "hasPaymentOptions")
+    List<User> payOptions;
+
     @Column(name = "card_nickname")
     private String cardNickname;
     @Column(name = "card_number")
@@ -20,11 +26,22 @@ public class PaymentOption {
     @Column(name = "cvv")
     private int cvv;
 
-    public PaymentOption(String cardNickname, Long cardNumber, int exp_month, int exp_year, int cvv){
+    public PaymentOption(@JsonProperty("card_nickname") String cardNickname,
+                         @JsonProperty("card_number") Long cardNumber,
+                         @JsonProperty("exp_month") int exp_month,
+                         @JsonProperty("exp_year")int exp_year,
+                         @JsonProperty("cvv") int cvv){
         this.cardNickname = cardNickname;
         this.cardNumber = cardNumber;
         this.expiration = exp_month + "/" + exp_year;
         this.cvv = cvv;
+    }
+
+    public PaymentOption(){
+        this.cardNickname = "";
+        this.cardNumber = null;
+        this.expiration = "";
+        this.cvv = 0;
     }
 
     public Integer getId(){

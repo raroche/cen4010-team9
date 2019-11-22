@@ -8,24 +8,22 @@ const MyAccount = props => (
 
     <div className="myaccount">
         <div className="upper-box">
-            <div className="title">Hi</div>
-            <UserInfo />
+            <div className="title">Hi {props.loggedInStatus} </div>
+            <UserInfo currentUser={props.currentUser} />
             
         </div>
         <div className="lower-box">
             <div className="payment-box">
                 <div className="title">Payment Options</div>
-                <PaymentOptions />
+                <PaymentOptions currentUser={props.currentUser} />
             </div>
             <div className="shipping-box">
                 <div className="title">Shipping Options</div>
-                <ShippingOptions />
+                <ShippingOptions currentUser={props.currentUser} />
             </div>
         </div>
 
     </div>
-
 )
-
 
 export default MyAccount;
