@@ -1,76 +1,80 @@
 package geektextteam9.com.geektext.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Author {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "serial")
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Integer id;
 
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	@Column
-	private String bio;
+    @Column
+    private String bio;
 
-	@Column(name = "photo_url")
-	private String photoUrl;
+    @Column(name = "photo_url")
+    private String photoUrl;
 
-	@OneToMany(mappedBy = "id.author", cascade = CascadeType.ALL)
-	private Set<AuthorBook> books;
+    @OneToMany(mappedBy = "id.author", cascade = CascadeType.ALL)
+    private Set<AuthorBook> books;
 
-	public Author() {
-		super();
-	}
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_in_wishlist",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
+    @JsonBackReference
+    private List<Book> books_wishlist;
 
-	public String getPhotoUrl() {
-		return photoUrl;
-	}
+    public Author() {
+        super();
+    }
 
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
-	}
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getBio() {
-		return bio;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setBio(String bio) {
-		this.bio = bio;
-	}
+    public String getBio() {
+        return bio;
+    }
 
-	public Set<AuthorBook> getBooks() {
-		return books;
-	}
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
-	public void setBooks(Set<AuthorBook> books) {
-		this.books = books;
-	}
+    public Set<AuthorBook> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<AuthorBook> books) {
+        this.books = books;
+    }
 }

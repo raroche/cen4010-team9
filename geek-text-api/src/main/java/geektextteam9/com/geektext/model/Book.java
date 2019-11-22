@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -50,16 +51,23 @@ public class Book {
 	@JsonManagedReference
 	private List<Publisher> publishers;
 
-
 	@ManyToOne
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_in_wishlist",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
+    @JsonBackReference
+    private List<Wishlist> wishlist;
 
 	public Book() {
 		super();
 	}
 
-	public Book(String isbn, String title, String description, Double price, Date date, float rating, String img_url, boolean top_seller, boolean featured, List<Review> reviews, List<Publisher> publishers, Genre genre) {
+	public Book(String isbn, String title, String description, Double price, Date date, float rating, String img_url,
+			boolean top_seller, boolean featured, List<Review> reviews, List<Publisher> publishers, Genre genre) {
 		this.isbn = isbn;
 		this.title = title;
 		this.description = description;
@@ -73,6 +81,7 @@ public class Book {
 		this.publishers = publishers;
 		this.genre = genre;
 	}
+
 
 	public List<Publisher> getPublishers() {
 		return publishers;

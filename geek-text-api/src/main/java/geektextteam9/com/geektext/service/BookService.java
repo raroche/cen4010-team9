@@ -12,6 +12,8 @@ import geektextteam9.com.geektext.model.Filter;
 import geektextteam9.com.geektext.repository.BookRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+import org.springframework.data.domain.Sort;
 
 
 @Service
@@ -56,6 +58,27 @@ public class BookService {
 
 	public Page<Book> findAll(Filter filter) {
 		return bookRepository.findAll(PageRequest.of(filter.getPageNumber(), filter.getPageSize()));
+	}
+	public List<Book> getAllBooks(){
+		return bookRepository.findAll(sortByIdAsc());
+	}
+
+	public List<Book> getTop(){
+		return bookRepository.findAllTopSellers();
+	}
+
+	public List<Book> getRated(){
+		return bookRepository.findAll(sortByRating());
+	}
+
+	private Sort sortByIdAsc() {
+		return new Sort(Sort.Direction.ASC, "id");
+	}
+	private Sort sortByTop() {
+		return new Sort(Sort.Direction.DESC, "id");
+	}
+	private Sort sortByRating() {
+		return new Sort(Sort.Direction.DESC, "rating");
 	}
 
 }

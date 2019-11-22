@@ -27,8 +27,13 @@ class WishlistNavbar extends Component {
     this.setState({ newList: event.target.value });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      Lists: nextProps.Lists
+    });
+  }
   render() {
-    if (this.state.Lists.length === 3) {
+    if (this.state.Lists.length >= 3) {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
@@ -40,12 +45,12 @@ class WishlistNavbar extends Component {
             {this.state.Lists.map(item => (
               <ToggleButton
                 variant="light"
-                value={item.ListName}
+                value={item.name}
                 onClick={e => {
-                  this.state.handleClick(item.ListName, false);
+                  this.state.handleClick(item.name, false);
                 }}
               >
-                {item.ListName}
+                {item.name}
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
@@ -84,8 +89,8 @@ class WishlistNavbar extends Component {
                 <InputGroup className="mb-3">
                   <FormControl
                     placeholder="List name"
-                    aria-label="ListName"
-                    aria-describedby="ListName"
+                    aria-label="name"
+                    aria-describedby="name"
                     style={{ width: "300px" }}
                     value={this.state.newList}
                     onChange={this.handleChange}
@@ -95,7 +100,7 @@ class WishlistNavbar extends Component {
                       onClick={e =>
                         this.state.handleClick(this.state.newList, true)
                       }
-                      id="ListName"
+                      id="name"
                     >
                       Create List
                     </InputGroup.Text>
@@ -121,12 +126,12 @@ class WishlistNavbar extends Component {
             {this.state.Lists.map(item => (
               <ToggleButton
                 variant="light"
-                value={this.state.Lists[0].ListName}
+                value={this.state.Lists[0].name}
                 onClick={e => {
-                  this.state.handleClick(item.ListName, false);
+                  this.state.handleClick(item.name, false);
                 }}
               >
-                {item.ListName}
+                {item.name}
               </ToggleButton>
             ))}
             <ToggleButton
@@ -153,8 +158,8 @@ class WishlistNavbar extends Component {
                 <InputGroup className="mb-3">
                   <FormControl
                     placeholder="List name"
-                    aria-label="ListName"
-                    aria-describedby="ListName"
+                    aria-label="name"
+                    aria-describedby="name"
                     style={{ width: "300px" }}
                     value={this.state.newList}
                     onChange={this.handleChange}
@@ -164,7 +169,7 @@ class WishlistNavbar extends Component {
                       onClick={e =>
                         this.state.handleClick(this.state.newList, true)
                       }
-                      id="ListName"
+                      id="name"
                     >
                       Create List
                     </InputGroup.Text>
