@@ -9,6 +9,8 @@ class LoginRegister extends Component {
         super(props);
         this.state = {isLoginOpen: true, isSignUpOpen: false};
         this.handleSuccessfulAccount = this.handleSuccessfulAccount.bind(this);
+        this.showLoginBox = this.showLoginBox.bind(this);
+        this.showSignUpBox = this.showSignUpBox.bind(this);
     }
 
     showLoginBox() {

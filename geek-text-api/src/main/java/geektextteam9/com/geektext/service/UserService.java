@@ -14,11 +14,6 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-
-//    public UserService(@Qualifier("fakeData") UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-
     public void createUser(User user){
         userRepository.save(user);
     }

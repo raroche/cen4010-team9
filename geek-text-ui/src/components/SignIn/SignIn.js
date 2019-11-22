@@ -18,10 +18,12 @@ class SignIn extends Component {
         this.submitLogin = this.submitLogin.bind(this);
     }
     
+    abortController = new AbortController();
+
     async componentDidMount(){
         const url = "http://localhost:8090/api/users/";
 
-        fetch(url).then(res => {
+        fetch(url,{ signal: this.abortController.signal }).then(res => {
             if(res.ok){
                 return res.json();
             }else{
@@ -30,6 +32,10 @@ class SignIn extends Component {
                 this.setState({users:users, loading:false});
                 }).catch(error => this.setState({error:error}))
     }
+
+    // UNSAFE_componentWillMount(){        //warning fix for updating state with a fetch request
+    //     this.abortController.abort();
+    // }
 
     handleChange = (e) => {
         this.setState({
@@ -41,14 +47,12 @@ class SignIn extends Component {
         e.preventDefault();
         const {username, password} = this.state;
         this.state.users.map(user => {
-            if(user.username === this.state.username){
-                if(user.password === this.state.password){
-                    this.props.handleSuccessfulAccount(user);
-                }else{
-                    this.setState({loginError: "Incorrect password."}) //fix bug
-                }
-            }else{
-                this.setState({loginError: "Account does not exist."})
+            if(user.username === this.state.username && user.password === this.state.password){
+                this.props.handleSuccessfulAccount(user);
+            }else if(user.username !== this.state.username){
+                this.setState({loginError: "Account does not exist."}) //fix bug
+            }else if(user.username === this.state.username && user.password !== this.state.password){
+                this.setState({loginError: "Incorrect password."})
             }
         })
         console.log(this.state);

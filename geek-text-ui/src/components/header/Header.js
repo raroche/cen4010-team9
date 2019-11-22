@@ -11,7 +11,7 @@ const Header = props => (
     <nav className="navigation">
     
         <SidePanelButton />   
-        <div style={{right: '0', position: 'absolute', padding: '50px', paddingBottom: '100px', color: 'deepPink'}}>Hello {props.loggedInStatus} </div>
+        <div style={{right: '0', position: 'absolute', padding: '50px', paddingBottom: '100px', color: 'deepPink'}}>Hello, {props.loggedInStatus} </div>
         <div className="navcontent"> 
             <Link to="/">GeekText</Link>
             <Link to="/">About</Link>
@@ -22,7 +22,7 @@ const Header = props => (
         
         <div className="usercontent">    
           <UserButton />
-          <SignOutButton />
+          <SignOutButton logout={props.handleLogoutStatus} />
         </div>
 
     </nav>
