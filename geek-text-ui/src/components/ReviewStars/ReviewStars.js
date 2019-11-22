@@ -16,11 +16,7 @@ export default function ReviewStars(props) {
       </span>
 
       <Typography component="span" className="ml-2">
-<<<<<<< HEAD
-        <span>{rating} / 5 </span>{" "}
-=======
         <span>{rating ? "(" + rating + " out of 5)" : "(0 Reviews)"}</span>
->>>>>>> 1ab0216b55fb2347a8c25547b236da0f08fdc057
       </Typography>
     </span>
   );
