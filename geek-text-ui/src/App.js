@@ -7,6 +7,7 @@ import BookPage from "./components/BookPage/BookPage";
 import BookDetails from "./components/BookDetails/BookDetails";
 import AuthorDetails from "./components/AuthorDetails/AuthorDetails";
 import Header from "./components/header/Header";
+import Footer from "./components/Footer/Footer";
 
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
@@ -15,7 +16,7 @@ import { Route } from "react-router-dom";
 import MyAccount from "./components/MyAccount/MyAccount";
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       loggedInStatus: "Not logged in",
@@ -24,9 +25,8 @@ class App extends Component {
 
     this.handleLoginStatus = this.handleLoginStatus.bind(this);
   }
-  
 
-  handleLoginStatus(data){
+  handleLoginStatus(data) {
     this.setState({
       loggedInStatus: data.first_name,
       user: data
@@ -36,17 +36,31 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path="/" render={props => <Header {...props} loggedInStatus={this.state.loggedInStatus} /> } />
+        <Route
+          path="/"
+          render={props => (
+            <Header {...props} loggedInStatus={this.state.loggedInStatus} />
+          )}
+        />
 
         <Route exact path="/" render={props => <HomePage />} />
-        <Route path="/login" render={props => <LoginRegister {...props} handleLoginStatus={this.handleLoginStatus} /> } />
-        <Route path="/myaccount" render={props => <MyAccount /> } />
+        <Route
+          path="/login"
+          render={props => (
+            <LoginRegister
+              {...props}
+              handleLoginStatus={this.handleLoginStatus}
+            />
+          )}
+        />
+        <Route path="/myaccount" render={props => <MyAccount />} />
         <Route path="/bookgrid" component={BooksGrid} />
         <Route path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />
         <Route path="/wishlist" component={WishList} />
         <Route path="/book/:bookId" component={BookDetails} />
         <Route path="/author/:authorId" component={AuthorDetails} />
+        <Route path="/" component={Footer} />
       </BrowserRouter>
     );
   }
