@@ -7,6 +7,7 @@ import BookPage from "./components/BookPage/BookPage";
 import BookDetails from "./components/BookDetails/BookDetails";
 import AuthorDetails from "./components/AuthorDetails/AuthorDetails";
 import Header from "./components/header/Header";
+import Footer from "./components/Footer/Footer";
 
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
@@ -15,7 +16,7 @@ import { Route } from "react-router-dom";
 import MyAccount from "./components/MyAccount/MyAccount";
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       loggedInStatus: "Sign in.",
@@ -25,16 +26,6 @@ class App extends Component {
     this.handleLoginStatus = this.handleLoginStatus.bind(this);
     this.handleLogoutStatus = this.handleLogoutStatus.bind(this);
   }
-
-  // saveToLocalStorage(state){
-  //   try{
-  //     const serializedState = JSON.stringify(state);
-  //     localStorage.setItem('state', serializedState)
-  //   }catch(e){
-  //     console.log(e);
-  //     return undefined;
-  //   }
-  // }
 
   componentWillMount(){                 //pull from local storage
     localStorage.getItem('loggedInUser') && this.setState({
@@ -55,7 +46,7 @@ class App extends Component {
     localStorage.setItem('stateTime', Date.now());    //time-stamp
   }
 
-  handleLoginStatus(data){
+  handleLoginStatus(data) {
     this.setState({
       loggedInStatus: data.first_name,
       userId: data.id,
@@ -84,6 +75,7 @@ class App extends Component {
         <Route path="/wishlist" component={WishList} />
         <Route path="/book/:bookId" component={BookDetails} />
         <Route path="/author/:authorId" component={AuthorDetails} />
+        <Route path="/" component={Footer} />
       </BrowserRouter>
     );
   }

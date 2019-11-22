@@ -1,11 +1,11 @@
 package geektextteam9.com.geektext.model;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.annotation.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -35,23 +35,38 @@ public class User {
     @NotBlank
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "email")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
+
     @Column(name = "username")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String username;
+
     @Column(name = "password")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;
+
     @Column(name = "nickname")
     private String nickname;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Review> reviews;
+
 
     public User(@JsonProperty("first_name") String firstName,
                 @JsonProperty("last_name") String lastName,
                 @JsonProperty("email") String email,
                 @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
-                @JsonProperty("nickname") String nickname)
+                @JsonProperty("nickname") String nickname,
+                List<Review> reviews)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,6 +74,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
+        this.reviews = reviews;
     }
 
     public User(String firstName, String lastName){
@@ -99,10 +115,6 @@ public class User {
         this.lastName = lastName;
     }
 
-//    public String getName(){
-//        return firstName + " " + lastName;
-//    }
-
     public String getEmail(){
         return email;
     }
@@ -135,7 +147,6 @@ public class User {
         this.nickname = nickname;
     }
 
-
     //Shipping Method getters/setters
     public List<ShippingOption> getHasShippingOptions(){
         return hasShippingOptions;
@@ -157,7 +168,6 @@ public class User {
 
     }
 
-
     //Payment Method getters/setters
     public List<PaymentOption> getHasPaymentOptions(){
         return hasPaymentOptions;
@@ -167,8 +177,16 @@ public class User {
         hasPaymentOptions.add(newPayment);
     }
 
-    public void deletePaymentOptionById(Integer id){
+    public void deletePaymentOptionById(Integer id) {
         hasPaymentOptions.removeIf(paymentOption -> paymentOption.getId().equals(id));      //find card by id to delete
+    }
+        
+    public List<Review> getReviews(){
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
 

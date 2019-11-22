@@ -17,7 +17,14 @@ export default function ReviewRow(props) {
                 <strong>
                   <span>{review ? review.title : undefined}</span>
                 </strong>
-                <span> by John Adams</span>
+                <span>
+                  <strong>
+                    {" by "}
+                    {review.user
+                      ? review.user.first_name + " " + review.user.last_name
+                      : undefined}
+                  </strong>
+                </span>
                 <br />
                 <span>
                   <ReviewStars avgRating={review.rating} />

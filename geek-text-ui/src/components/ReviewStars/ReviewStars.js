@@ -4,14 +4,19 @@ import Typography from "@material-ui/core/Typography";
 
 export default function ReviewStars(props) {
   let rating = Math.round(props.avgRating * 10) / 10;
+
+  var style = {
+    verticalAlign: "middle"
+  };
+
   return (
     <span>
-      <span>
+      <span style={style}>
         <Rating value={Math.floor(props.avgRating)} readOnly />
       </span>
 
       <Typography component="span" className="ml-2">
-        <span>{rating} out of 5 starts </span>{" "}
+        <span>{rating ? "(" + rating + " out of 5)" : "(0 Reviews)"}</span>
       </Typography>
     </span>
   );
