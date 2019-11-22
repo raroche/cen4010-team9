@@ -41,32 +41,32 @@ class CreateAccount extends Component {
 
         switch(id){
             case 'firstName':
-                registerErrors.firstName = value.length < 2 && value.length > 0 
+                registerErrors.firstName = value.length < 2 
                 ? 'Minimum of two characters required.' 
                 : '';
                 break;
             case 'lastName':
-                registerErrors.lastName = value.length < 2 && value.length > 0 
+                registerErrors.lastName = value.length < 2 
                 ? 'Minimum of two characters required.' 
                 : '';
                 break;
             case 'email':
-                registerErrors.email = emailRegex.test(value) && value.length > 0 
+                registerErrors.email = emailRegex.test(value) 
                 ? '' 
                 : 'Invalid email address.';
                 break;
             case 'username':
-                registerErrors.username = value.length < 2 && value.length > 0 
+                registerErrors.username = value.length < 2 
                 ? 'Minimum of two characters required.' 
                 : '';
                 break;
             case 'nickname':
-                registerErrors.nickname = value.length < 2 && value.length > 0 
+                registerErrors.nickname = value.length < 2
                 ? 'Minimum of two characters required.' 
                 : '';
                 break;
             case 'password':
-                registerErrors.password = value.length < 8 && value.length > 0 
+                registerErrors.password = value.length < 8
                 ? 'Minimum of eight characters required.' 
                 : '';
                 break;
@@ -120,18 +120,15 @@ class CreateAccount extends Component {
             .then(data => console.log(data))
             .catch(error => console.log(error))
         }
-        
-
-        
+                
         console.log(this.state);
 
-        //this.props.handleSuccessfulAccount(data.value);
     }
     
 
     render() {
         const {registerErrors} = this.state;
-        
+
         return (
             <div className="inner-container">
 
@@ -145,7 +142,6 @@ class CreateAccount extends Component {
                             <input 
                                 type="text" 
                                 id="firstName" 
-                                //value={this.state.firstName} 
                                 onChange={this.handleChange} 
                                 required 
                                 className="login-input" 
@@ -153,6 +149,9 @@ class CreateAccount extends Component {
                                 noValidate
                             />
                         </div>
+                            {registerErrors.firstName.length > 0 && (
+                                <div className="errorMessage">{registerErrors.firstName}</div>
+                            )}
 
                         <div className="input-group">
                             <label htmlFor="lastName">Last Name</label>
@@ -167,13 +166,15 @@ class CreateAccount extends Component {
                                 noValidate
                             />
                         </div>
+                            {registerErrors.lastName.length > 0 && (
+                                <div className="errorMessage">{registerErrors.lastName}</div>
+                            )}
 
                         <div className="input-group">
                             <label htmlFor="email">Email Address</label>
                             <input 
                                 type="email" 
                                 id="email" 
-                                //value={this.state.email}
                                 onChange={this.handleChange} 
                                 required
                                 className="login-input" 
@@ -181,13 +182,15 @@ class CreateAccount extends Component {
                                 noValidate
                             />
                         </div>
+                            {registerErrors.email.length > 0 && (
+                                <div className="errorMessage">{registerErrors.email}</div>
+                            )}
                     
                         <div className="input-group">
                             <label htmlFor="username">Username</label>
                             <input 
                                 type="text"
                                 id="username"
-                                //value={this.state.username}
                                 onChange={this.handleChange} 
                                 required
                                 className="login-input" 
@@ -195,13 +198,15 @@ class CreateAccount extends Component {
                                 noValidate
                             />
                         </div>
+                            {registerErrors.username.length > 0 && (
+                                <div className="errorMessage">{registerErrors.username}</div>
+                            )}
 
                         <div className="input-group">
                             <label htmlFor="nickname">Nickname</label>
                             <input 
                                 type="text"
                                 id="nickname"
-                                //value={this.state.nickname}
                                 onChange={this.handleChange} 
                                 required
                                 className="login-input" 
@@ -209,13 +214,15 @@ class CreateAccount extends Component {
                                 noValidate
                             />
                         </div>
+                            {registerErrors.nickname.length > 0 && (
+                                <div className="errorMessage">{registerErrors.nickname}</div>
+                            )}
 
                         <div className="input-group">
                             <label htmlFor="password">Password</label>
                             <input 
                                 type="password" 
                                 id="password" 
-                                //value={this.state.password}
                                 onChange={this.handleChange} 
                                 required
                                 className="login-input" 
@@ -223,13 +230,15 @@ class CreateAccount extends Component {
                                 noValidate
                             />
                         </div>
+                            {registerErrors.password.length > 0 && (
+                                <div className="errorMessage">{registerErrors.password}</div>
+                            )}
 
                         <div className="input-group">
                             <label htmlFor="verifyPassword">Verify Password</label>
                             <input 
                                 type="password" 
                                 id="verifyPassword" 
-                                //value={this.state.verifyPassword}
                                 onChange={this.handleChange} 
                                 required
                                 className="login-input" 
@@ -237,6 +246,9 @@ class CreateAccount extends Component {
                                 noValidate
                             />
                         </div>
+                            {registerErrors.verifyPassword.length > 0 && (
+                                <div className="errorMessage">{registerErrors.verifyPassword}</div>
+                            )}
 
                         {this.state.registerStatus}
                         <button type="submit" className="login-btn" onClick={this.submitRegister.bind(this)}>Sign Up</button>

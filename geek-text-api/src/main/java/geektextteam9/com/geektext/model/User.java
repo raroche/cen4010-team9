@@ -180,7 +180,7 @@ public class User {
     public void deletePaymentOptionById(Integer id) {
         hasPaymentOptions.removeIf(paymentOption -> paymentOption.getId().equals(id));      //find card by id to delete
     }
-        
+
     public List<Review> getReviews(){
         return reviews;
     }
