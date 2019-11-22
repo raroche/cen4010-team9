@@ -9,10 +9,11 @@ class usersInfo extends Component{
 
     async componentDidMount(){
         const url = "http://localhost:8090/api/users/";
+        var currentUser = this.props.currentUser;
         // const response = await fetch(url);
         // const data = await response.json();
         // this.setState({users: data, loading: false});
-        fetch(url).then(res => {
+        fetch(url+currentUser).then(res => {
             if(res.ok){
                 return res.json();
             }else{
@@ -40,15 +41,11 @@ class usersInfo extends Component{
         return(
             <div>
                 <div>
-                    {users.map(user => (
-                        <div>
-                            {user.first_name}
-                        </div>
-                    ))}
+                    Name: {users.first_name} {users.last_name}
                 </div>
-                <div>Email: </div>
-                <div>usersname: </div>
-                <div>Password: </div>
+                <div>Email: {users.email}</div>
+                <div>Usersname: {users.username}</div>
+                <div>Password: {users.password}</div>
             </div>
         );
     }
