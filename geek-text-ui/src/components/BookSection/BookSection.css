@@ -1,12 +1,14 @@
 .scroll {
     width: 81.5%;
-    height: 800px;
+    height: 2000px;
     position: relative;
     padding: 15px;
     flex-wrap: wrap;
     display: flex;
     justify-content: flex-start; 
     margin: 0 auto;
+    vertical-align: top;
+    padding-bottom: 1000px;
 }
 
 .inside {
@@ -22,6 +24,6 @@ a {
     cursor: pointer;
 }
 
-.pagination {
+.center1 {
     justify-content: center;
 }

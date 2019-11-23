@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import './Book.css';
-import ReviewStars from "../ReviewStars/ReviewStars";
+import ReviewStars from "../BookStars/BookStars";
 
 export default function Book(props) {
   const reviews = props.book.reviews;
@@ -21,7 +21,7 @@ export default function Book(props) {
             {shortTitle (props.book.title)}    </p>
         </div>
           <p > 
-            <ReviewStars totalReviews={totalReviews} avgRating={avgRating} /> <br/>
+            <div class = "stars"> <ReviewStars totalReviews={totalReviews} avgRating={avgRating} /> </div>
             Price: ${props.book.price} 
           </p>
         
