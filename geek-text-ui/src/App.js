@@ -32,23 +32,31 @@ class App extends Component {
     this.handleLogoutStatus = this.handleLogoutStatus.bind(this);
   }
 
-  componentWillMount(){                 //pull from local storage
-    localStorage.getItem('loggedInUser') && this.setState({
-      user: JSON.parse(localStorage.getItem('loggedInUser'))
-    })
-    localStorage.getItem('userId') && this.setState({
-      userId: JSON.parse(localStorage.getItem('userId'))
-    })
-    localStorage.getItem('loggedInStatus') && this.setState({
-      loggedInStatus: JSON.parse(localStorage.getItem('loggedInStatus'))
-    })
+  componentWillMount() {
+    //pull from local storage
+    localStorage.getItem("loggedInUser") &&
+      this.setState({
+        user: JSON.parse(localStorage.getItem("loggedInUser"))
+      });
+    localStorage.getItem("userId") &&
+      this.setState({
+        userId: JSON.parse(localStorage.getItem("userId"))
+      });
+    localStorage.getItem("loggedInStatus") &&
+      this.setState({
+        loggedInStatus: JSON.parse(localStorage.getItem("loggedInStatus"))
+      });
   }
 
-  componentWillUpdate(nextProps, nextState){      //save to local storage
-    localStorage.setItem('loggedInUser', JSON.stringify(nextState.user));
-    localStorage.setItem('userId', JSON.stringify(nextState.userId));
-    localStorage.setItem('loggedInStatus', JSON.stringify(nextState.loggedInStatus));
-    localStorage.setItem('stateTime', Date.now());    //time-stamp
+  componentWillUpdate(nextProps, nextState) {
+    //save to local storage
+    localStorage.setItem("loggedInUser", JSON.stringify(nextState.user));
+    localStorage.setItem("userId", JSON.stringify(nextState.userId));
+    localStorage.setItem(
+      "loggedInStatus",
+      JSON.stringify(nextState.loggedInStatus)
+    );
+    localStorage.setItem("stateTime", Date.now()); //time-stamp
   }
 
   handleLoginStatus(data) {
@@ -59,7 +67,7 @@ class App extends Component {
     });
   }
 
-  handleLogoutStatus(){
+  handleLogoutStatus() {
     this.setState({
       loggedInStatus: "Sign in.",
       userId: null,
@@ -70,10 +78,36 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path="/" render={props => <Header {...props} loggedInStatus={this.state.loggedInStatus} handleLogoutStatus={this.handleLogoutStatus} /> } />
+        <Route
+          path="/"
+          render={props => (
+            <Header
+              {...props}
+              loggedInStatus={this.state.loggedInStatus}
+              handleLogoutStatus={this.handleLogoutStatus}
+            />
+          )}
+        />
         <Route exact path="/" render={props => <HomePage />} />
-        <Route path="/login" render={props => <LoginRegister {...props} handleLoginStatus={this.handleLoginStatus} /> } />
-        <Route path="/myaccount" render={props => <MyAccount {...props} currentUser={this.state.userId} loggedInStatus={this.state.loggedInStatus} /> } />
+        <Route
+          path="/login"
+          render={props => (
+            <LoginRegister
+              {...props}
+              handleLoginStatus={this.handleLoginStatus}
+            />
+          )}
+        />
+        <Route
+          path="/myaccount"
+          render={props => (
+            <MyAccount
+              {...props}
+              currentUser={this.state.userId}
+              loggedInStatus={this.state.loggedInStatus}
+            />
+          )}
+        />
         <Route path="/bookgrid" component={BooksGrid} />
         <Route exact path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />

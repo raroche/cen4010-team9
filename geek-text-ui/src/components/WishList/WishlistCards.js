@@ -34,7 +34,7 @@ class WishlistCards extends Component {
           style={{
             top: "80px",
             width: "800px",
-            left: "20%"
+            left: "30%"
           }}
         >
           <Card.Body>
@@ -50,7 +50,7 @@ class WishlistCards extends Component {
             style={{
               top: "80px",
               width: "800px",
-              left: "20%"
+              left: "30%"
             }}
           >
             <Card.Body>
