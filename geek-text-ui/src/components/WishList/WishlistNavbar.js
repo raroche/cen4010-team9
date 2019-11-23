@@ -20,6 +20,7 @@ class WishlistNavbar extends Component {
       userId: props.userId,
       newList: "New List",
       modalShow: false,
+      loggedInStatus: props.loggedInStatus,
       handleClick: props.handleClick,
       handleDelete: props.handleDelete
     };
@@ -37,11 +38,11 @@ class WishlistNavbar extends Component {
     });
   }
   render() {
-    if (this.state.Lists.length >= 3) {
+    if (this.state.Lists.length >= 3 && this.state.userId !== undefined) {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "20%" }}
+            style={{ top: "80px", width: "800px", left: "30%" }}
             type="radio"
             name="options"
             defaultValue={1}
@@ -78,11 +79,14 @@ class WishlistNavbar extends Component {
           </ToggleButtonGroup>
         </ButtonToolbar>
       );
-    } else if (this.state.Lists.length === 0) {
+    } else if (
+      this.state.Lists.length === 0 &&
+      this.state.userId !== undefined
+    ) {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "20%" }}
+            style={{ top: "80px", width: "800px", left: "30%" }}
             type="radio"
             name="options"
             defaultValue={"Create List"}
@@ -136,11 +140,11 @@ class WishlistNavbar extends Component {
           </ToggleButtonGroup>
         </ButtonToolbar>
       );
-    } else {
+    } else if (this.state.userId !== undefined) {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "20%" }}
+            style={{ top: "80px", width: "800px", left: "30%" }}
             type="radio"
             name="options"
             defaultValue={this.state.default}
@@ -222,6 +226,8 @@ class WishlistNavbar extends Component {
           </ToggleButtonGroup>
         </ButtonToolbar>
       );
+    } else {
+      return <div></div>;
     }
   }
 }

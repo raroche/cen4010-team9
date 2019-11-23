@@ -15,6 +15,7 @@ class WishList extends Component {
     this.state = {
       userId: props.user.id,
       Lists: [],
+      LoggedInStatus: props.LoggedInStatus,
       currentList: 0
     };
     this.handleClick = this.handleClick.bind(this);
@@ -145,6 +146,7 @@ class WishList extends Component {
 
       if (response.ok) {
         let temp = await response.json();
+        temp.sort((a, b) => (a.id > b.id ? 1 : -1));
         this.setState({ Lists: temp });
       } else {
         throw new Error("Something went wrong while fetching the data");
@@ -168,18 +170,37 @@ class WishList extends Component {
     }
 
     let cards = <h1></h1>;
-    if (this.state.Lists.length === 0) {
+    if (this.state.userId === undefined) {
       cards = (
         <Card
           className="p-3"
           style={{
             top: "80px",
             width: "800px",
-            left: "20%"
+            left: "30%"
           }}
         >
           <Card.Body>
-            <h1> No lists exists for this user </h1>
+            <h1 style={{ position: "relative", left: "20%" }}>
+              User in not logged in
+            </h1>
+          </Card.Body>
+        </Card>
+      );
+    } else if (this.state.Lists.length === 0) {
+      cards = (
+        <Card
+          className="p-3"
+          style={{
+            top: "80px",
+            width: "800px",
+            left: "30%"
+          }}
+        >
+          <Card.Body>
+            <h1 style={{ position: "relative", left: "20%" }}>
+              No lists exists for this user
+            </h1>
           </Card.Body>
         </Card>
       );
@@ -194,18 +215,28 @@ class WishList extends Component {
         />
       );
     }
+
     return (
       <div>
-        <WishlistNavbar
-          Lists={this.state.Lists}
-          handleClick={this.handleClick}
-          handleDelete={this.handleDeleteWishlist}
-          userId={this.state.userId}
-          default={
-            this.state.Lists.length > 0 ? this.state.Lists[0].ListName : null
-          }
-        />
-        {cards}
+        <div>
+          <WishlistNavbar
+            LoggedInStatus={this.state.LoggedInStatus}
+            Lists={this.state.Lists}
+            handleClick={this.handleClick}
+            handleDelete={this.handleDeleteWishlist}
+            userId={this.state.userId}
+            default={
+              this.state.Lists.length > 0 ? this.state.Lists[0].ListName : null
+            }
+          />
+          {cards}
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     );
   }
