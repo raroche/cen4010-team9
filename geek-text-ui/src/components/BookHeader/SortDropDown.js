@@ -12,11 +12,11 @@ const SortDropDown = props => {
     return (
         <div className={sortClasses}>
             <div className="dropdown-sort">
-                <a href="/books">Book Title</a>
-                <a href="/books">Author</a>
-                <a href="/books">Price</a>
-                <a href="/books">Book Rating</a>
-                <a href="/books">Release date</a>
+                <button>Book Title</button>
+                <button >Author</button>
+                <button >Price</button>
+                <button >Book Rating</button>
+                <button >Release date</button>
             </div>
         </div>
     );

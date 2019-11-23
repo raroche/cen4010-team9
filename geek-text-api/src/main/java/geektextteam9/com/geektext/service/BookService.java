@@ -71,6 +71,22 @@ public class BookService {
 		return bookRepository.findAll(sortByRating());
 	}
 
+	public List<Book> getProgramming(){
+		return bookRepository.findProgramming();
+	}
+
+	public List<Book> getRobotics(){
+		return bookRepository.findRobotics();
+	}
+
+	public List<Book> getNetwork(){
+		return bookRepository.findNetwork();
+	}
+
+	public List<Book> getAI(){
+		return bookRepository.findAI();
+	}
+
 	private Sort sortByIdAsc() {
 		return new Sort(Sort.Direction.ASC, "id");
 	}

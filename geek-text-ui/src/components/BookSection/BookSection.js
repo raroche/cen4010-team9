@@ -29,7 +29,7 @@ render() {
     
     <div>
         <div class="scroll" >
-          {this.props.data.map(book => book.id <= 20 ? <div key= {book.id}>  <Book book={book} key={book.id}/> </div>: undefined )}
+          {this.props.data.map(book => book.id <= 25 ? <div key= {book.id}>  <Book book={book} key={book.id}/> </div>: undefined )}
         </div>
         <div class = "pagination">
         <Pagination items={this.state.exampleItems} onChangePage={this.onChangePage} />

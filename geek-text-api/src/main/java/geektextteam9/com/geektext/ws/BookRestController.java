@@ -32,6 +32,11 @@ public class BookRestController {
 		return ResponseEntity.ok(bookService.save(book));
 	}
 
+	@PostMapping
+	public ResponseEntity<Page<Book>> findAll(@RequestBody Filter filter) {
+		return ResponseEntity.ok(bookService.findAll(filter));
+	}
+
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Book> findById(@PathVariable Integer id) {
 		return ResponseEntity.ok(bookService.findById(id));
@@ -46,20 +51,38 @@ public class BookRestController {
 	public List<Book> getAllBooks(){
 		return bookService.getAllBooks();
 	}
+
 	@GetMapping(path = "/top/")
 	public ResponseEntity<List<Book>> getTop() {
 		return ResponseEntity.ok(bookService.getTop());
 	}
 
-
 	@GetMapping(path = "/rated/")
-	public List<Book> getRated(){
-		return bookService.getRated();
+	public ResponseEntity<List<Book>> getRated() {
+		return ResponseEntity.ok(bookService.getRated());
 	}
 
-	@PostMapping
-	public ResponseEntity<Page<Book>> findAll(@RequestBody Filter filter) {
-		return ResponseEntity.ok(bookService.findAll(filter));
+	@GetMapping(path = "/programming/")
+	public ResponseEntity<List<Book>> getProgramming() {
+		return ResponseEntity.ok(bookService.getProgramming());
 	}
+
+	@GetMapping(path = "/robotics/")
+	public ResponseEntity<List<Book>> getRobotics() {
+		return ResponseEntity.ok(bookService.getRobotics());
+	}
+
+	@GetMapping(path = "/network/")
+	public ResponseEntity<List<Book>> getNetwork() {
+		return ResponseEntity.ok(bookService.getNetwork());
+	}
+
+	@GetMapping(path = "/AI/")
+	public ResponseEntity<List<Book>> getAI() {
+		return ResponseEntity.ok(bookService.getAI());
+	}
+
+
+
 
 }

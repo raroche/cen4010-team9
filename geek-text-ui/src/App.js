@@ -15,6 +15,10 @@ import HighRating from "./components/HighRating/HighRating";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
 import MyAccount from "./components/MyAccount/MyAccount";
+import Programming from "./components/Genres/Programming";
+import Robotics from "./components/Genres/Robotics";
+import Network from "./components/Genres/Network";
+import AI from "./components/Genres/AI";
 
 class App extends Component {
   constructor() {
@@ -71,10 +75,14 @@ class App extends Component {
         <Route path="/login" render={props => <LoginRegister {...props} handleLoginStatus={this.handleLoginStatus} /> } />
         <Route path="/myaccount" render={props => <MyAccount {...props} currentUser={this.state.userId} loggedInStatus={this.state.loggedInStatus} /> } />
         <Route path="/bookgrid" component={BooksGrid} />
-        <Route path="/books" component={BookPage} />
+        <Route exact path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />
-        <Route path="/top" component={TopSeller} />
-        <Route path="/rating" component={HighRating} />
+        <Route path="/books/top" component={TopSeller} />
+        <Route path="/books/rating" component={HighRating} />
+        <Route path="/books/genre/Programming" component={Programming} />
+        <Route path="/books/genre/Robotics" component={Robotics} />
+        <Route path="/books/genre/Network" component={Network} />
+        <Route path="/books/genre/Artificial_Intelligence" component={AI} />
         <Route
           path="/wishlist"
           render={props => (

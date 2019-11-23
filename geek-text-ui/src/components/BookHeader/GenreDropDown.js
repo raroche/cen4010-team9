@@ -12,10 +12,10 @@ const GenreDropDown = props => {
     return (
         <div className={genreClasses}>
             <div className="dropdown-genre">
-                <a href="/books">Programming</a>
-                <a href="/books">Robotics</a>
-                <a href="/books">Network</a>
-                <a href="/books">Artificial Intelligence</a>
+                <a href="/books/genre/Programming">Programming</a>
+                <a href="/books/genre/Robotics">Robotics</a>
+                <a href="/books/genre/Network">Network</a>
+                <a href="/books/genre/Artificial_Intelligence">Artificial Intelligence</a>
             </div>
         </div>
     );
