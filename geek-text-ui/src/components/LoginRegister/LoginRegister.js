@@ -7,7 +7,10 @@ import SignIn from '../SignIn/SignIn';
 class LoginRegister extends Component {
     constructor(props) {
         super(props);
-        this.state = {isLoginOpen: true, isSignUpOpen: false};
+        this.state = {isLoginOpen: true, 
+            isSignUpOpen: false,
+            users:[]
+        };
         this.handleSuccessfulAccount = this.handleSuccessfulAccount.bind(this);
         this.showLoginBox = this.showLoginBox.bind(this);
         this.showSignUpBox = this.showSignUpBox.bind(this);
@@ -24,6 +27,19 @@ class LoginRegister extends Component {
     handleSuccessfulAccount(data){
         this.props.handleLoginStatus(data);
         this.props.history.push("/myaccount");
+    }
+
+    async componentDidMount(){
+        const url = "http://localhost:8090/api/users/";
+
+        fetch(url).then(res => {
+            if(res.ok){
+                return res.json();
+            }else{
+                throw Error("Error getting your information!")
+            }}).then(users => {
+                this.setState({users:users, loading:false});
+                }).catch(error => this.setState({error:error}))
     }
 
     render() {
@@ -43,8 +59,8 @@ class LoginRegister extends Component {
                 </div>
 
                 <div className="box-container">
-                    {this.state.isLoginOpen && <SignIn handleSuccessfulAccount={this.handleSuccessfulAccount} />}
-                    {this.state.isSignUpOpen && <CreateAccount handleSuccessfulAccount={this.handleSuccessfulAccount} />}
+                    {this.state.isLoginOpen && <SignIn userList={this.state.users} handleSuccessfulAccount={this.handleSuccessfulAccount} />}
+                    {this.state.isSignUpOpen && <CreateAccount userList={this.state.users} handleSuccessfulAccount={this.handleSuccessfulAccount} />}
                 </div>
         
             </div>

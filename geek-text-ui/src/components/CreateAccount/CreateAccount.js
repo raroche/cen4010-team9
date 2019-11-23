@@ -1,9 +1,21 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './CreateAccount.css';
-import { faSignLanguage } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
 
 const emailRegex = RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);      //email validation
+
+const formValid = registerErrors => {
+    let valid = true;
+    Object.values(registerErrors).forEach(val => {
+        if(val.length > 1 || val === ""){
+            valid = false;
+        }
+    });
+    return valid;
+};
 
 class CreateAccount extends Component {
     constructor(props) {
@@ -25,14 +37,15 @@ class CreateAccount extends Component {
                 password: "",
                 verifyPassword: ""
             },
-            registerStatus: ""
+            registerStatus: "",
+            users: [],
+            loading: true
         };
     }
     
-    
-
     handleChange = (e) => {
         this.setState({
+            users: this.props.userList,
             [e.target.id]: e.target.value
         })
 
@@ -55,11 +68,20 @@ class CreateAccount extends Component {
                 ? '' 
                 : 'Invalid email address.';
                 break;
+            // case 'username':
+            //     registerErrors.username = value.length < 2 
+            //     ? 'Minimum of two characters required.' 
+            //     : '';
+            //     break;
             case 'username':
-                registerErrors.username = value.length < 2 
-                ? 'Minimum of two characters required.' 
-                : '';
-                break;
+                this.state.users.map(user => {
+                    if(user.username === value){
+                        registerErrors.username = 'Username already exists.';
+                    }else{
+                        registerErrors.username = '';
+                    }
+                })
+                break;    
             case 'nickname':
                 registerErrors.nickname = value.length < 2
                 ? 'Minimum of two characters required.' 
@@ -72,8 +94,8 @@ class CreateAccount extends Component {
                 break;
             case 'verifyPassword':
                 registerErrors.verifyPassword = value === this.state.password       //doesn't work yet
-                ? "Passwords don't match." 
-                : '';
+                ?  ''
+                : "Passwords don't match.";
                 break;
             default:
                 break;
@@ -92,15 +114,12 @@ class CreateAccount extends Component {
             email,
             username,
             password,
-            verifyPassword,
             nickname
         } = this.state;
 
         const url = "http://localhost:8090/api/users/";
 
-        if(password !== verifyPassword){
-            this.setState({registerStatus: "Passwords don't match! Try again."})
-        }else{
+        if(formValid(this.state.registerErrors)){
             fetch(url,{
                 method: 'post',
                 body: JSON.stringify({
@@ -119,6 +138,9 @@ class CreateAccount extends Component {
             })
             .then(data => console.log(data))
             .catch(error => console.log(error))
+        }else{
+            console.error("Invalid account");
+            this.setState({registerStatus: "Please check your information."});
         }
                 
         console.log(this.state);
@@ -128,7 +150,9 @@ class CreateAccount extends Component {
 
     render() {
         const {registerErrors} = this.state;
-
+        // if(this.state.loading){
+        //     return <div>Loading...</div>;
+        // }else{
         return (
             <div className="inner-container">
 
@@ -144,31 +168,34 @@ class CreateAccount extends Component {
                                 id="firstName" 
                                 onChange={this.handleChange} 
                                 required 
-                                className="login-input" 
+                                className={registerErrors.firstName.length > 1 ? "login-error" : "login-input" }
                                 placeholder="John"
                                 noValidate
                             />
                         </div>
-                            {registerErrors.firstName.length > 0 && (
-                                <div className="errorMessage">{registerErrors.firstName}</div>
-                            )}
+                            {registerErrors.firstName.length > 0 
+                            ? (<div className="errorMessage">{registerErrors.firstName}</div>)
+                            : (this.state.firstName.length > 0 
+                                ? <FontAwesomeIcon icon={faCheck} style={{color: "green"}} />
+                                : '')}
 
                         <div className="input-group">
                             <label htmlFor="lastName">Last Name</label>
                             <input 
                                 type="text" 
                                 id="lastName" 
-                                //value={this.state.lastName}
                                 onChange={this.handleChange} 
                                 required
-                                className="login-input" 
+                                className={registerErrors.lastName.length > 0 ? "login-error" : "login-input" }
                                 placeholder="Smith"
                                 noValidate
                             />
                         </div>
-                            {registerErrors.lastName.length > 0 && (
-                                <div className="errorMessage">{registerErrors.lastName}</div>
-                            )}
+                            {registerErrors.lastName.length > 0 
+                            ?(<div className="errorMessage">{registerErrors.lastName}</div>)
+                            :(this.state.lastName.length > 0 
+                                ? <FontAwesomeIcon icon={faCheck} style={{color: "green"}}/>
+                                : '')}
 
                         <div className="input-group">
                             <label htmlFor="email">Email Address</label>
@@ -177,14 +204,16 @@ class CreateAccount extends Component {
                                 id="email" 
                                 onChange={this.handleChange} 
                                 required
-                                className="login-input" 
+                                className={registerErrors.email.length > 0 ? "login-error" : "login-input" }
                                 placeholder="jsmith@gmail.com"
                                 noValidate
                             />
                         </div>
-                            {registerErrors.email.length > 0 && (
-                                <div className="errorMessage">{registerErrors.email}</div>
-                            )}
+                            {registerErrors.email.length > 0 
+                            ?(<div className="errorMessage">{registerErrors.email}</div>)
+                            :(this.state.email.length > 0 
+                                ? <FontAwesomeIcon icon={faCheck} style={{color: "green"}}/>
+                                : '')}
                     
                         <div className="input-group">
                             <label htmlFor="username">Username</label>
@@ -193,14 +222,16 @@ class CreateAccount extends Component {
                                 id="username"
                                 onChange={this.handleChange} 
                                 required
-                                className="login-input" 
+                                className={registerErrors.username.length > 0 ? "login-error" : "login-input" }
                                 placeholder="Username"
                                 noValidate
                             />
                         </div>
-                            {registerErrors.username.length > 0 && (
-                                <div className="errorMessage">{registerErrors.username}</div>
-                            )}
+                            {registerErrors.username.length > 0 
+                            ?(<div className="errorMessage">{registerErrors.username}</div>)
+                            :(this.state.username.length > 0 
+                                ? <FontAwesomeIcon icon={faCheck} style={{color: "green"}}/>
+                                : '')}
 
                         <div className="input-group">
                             <label htmlFor="nickname">Nickname</label>
@@ -209,14 +240,16 @@ class CreateAccount extends Component {
                                 id="nickname"
                                 onChange={this.handleChange} 
                                 required
-                                className="login-input" 
+                                className={registerErrors.nickname.length > 0 ? "login-error" : "login-input" }
                                 placeholder="Nickname"
                                 noValidate
                             />
                         </div>
-                            {registerErrors.nickname.length > 0 && (
-                                <div className="errorMessage">{registerErrors.nickname}</div>
-                            )}
+                            {registerErrors.nickname.length > 0 
+                            ?(<div className="errorMessage">{registerErrors.nickname}</div>)
+                            :(this.state.nickname.length > 0 
+                                ? <FontAwesomeIcon icon={faCheck} style={{color: "green"}}/>
+                                : '')}
 
                         <div className="input-group">
                             <label htmlFor="password">Password</label>
@@ -225,14 +258,16 @@ class CreateAccount extends Component {
                                 id="password" 
                                 onChange={this.handleChange} 
                                 required
-                                className="login-input" 
+                                className={registerErrors.password.length > 0 ? "login-error" : "login-input" }
                                 placeholder="Password"
                                 noValidate
                             />
                         </div>
-                            {registerErrors.password.length > 0 && (
-                                <div className="errorMessage">{registerErrors.password}</div>
-                            )}
+                            {registerErrors.password.length > 0 
+                            ?(<div className="errorMessage">{registerErrors.password}</div>)
+                            :(this.state.password.length > 0 
+                                ? <FontAwesomeIcon icon={faCheck} style={{color: "green"}}/>
+                                : '')}
 
                         <div className="input-group">
                             <label htmlFor="verifyPassword">Verify Password</label>
@@ -241,20 +276,22 @@ class CreateAccount extends Component {
                                 id="verifyPassword" 
                                 onChange={this.handleChange} 
                                 required
-                                className="login-input" 
+                                className={registerErrors.verifyPassword.length > 0 ? "login-error" : "login-input" }
                                 placeholder="Verify Password"
                                 noValidate
                             />
                         </div>
-                            {registerErrors.verifyPassword.length > 0 && (
-                                <div className="errorMessage">{registerErrors.verifyPassword}</div>
-                            )}
-
-                        {this.state.registerStatus}
+                            {registerErrors.verifyPassword.length > 0 
+                            ?(<div className="errorMessage">{registerErrors.verifyPassword}</div>)
+                            :(this.state.verifyPassword.length > 0 
+                                ? <FontAwesomeIcon icon={faCheck} style={{color: "green"}}/>
+                                : '')}
+                        <div className="errorMessage">{this.state.registerStatus}</div>
                         <button type="submit" className="login-btn" onClick={this.submitRegister.bind(this)}>Sign Up</button>
                     </form>
             </div>
         );
+        
     }
 
 }

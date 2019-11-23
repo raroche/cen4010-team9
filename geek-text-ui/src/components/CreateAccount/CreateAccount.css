@@ -61,12 +61,24 @@
     background: rgba(15, 15, 15, 0.01);
 }
 
+.login-error {
+    border-style: solid;
+    border-color: rgb(195, 0, 0);
+    outline-style: none;
+    outline-color: none;
+    background:rgb(255, 237, 237);
+}
+
+.login-error:focus{
+    outline-style: none;
+}
+
 .login-input:hover {
     border: 2px solid $blue_theme;
 }
 
 .login-input:focus {
-    border: 2px solid #6565e7;
+    border: 2px solid;
     box-shadow: 0px 0px 20px rgba(15, 15, 15, 0.2);
 }
 
@@ -132,6 +144,7 @@
 }
 
 .errorMessage {
-    color: red;
-    font-size: 14px;
+    color: rgb(195, 0, 0);
+    font-size: 12px;
+    font-weight: bold;
 }

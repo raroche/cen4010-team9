@@ -17,30 +17,13 @@ class SignIn extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.submitLogin = this.submitLogin.bind(this);
     }
-    
-    abortController = new AbortController();
-
-    async componentDidMount(){
-        const url = "http://localhost:8090/api/users/";
-
-        fetch(url,{ signal: this.abortController.signal }).then(res => {
-            if(res.ok){
-                return res.json();
-            }else{
-                throw Error("Error getting your information!")
-            }}).then(users => {
-                this.setState({users:users, loading:false});
-                }).catch(error => this.setState({error:error}))
-    }
-
-    // UNSAFE_componentWillMount(){        //warning fix for updating state with a fetch request
-    //     this.abortController.abort();
-    // }
 
     handleChange = (e) => {
         this.setState({
+            users: this.props.userList,
             [e.target.id]: e.target.value
-        })
+        });
+        console.log(this.state);
     }
 
     submitLogin(e) {
@@ -66,7 +49,7 @@ class SignIn extends Component {
                     Sign In
                 </div>
 
-                <form className="box">
+                <form className="box" onSubmit={this.submitLogin}>
                 
                     <div className="input-group">
                         <label htmlFor="username">Username</label>
@@ -90,7 +73,7 @@ class SignIn extends Component {
                             placeholder="Password"/>
                     </div>
                     {this.state.loginError}
-                    <button type="button" className="login-btn" onClick={this.submitLogin}>Sign In</button>
+                    <button type="submit" className="login-btn" onClick={this.submitLogin}>Sign In</button>
 
                 </form>
 

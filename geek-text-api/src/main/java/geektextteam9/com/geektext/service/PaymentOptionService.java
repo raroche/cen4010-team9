@@ -17,6 +17,8 @@ public class PaymentOptionService {
     PaymentOptionRepository paymentOptionRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserService userService;
 
     public void createPaymentOption(Integer id, PaymentOption paymentOption){
         userRepository.findById(id).map(user -> {
@@ -37,9 +39,25 @@ public class PaymentOptionService {
         return paymentOptionRepository.findById(id);
     }
 
-    public void updatePaymentOption(PaymentOption paymentOption){
-
+    public void updatePaymentOption(Integer userId, Integer payId, PaymentOption paymentOption){
+        userService.getAllUsers().stream().forEach(user -> {
+            if(user.getId()==userId){
+                user.getHasPaymentOptions().stream().forEach(paymentOption1 -> {
+                    if(paymentOption1.getId()==payId){
+                        user.updatePaymentOption(payId, paymentOption);
+                        userRepository.save(user);
+//                        paymentOption1.setCardNickname(paymentOption.getCardNickname());
+//                        paymentOption1.setCardNumber(paymentOption.getCardNumber());
+//                        paymentOption1.setCvv(paymentOption.getCvv());
+                        //paymentOptionRepository.save(paymentOption);
+                    }
+                });
+            }
+        });
+            //find payment option by id and update
+            //paymentOptionRepository.save(paymentOption);
     }
+
 
     public void deletePaymentOption(Integer userId, Integer payId){
         userRepository.findById(userId).map(user -> {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { GoogleComponent } from 'react-google-location'
 
 class AddShipping extends Component {
     constructor(props){
