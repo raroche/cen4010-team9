@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleComponent } from 'react-google-location'
+const API_KEY = "AIzaSyDmvnBO_DCbC2PIDBAf40XyO_1O7dO0_8k"
 
 class AddShipping extends Component {
     constructor(props){
@@ -52,6 +53,7 @@ class AddShipping extends Component {
             <form onSubmit={this.submitShipping}>
                 <div className="input-group">
                     <label htmlFor="nickname">Address Name</label>
+                    
                     <input type="text" id="nickname" onChange={this.updateShipping} className="login-input" placeholder="My House"/>
                 </div>
 
