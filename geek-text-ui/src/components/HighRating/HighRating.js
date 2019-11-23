@@ -43,8 +43,8 @@ class HighRating extends Component {
             <BookHeader/>
             <div className="bookpage">
                 <div className="books-title">
-                  <h1> The Book Store </h1> <br/>
-                  <h2>Books by High Rating</h2><br/>
+                  <h1> The Book Store </h1> 
+                  <h2>Books by High Rating</h2>
                 </div>
                 <div class = "pad">
                 <BookSection data={this.state.books} /><br/>

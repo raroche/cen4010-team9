@@ -9,7 +9,7 @@ class BookSection extends Component {
     super(props);
     
     // an example array of items to be paged
-    var exampleItems = [...Array(20).keys()].map(i => ({ id: (i+1), name: 'Item ' + (i+1) }));
+    var exampleItems = [...Array(25).keys()].map(i => ({ id: (i+1), name: 'Item ' + (i+1) }));
     this.state = {
         exampleItems: exampleItems,
         pageOfBooks: []
@@ -31,7 +31,7 @@ render() {
         <div class="scroll" >
           {this.props.data.map(book => book.id <= 25 ? <div key= {book.id}>  <Book book={book} key={book.id}/> </div>: undefined )}
         </div>
-        <div class = "pagination">
+        <div class = "center1">
         <Pagination items={this.state.exampleItems} onChangePage={this.onChangePage} />
         </div>
         
