@@ -46,7 +46,8 @@ public class PaymentOptionController {
         paymentOptionService.deletePaymentOption(userId, payId);
     }
 
-    public void updatePaymentOption(PaymentOption updatedPaymentOption){
-        paymentOptionService.updatePaymentOption(updatedPaymentOption);
+    @PutMapping("/users/{userId}/payments/{payId}")
+    public void updatePaymentOption(@PathVariable("userId") Integer userId, @PathVariable("payId") Integer payId, @RequestBody PaymentOption updatedPaymentOption){
+        paymentOptionService.updatePaymentOption(userId, payId, updatedPaymentOption);
     }
 }

@@ -48,9 +48,9 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @PutMapping(path = "{id}")
-    public void updateUser(@Valid @NotNull @PathVariable("id") @RequestBody User updatedUser){
-        userService.updateUser(updatedUser);
+    @PutMapping(path = "{userId}")
+    public void updateUser(@PathVariable("userId") Integer userId, @RequestBody User updatedUser){
+        userService.updateUser(userId, updatedUser);
     }
 
     @GetMapping(path = "/wishlist/{id}")

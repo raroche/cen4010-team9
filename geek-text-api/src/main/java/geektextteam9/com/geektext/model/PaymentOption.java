@@ -37,6 +37,16 @@ public class PaymentOption {
         this.cvv = cvv;
     }
 
+    public PaymentOption(String cardNickname,
+                         Long cardNumber,
+                         String expiration,
+                         int cvv){
+        this.cardNickname = cardNickname;
+        this.cardNumber = cardNumber;
+        this.expiration = expiration;
+        this.cvv = cvv;
+    }
+
     public PaymentOption(){
         this.cardNickname = "";
         this.cardNumber = null;
@@ -74,6 +84,10 @@ public class PaymentOption {
 
     public void setExpiration(int exp_month, int exp_year){
         this.expiration = exp_month + "/" + exp_year;
+    }
+
+    public void setExpiration(String expiration){
+        this.expiration = expiration;
     }
 
     public int getCvv(){

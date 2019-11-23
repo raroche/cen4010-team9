@@ -33,7 +33,7 @@ class AddPayment extends Component {
         fetch(url+currentUser+payments,{
             method: 'post',
             body: JSON.stringify({
-                card_nickname: this.state.card_name,
+                card_nickname: this.state.card_nickname,
                 card_number: this.state.card_number,
                 exp_month: this.state.exp_month,
                 exp_year: this.state.exp_year,
@@ -51,7 +51,7 @@ class AddPayment extends Component {
 
             <form onSubmit={this.submitPayment}>
                 <div className="input-group">
-                    <label htmlFor="cardName">Card Name</label>
+                    <label htmlFor="card_nickname">Card Name</label>
                     <input type="text" id="card_nickname" onChange={this.updatePayment} className="login-input" placeholder="My Card"/>
                 </div>
 

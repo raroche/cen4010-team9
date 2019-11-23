@@ -32,7 +32,6 @@ public class User {
     )
     private List<PaymentOption> hasPaymentOptions;
 
-    @NotBlank
     @Column(name = "first_name")
     private String firstName;
 
@@ -188,7 +187,16 @@ public class User {
     public void deletePaymentOptionById(Integer id) {
         hasPaymentOptions.removeIf(paymentOption -> paymentOption.getId().equals(id));      //find card by id to delete
     }
-        
+
+    public void updatePaymentOption(Integer payId, PaymentOption paymentOption){
+        for(int i=0; i<hasPaymentOptions.size(); i++){
+            PaymentOption p = hasPaymentOptions.get(i);
+            if(p.getId() == payId){
+                hasPaymentOptions.set(i, paymentOption);
+            }
+        }
+    }
+
     public List<Review> getReviews(){
         return reviews;
     }

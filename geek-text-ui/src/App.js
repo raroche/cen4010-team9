@@ -78,36 +78,10 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route
-          path="/"
-          render={props => (
-            <Header
-              {...props}
-              loggedInStatus={this.state.loggedInStatus}
-              handleLogoutStatus={this.handleLogoutStatus}
-            />
-          )}
-        />
-        <Route exact path="/" render={props => <HomePage />} />
-        <Route
-          path="/login"
-          render={props => (
-            <LoginRegister
-              {...props}
-              handleLoginStatus={this.handleLoginStatus}
-            />
-          )}
-        />
-        <Route
-          path="/myaccount"
-          render={props => (
-            <MyAccount
-              {...props}
-              currentUser={this.state.userId}
-              loggedInStatus={this.state.loggedInStatus}
-            />
-          )}
-        />
+        <Route path="/" render={props => <Header {...props} loggedInStatus={this.state.loggedInStatus} handleLogoutStatus={this.handleLogoutStatus} /> } />
+        <Route exact path="/" render={props => <HomePage {...props} />} />
+        <Route path="/login" render={props => <LoginRegister {...props} handleLoginStatus={this.handleLoginStatus} /> } />
+        <Route path="/myaccount" render={props => <MyAccount {...props} currentUser={this.state.userId} loggedInStatus={this.state.loggedInStatus} /> } />
         <Route path="/bookgrid" component={BooksGrid} />
         <Route exact path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />
