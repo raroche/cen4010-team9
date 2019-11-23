@@ -140,7 +140,7 @@ class WishList extends Component {
       const response = await fetch(
         `http://localhost:8090/api/wishlist/moveBook/${
           this.state.Lists[this.state.currentList].id
-        }/${destList}/${book_id}/1`,
+        }/${destList}/${book_id}/${this.state.userId}`,
         { method: "PUT" }
       );
 
