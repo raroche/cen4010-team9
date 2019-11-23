@@ -43,11 +43,11 @@ class BookPage extends Component {
             <BookHeader/>
             <div className="bookpage">
                 <div className="books-title">
-                  <h1> The Book Store </h1> <br/>
+                  <h1> The Book Store </h1> 
                   <h2>All Books</h2><br/>
                 </div>
                 <div class = "pad">
-                <BookSection data={this.state.books} /><br/>
+                  <BookSection data={this.state.books} /><br/>
                 </div>
 
                 
