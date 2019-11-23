@@ -30,7 +30,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    @JsonManagedReference
+    @JsonBackReference
     private User user;
 
     public Review() {

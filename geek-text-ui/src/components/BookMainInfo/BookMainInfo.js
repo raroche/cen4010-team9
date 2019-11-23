@@ -3,8 +3,18 @@ import "./BookMainInfo.css";
 import ReviewStars from "../ReviewStars/ReviewStars";
 import BookDetailsPublishers from "../BookDetailsPublishers/BookDetailsPublishers";
 import { NavLink } from "react-router-dom";
+import AddBook from "../WishList/AddBook";
 
 export default class BookMainInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: props.user,
+      loggedIn: props.loggedIn,
+      modalShow: false
+    };
+  }
+
   render() {
     const book = this.props.state.book;
     const authors = this.props.state.authors;
@@ -19,6 +29,7 @@ export default class BookMainInfo extends Component {
 
       avgRating = calculateAvgRating(reviews, totalReviews);
     }
+    //console.log("bookid " + this.state.bookId);
 
     return (
       <div className="mt-5">
@@ -36,9 +47,18 @@ export default class BookMainInfo extends Component {
           <strong>Add to Cart</strong>
         </button>
         <span className="ml-3">
-          <i className="fa fa-heart-o wishList mr-1 ml-3"></i>
+          <i
+            className="fa fa-heart-o wishList mr-1 ml-3"
+            onClick={() => this.setState({ modalShow: true })}
+          ></i>
           Add to my WishList
         </span>
+        <AddBook
+          userId={this.state.user.id}
+          loggedIn={this.state.loggedIn}
+          bookId={this.props.state.book.id}
+          modalShow={this.state.modalShow}
+        />
         <p className="mt-1">
           <i className="fab fa-usps fa-2x text-primary mr-2 "></i>
           Get it as soon as {deliveryDate()}

@@ -16,12 +16,12 @@ export default function BookCard(props) {
       style={{ textDecoration: "none" }}
     >
       <div className="mt-4 mb-2 ml-2 mr-2">
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: "18rem", height: "auto" }}>
           <Card.Img
             variant="top"
             src={props.book.img_url}
-            width="auto"
-            height="300px"
+            width="200px"
+            height="auto"
           />
           <Card.Body>
             <Card.Title>{props.book.title}</Card.Title>

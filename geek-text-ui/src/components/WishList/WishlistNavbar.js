@@ -5,6 +5,8 @@ import {
   ToggleButtonGroup,
   Modal,
   Button,
+  Dropdown,
+  DropdownButton,
   InputGroup,
   FormControl
 } from "react-bootstrap";
@@ -15,9 +17,12 @@ class WishlistNavbar extends Component {
 
     this.state = {
       Lists: props.Lists,
+      userId: props.userId,
       newList: "New List",
       modalShow: false,
-      handleClick: props.handleClick
+      loggedInStatus: props.loggedInStatus,
+      handleClick: props.handleClick,
+      handleDelete: props.handleDelete
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,12 +32,17 @@ class WishlistNavbar extends Component {
     this.setState({ newList: event.target.value });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      Lists: nextProps.Lists
+    });
+  }
   render() {
-    if (this.state.Lists.length === 3) {
+    if (this.state.Lists.length >= 3 && this.state.userId !== undefined) {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "20%" }}
+            style={{ top: "80px", width: "800px", left: "30%" }}
             type="radio"
             name="options"
             defaultValue={1}
@@ -40,22 +50,43 @@ class WishlistNavbar extends Component {
             {this.state.Lists.map(item => (
               <ToggleButton
                 variant="light"
-                value={item.ListName}
+                value={item.name}
                 onClick={e => {
-                  this.state.handleClick(item.ListName, false);
+                  this.state.handleClick(item.name, false);
                 }}
               >
-                {item.ListName}
+                {item.name}
               </ToggleButton>
             ))}
+            <DropdownButton
+              id="dropdown-basic-button"
+              title="Delete list"
+              variant="light"
+            >
+              {this.state.Lists.map(item => (
+                <Dropdown.Item
+                  variant="light"
+                  value={item.name}
+                  onClick={e => {
+                    this.state.handleDelete(item.id, this.state.userId);
+                    this.setState({ modalShow: false });
+                  }}
+                >
+                  {item.name}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
           </ToggleButtonGroup>
         </ButtonToolbar>
       );
-    } else if (this.state.Lists.length === 0) {
+    } else if (
+      this.state.Lists.length === 0 &&
+      this.state.userId !== undefined
+    ) {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "20%" }}
+            style={{ top: "80px", width: "800px", left: "30%" }}
             type="radio"
             name="options"
             defaultValue={"Create List"}
@@ -84,8 +115,8 @@ class WishlistNavbar extends Component {
                 <InputGroup className="mb-3">
                   <FormControl
                     placeholder="List name"
-                    aria-label="ListName"
-                    aria-describedby="ListName"
+                    aria-label="name"
+                    aria-describedby="name"
                     style={{ width: "300px" }}
                     value={this.state.newList}
                     onChange={this.handleChange}
@@ -95,7 +126,7 @@ class WishlistNavbar extends Component {
                       onClick={e =>
                         this.state.handleClick(this.state.newList, true)
                       }
-                      id="ListName"
+                      id="name"
                     >
                       Create List
                     </InputGroup.Text>
@@ -109,11 +140,11 @@ class WishlistNavbar extends Component {
           </ToggleButtonGroup>
         </ButtonToolbar>
       );
-    } else {
+    } else if (this.state.userId !== undefined) {
       return (
         <ButtonToolbar>
           <ToggleButtonGroup
-            style={{ top: "80px", width: "800px", left: "20%" }}
+            style={{ top: "80px", width: "800px", left: "30%" }}
             type="radio"
             name="options"
             defaultValue={this.state.default}
@@ -121,12 +152,12 @@ class WishlistNavbar extends Component {
             {this.state.Lists.map(item => (
               <ToggleButton
                 variant="light"
-                value={this.state.Lists[0].ListName}
+                value={this.state.Lists[0].name}
                 onClick={e => {
-                  this.state.handleClick(item.ListName, false);
+                  this.state.handleClick(item.name, false);
                 }}
               >
-                {item.ListName}
+                {item.name}
               </ToggleButton>
             ))}
             <ToggleButton
@@ -153,8 +184,8 @@ class WishlistNavbar extends Component {
                 <InputGroup className="mb-3">
                   <FormControl
                     placeholder="List name"
-                    aria-label="ListName"
-                    aria-describedby="ListName"
+                    aria-label="name"
+                    aria-describedby="name"
                     style={{ width: "300px" }}
                     value={this.state.newList}
                     onChange={this.handleChange}
@@ -164,7 +195,7 @@ class WishlistNavbar extends Component {
                       onClick={e =>
                         this.state.handleClick(this.state.newList, true)
                       }
-                      id="ListName"
+                      id="name"
                     >
                       Create List
                     </InputGroup.Text>
@@ -175,9 +206,28 @@ class WishlistNavbar extends Component {
                 <Button onClick={this.state.onHide}>Cancel </Button>
               </Modal.Footer>
             </Modal>
+            <DropdownButton
+              id="dropdown-basic-button"
+              title="Delete list"
+              variant="light"
+            >
+              {this.state.Lists.map(item => (
+                <Dropdown.Item
+                  variant="light"
+                  value={item.name}
+                  onClick={e => {
+                    this.state.handleDelete(item.id, this.state.userId);
+                  }}
+                >
+                  {item.name}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
           </ToggleButtonGroup>
         </ButtonToolbar>
       );
+    } else {
+      return <div></div>;
     }
   }
 }

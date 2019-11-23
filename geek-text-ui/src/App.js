@@ -8,12 +8,17 @@ import BookDetails from "./components/BookDetails/BookDetails";
 import AuthorDetails from "./components/AuthorDetails/AuthorDetails";
 import Header from "./components/header/Header";
 import Footer from "./components/Footer/Footer";
-
+import TopSeller from "./components/TopSeller/TopSeller";
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
+import HighRating from "./components/HighRating/HighRating";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
 import MyAccount from "./components/MyAccount/MyAccount";
+import Programming from "./components/Genres/Programming";
+import Robotics from "./components/Genres/Robotics";
+import Network from "./components/Genres/Network";
+import AI from "./components/Genres/AI";
 
 class App extends Component {
   constructor() {
@@ -27,23 +32,31 @@ class App extends Component {
     this.handleLogoutStatus = this.handleLogoutStatus.bind(this);
   }
 
-  componentWillMount(){                 //pull from local storage
-    localStorage.getItem('loggedInUser') && this.setState({
-      user: JSON.parse(localStorage.getItem('loggedInUser'))
-    })
-    localStorage.getItem('userId') && this.setState({
-      userId: JSON.parse(localStorage.getItem('userId'))
-    })
-    localStorage.getItem('loggedInStatus') && this.setState({
-      loggedInStatus: JSON.parse(localStorage.getItem('loggedInStatus'))
-    })
+  componentWillMount() {
+    //pull from local storage
+    localStorage.getItem("loggedInUser") &&
+      this.setState({
+        user: JSON.parse(localStorage.getItem("loggedInUser"))
+      });
+    localStorage.getItem("userId") &&
+      this.setState({
+        userId: JSON.parse(localStorage.getItem("userId"))
+      });
+    localStorage.getItem("loggedInStatus") &&
+      this.setState({
+        loggedInStatus: JSON.parse(localStorage.getItem("loggedInStatus"))
+      });
   }
 
-  componentWillUpdate(nextProps, nextState){      //save to local storage
-    localStorage.setItem('loggedInUser', JSON.stringify(nextState.user));
-    localStorage.setItem('userId', JSON.stringify(nextState.userId));
-    localStorage.setItem('loggedInStatus', JSON.stringify(nextState.loggedInStatus));
-    localStorage.setItem('stateTime', Date.now());    //time-stamp
+  componentWillUpdate(nextProps, nextState) {
+    //save to local storage
+    localStorage.setItem("loggedInUser", JSON.stringify(nextState.user));
+    localStorage.setItem("userId", JSON.stringify(nextState.userId));
+    localStorage.setItem(
+      "loggedInStatus",
+      JSON.stringify(nextState.loggedInStatus)
+    );
+    localStorage.setItem("stateTime", Date.now()); //time-stamp
   }
 
   handleLoginStatus(data) {
@@ -54,7 +67,7 @@ class App extends Component {
     });
   }
 
-  handleLogoutStatus(){
+  handleLogoutStatus() {
     this.setState({
       loggedInStatus: "Sign in.",
       userId: null,
@@ -70,10 +83,34 @@ class App extends Component {
         <Route path="/login" render={props => <LoginRegister {...props} handleLoginStatus={this.handleLoginStatus} /> } />
         <Route path="/myaccount" render={props => <MyAccount {...props} currentUser={this.state.userId} loggedInStatus={this.state.loggedInStatus} /> } />
         <Route path="/bookgrid" component={BooksGrid} />
-        <Route path="/books" component={BookPage} />
+        <Route exact path="/books" component={BookPage} />
         <Route path="/cart" component={Cart} />
-        <Route path="/wishlist" component={WishList} />
-        <Route path="/book/:bookId" component={BookDetails} />
+        <Route path="/books/top" component={TopSeller} />
+        <Route path="/books/rating" component={HighRating} />
+        <Route path="/books/genre/Programming" component={Programming} />
+        <Route path="/books/genre/Robotics" component={Robotics} />
+        <Route path="/books/genre/Network" component={Network} />
+        <Route path="/books/genre/Artificial_Intelligence" component={AI} />
+        <Route
+          path="/wishlist"
+          render={props => (
+            <WishList
+              {...props}
+              loggedInStatus={this.state.loggedInStatus}
+              user={this.state.user}
+            />
+          )}
+        />
+        <Route
+          path="/book/:bookId"
+          render={props => (
+            <BookDetails
+              {...props}
+              loggedIn={this.state.loggedInStatus}
+              user={this.state.user}
+            />
+          )}
+        />
         <Route path="/author/:authorId" component={AuthorDetails} />
         <Route path="/" component={Footer} />
       </BrowserRouter>

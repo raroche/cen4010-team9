@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import './LoginRegister.css'
-import CreateAccount from '../CreateAccount/CreateAccount';
-import SignIn from '../SignIn/SignIn';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import "./LoginRegister.css";
+import CreateAccount from "../CreateAccount/CreateAccount";
+import SignIn from "../SignIn/SignIn";
 
 class LoginRegister extends Component {
     constructor(props) {
@@ -16,18 +16,18 @@ class LoginRegister extends Component {
         this.showSignUpBox = this.showSignUpBox.bind(this);
     }
 
-    showLoginBox() {
-        this.setState({isLoginOpen: true, isSignUpOpen: false});
-    }
+  showLoginBox() {
+    this.setState({ isLoginOpen: true, isSignUpOpen: false });
+  }
 
-    showSignUpBox() {
-        this.setState({isSignUpOpen: true, isLoginOpen: false});
-    }
+  showSignUpBox() {
+    this.setState({ isSignUpOpen: true, isLoginOpen: false });
+  }
 
-    handleSuccessfulAccount(data){
-        this.props.handleLoginStatus(data);
-        this.props.history.push("/myaccount");
-    }
+  handleSuccessfulAccount(data) {
+    this.props.handleLoginStatus(data);
+    this.props.history.push("/myaccount");
+  }
 
     async componentDidMount(){
         const url = "http://localhost:8090/api/users/";

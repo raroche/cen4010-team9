@@ -58,6 +58,12 @@ public class User {
     @JsonIgnore
     private List<Review> reviews;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_wishlist",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
+    @JsonManagedReference
+    private List<Wishlist> wishlists;
 
     public User(@JsonProperty("first_name") String firstName,
                 @JsonProperty("last_name") String lastName,
@@ -65,7 +71,8 @@ public class User {
                 @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
                 @JsonProperty("nickname") String nickname,
-                List<Review> reviews)
+                List<Review> reviews,
+                List<Wishlist> wishlists)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -74,6 +81,7 @@ public class User {
         this.password = password;
         this.nickname = nickname;
         this.reviews = reviews;
+        this.wishlists = wishlists;
     }
 
     public User(String firstName, String lastName){
@@ -195,6 +203,14 @@ public class User {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public List<Wishlist> getWishlists() {
+        return wishlists;
+    }
+
+    public void setWishlists(List<Wishlist> wishlists) {
+        this.wishlists = wishlists;
     }
 }
 
