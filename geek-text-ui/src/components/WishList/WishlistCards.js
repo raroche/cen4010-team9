@@ -34,7 +34,7 @@ class WishlistCards extends Component {
           style={{
             top: "80px",
             width: "800px",
-            left: "20%"
+            left: "30%"
           }}
         >
           <Card.Body>
@@ -50,12 +50,12 @@ class WishlistCards extends Component {
             style={{
               top: "80px",
               width: "800px",
-              left: "20%"
+              left: "30%"
             }}
           >
             <Card.Body>
               <img
-                src={item.cover}
+                src={item.img_url}
                 height="150"
                 width="100"
                 padding="20px"
@@ -103,16 +103,18 @@ class WishlistCards extends Component {
                 style={{
                   position: "absolute",
                   top: "70px",
-                  left: "200px"
+                  left: "200px",
+                  maxWidth: "350px"
                 }}
               >
-                <h1
+                <p1
                   style={{
-                    fontweight: "bold"
+                    fontweight: "bold",
+                    maxWidth: "10px"
                   }}
                 >
-                  {item.bookName}
-                </h1>
+                  {item.title}
+                </p1>
                 {item.author}
                 <br />${item.price}
               </Card.Text>
