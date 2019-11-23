@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import BookSection from '../BookSection/BookSection';
-import './BookPage.css';
+import '../BookPage/BookPage.css';
 import BookHeader from '../BookHeader/BookHeader';
 
-class BookPage extends Component {
+class TopSeller extends Component {
   constructor(props) {
     super();
 
@@ -17,7 +17,7 @@ class BookPage extends Component {
   }
   async fetchBooks() {
     try {
-      const response = await fetch("http://localhost:8090/api/books/");
+      const response = await fetch("http://localhost:8090/api/books/top/");
 
       if (response.ok) {
         const data = await response.json();
@@ -44,10 +44,10 @@ class BookPage extends Component {
             <div className="bookpage">
                 <div className="books-title">
                   <h1> The Book Store </h1> <br/>
-                  <h2>All Books</h2><br/>
+                  <h2>Top Sellers</h2><br/>
                 </div>
                 <div class = "pad">
-                <BookSection data={this.state.books} /><br/>
+                <BookSection data={this.state.books}  /><br/>
                 </div>
 
                 
@@ -58,4 +58,4 @@ class BookPage extends Component {
     }
 }
 
-export default BookPage;
+export default TopSeller;
