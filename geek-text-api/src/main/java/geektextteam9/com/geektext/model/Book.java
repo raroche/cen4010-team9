@@ -55,6 +55,9 @@ public class Book {
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
 
+	@Column
+	private String author;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "book_in_wishlist",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
@@ -67,7 +70,7 @@ public class Book {
 	}
 
 	public Book(String isbn, String title, String description, Double price, Date date, float rating, String img_url,
-			boolean top_seller, boolean featured, List<Review> reviews, List<Publisher> publishers, Genre genre) {
+			boolean top_seller, boolean featured, List<Review> reviews, List<Publisher> publishers, Genre genre, String author) {
 		this.isbn = isbn;
 		this.title = title;
 		this.description = description;
@@ -80,6 +83,7 @@ public class Book {
 		this.reviews = reviews;
 		this.publishers = publishers;
 		this.genre = genre;
+		this.author = author;
 	}
 
 
@@ -186,4 +190,13 @@ public class Book {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 }

@@ -87,6 +87,35 @@ public class BookService {
 		return bookRepository.findAI();
 	}
 
+	public List<Book> getRating0(){
+		return bookRepository.getRating0();
+	}
+
+	public List<Book> getRating1(){
+		return bookRepository.getRating1();
+	}
+
+	public List<Book> getRating2(){
+		return bookRepository.getRating2();
+	}
+
+	public List<Book> getRating3(){
+		return bookRepository.getRating3();
+	}
+
+	public List<Book> getRating4(){
+		return bookRepository.getRating4();
+	}
+
+	public List<Book> getRating5(){
+		return bookRepository.getRating5();
+	}
+
+
+
+
+
+
 	private Sort sortByIdAsc() {
 		return new Sort(Sort.Direction.ASC, "id");
 	}

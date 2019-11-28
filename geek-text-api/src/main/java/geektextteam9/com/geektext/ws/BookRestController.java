@@ -82,6 +82,36 @@ public class BookRestController {
 		return ResponseEntity.ok(bookService.getAI());
 	}
 
+	@GetMapping(path = "/rating0/")
+	public ResponseEntity<List<Book>> getRating0() {
+		return ResponseEntity.ok(bookService.getRating0());
+	}
+
+	@GetMapping(path = "/rating1/")
+	public ResponseEntity<List<Book>> getRating1() {
+		return ResponseEntity.ok(bookService.getRating1());
+	}
+
+	@GetMapping(path = "/rating2/")
+	public ResponseEntity<List<Book>> getRating2() {
+		return ResponseEntity.ok(bookService.getRating2());
+	}
+
+	@GetMapping(path = "/rating3/")
+	public ResponseEntity<List<Book>> getRating3() {
+		return ResponseEntity.ok(bookService.getRating3());
+	}
+
+	@GetMapping(path = "/rating4/")
+	public ResponseEntity<List<Book>> getRating4() {
+		return ResponseEntity.ok(bookService.getRating4());
+	}
+
+	@GetMapping(path = "/rating5/")
+	public ResponseEntity<List<Book>> getRating5() {
+		return ResponseEntity.ok(bookService.getRating5());
+	}
+
 
 
 

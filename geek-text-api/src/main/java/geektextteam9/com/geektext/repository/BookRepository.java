@@ -28,6 +28,26 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	@Query(value = "select * from book WHERE genre_id = 4", nativeQuery = true)
 	public List<Book> findAI();
 
+	@Query(value = "select * from book WHERE rating >= 0", nativeQuery = true)
+	public List<Book> getRating0();
+
+	@Query(value = "select * from book WHERE rating >= 1", nativeQuery = true)
+	public List<Book> getRating1();
+
+	@Query(value = "select * from book WHERE rating >= 2", nativeQuery = true)
+	public List<Book> getRating2();
+
+	@Query(value = "select * from book WHERE rating >= 3", nativeQuery = true)
+	public List<Book> getRating3();
+
+	@Query(value = "select * from book WHERE rating >= 4", nativeQuery = true)
+	public List<Book> getRating4();
+
+	@Query(value = "select * from book WHERE rating = 5", nativeQuery = true)
+	public List<Book> getRating5();
+
+
+
 
 
 }
