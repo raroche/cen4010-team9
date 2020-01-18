@@ -27,7 +27,7 @@ class AddBook extends Component {
   async componentDidMount() {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/users/wishlist/${this.state.userId}`
+        `https://geek-text-team9.herokuapp.com/api/users/wishlist/${this.state.userId}`
       );
 
       if (response.ok) {
@@ -49,7 +49,7 @@ class AddBook extends Component {
     this.setState({ modalShow: false });
     try {
       const response = await fetch(
-        `http://localhost:8090/api/wishlist/addBook/${wishlistId}/${bookId}`,
+        `https://geek-text-team9.herokuapp.com/api/wishlist/addBook/${wishlistId}/${bookId}`,
         { method: "PUT" }
       );
 

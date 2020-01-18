@@ -23,7 +23,7 @@ export default class AuthorDetails extends Component {
       } = this.props;
 
       const response = await fetch(
-        `http://localhost:8090/api/author/${params.authorId}`
+        `https://geek-text-team9.herokuapp.com/api/author/${params.authorId}`
       );
 
       if (response.ok) {

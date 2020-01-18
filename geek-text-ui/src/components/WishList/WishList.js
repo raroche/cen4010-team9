@@ -29,7 +29,7 @@ class WishList extends Component {
   async fetchWishlists() {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/users/wishlist/${this.state.userId}`
+        `https://geek-text-team9.herokuapp.com/api/users/wishlist/${this.state.userId}`
       );
 
       if (response.ok) {
@@ -53,7 +53,7 @@ class WishList extends Component {
   async handleCreate(listName) {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/users/addWishlist/${listName}/${this.state.userId}`,
+        `https://geek-text-team9.herokuapp.com/api/users/addWishlist/${listName}/${this.state.userId}`,
         { method: "PUT" }
       );
       if (response.ok) {
@@ -73,7 +73,7 @@ class WishList extends Component {
   async handleDeleteWishlist(list_id, userId) {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/users/removeWishlist/${list_id}/${userId}`,
+        `https://geek-text-team9.herokuapp.com/api/users/removeWishlist/${list_id}/${userId}`,
         { method: "DELETE" }
       );
 
@@ -111,7 +111,7 @@ class WishList extends Component {
   async handleDelete(book_id) {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/wishlist/removeBook/${
+        `https://geek-text-team9.herokuapp.com/api/wishlist/removeBook/${
           this.state.Lists[this.state.currentList].id
         }/${book_id}`,
         { method: "DELETE" }
@@ -138,7 +138,7 @@ class WishList extends Component {
   async handleMove(destList, book_id) {
     try {
       const response = await fetch(
-        `http://localhost:8090/api/wishlist/moveBook/${
+        `https://geek-text-team9.herokuapp.com/api/wishlist/moveBook/${
           this.state.Lists[this.state.currentList].id
         }/${destList}/${book_id}/${this.state.userId}`,
         { method: "PUT" }

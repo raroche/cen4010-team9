@@ -24,7 +24,7 @@ class usersInfo extends Component {
   }
 
   async componentDidMount() {
-    const url = "http://localhost:8090/api/users/";
+    const url = "https://geek-text-team9.herokuapp.com/api/users/";
     var currentUser = this.props.currentUser;
     fetch(url + currentUser)
       .then(res => {
@@ -61,7 +61,7 @@ class usersInfo extends Component {
   };
 
   save = () => {
-    const url = "http://localhost:8090/api/users/";
+    const url = "https://geek-text-team9.herokuapp.com/api/users/";
     var currentUser = this.props.currentUser;
     fetch(url + currentUser, {
       method: "put",
