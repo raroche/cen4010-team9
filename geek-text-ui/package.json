@@ -11,6 +11,8 @@
     "@material-ui/lab": "^4.0.0-alpha.29",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "browserslist": "^4.8.3",
+    "caniuse-lite": "^1.0.30001021",
     "lightbox2": "^2.11.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
