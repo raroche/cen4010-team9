@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import BookSection from '../BookSection/BookSection';
-import '../BookPage/BookPage.css';
-import BookHeader from '../BookHeader/BookHeader';
+import React, { Component } from "react";
+import BookSection from "../BookSection/BookSection";
+import "../BookPage/BookPage.css";
+import BookHeader from "../BookHeader/BookHeader";
 
 class AI extends Component {
   constructor(props) {
@@ -17,7 +17,9 @@ class AI extends Component {
   }
   async fetchBooks() {
     try {
-      const response = await fetch("http://localhost:8090/api/books/AI/");
+      const response = await fetch(
+        "https://geek-text-team9.herokuapp.com/api/books/AI/"
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -37,25 +39,23 @@ class AI extends Component {
     this.fetchBooks();
     this.setState({ loading: false });
   }
-    render() {
-        return(
-          <div>
-            <BookHeader/>
-            <div className="bookpage">
-                <div className="books-title">
-                  <h1> The Book Store </h1>
-                  <h2>Artificial Intelligence Books</h2>
-                </div>
-                <div class = "pad">
-                <BookSection data={this.state.books} /><br/>
-                </div>
-
-                
-                
-            </div>
+  render() {
+    return (
+      <div>
+        <BookHeader />
+        <div className="bookpage">
+          <div className="books-title">
+            <h1> The Book Store </h1>
+            <h2>Artificial Intelligence Books</h2>
           </div>
-        );
-    }
+          <div class="pad">
+            <BookSection data={this.state.books} />
+            <br />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default AI;
