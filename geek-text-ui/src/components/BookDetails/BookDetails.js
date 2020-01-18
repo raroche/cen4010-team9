@@ -13,7 +13,9 @@ export default class BookDetails extends Component {
       book: {},
       authors: [],
       loading: false,
-      error: null
+      error: null,
+      loggedIn: props.loggedIn,
+      user: props.user
     };
 
     // Binding methods to class
@@ -64,7 +66,11 @@ export default class BookDetails extends Component {
   render() {
     return (
       <div>
-        <BookMainContainer state={this.state} />
+        <BookMainContainer
+          state={this.state}
+          loggedIn={this.state.loggedIn}
+          user={this.state.user}
+        />
         <BookDescription description={this.state.book.description} />
         <ReviewsSection book={this.state.book} />
       </div>

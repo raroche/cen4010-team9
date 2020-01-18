@@ -2,11 +2,10 @@ package geektextteam9.com.geektext.model;
 
 
 import com.fasterxml.jackson.annotation.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "users")
@@ -17,7 +16,22 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
-    @NotBlank
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_shipping_options",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id")
+    )
+    private List<ShippingOption> hasShippingOptions;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_payment_options",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id")
+    )
+    private List<PaymentOption> hasPaymentOptions;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -44,6 +58,12 @@ public class User {
     @JsonIgnore
     private List<Review> reviews;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_wishlist",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "wishlist_id", referencedColumnName = "id"))
+    @JsonManagedReference
+    private List<Wishlist> wishlists;
 
     public User(@JsonProperty("first_name") String firstName,
                 @JsonProperty("last_name") String lastName,
@@ -51,7 +71,8 @@ public class User {
                 @JsonProperty("username") String username,
                 @JsonProperty("password") String password,
                 @JsonProperty("nickname") String nickname,
-                List<Review> reviews)
+                List<Review> reviews,
+                List<Wishlist> wishlists)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,6 +81,7 @@ public class User {
         this.password = password;
         this.nickname = nickname;
         this.reviews = reviews;
+        this.wishlists = wishlists;
     }
 
     public User(String firstName, String lastName){
@@ -84,10 +106,6 @@ public class User {
         return id;
     }
 
-    public void setId(int id){
-        this.id = id;
-    }
-
     public String getFirstName(){
         return firstName;
     }
@@ -103,10 +121,6 @@ public class User {
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
-
-//    public String getName(){
-//        return firstName + " " + lastName;
-//    }
 
     public String getEmail(){
         return email;
@@ -140,12 +154,63 @@ public class User {
         this.nickname = nickname;
     }
 
-    public List<Review> getReviews() {
+    //Shipping Method getters/setters
+    public List<ShippingOption> getHasShippingOptions(){
+        return hasShippingOptions;
+    }
+
+    public void addShippingOption(ShippingOption newShipping){
+        hasShippingOptions.add(newShipping);
+    }
+
+    public void deleteShippingOptionById(Integer id){
+//        hasShippingOptions.stream().map(shippingOption -> {
+//            if(shippingOption.getId() == id){
+//                return hasShippingOptions.remove(shippingOption);
+//            }else{
+//                return 1;
+//            }
+//        });     //buggy code
+        hasShippingOptions.removeIf(shippingOption -> shippingOption.getId().equals(id));
+
+    }
+
+    //Payment Method getters/setters
+    public List<PaymentOption> getHasPaymentOptions(){
+        return hasPaymentOptions;
+    }
+
+    public void addPaymentOption(PaymentOption newPayment){
+        hasPaymentOptions.add(newPayment);
+    }
+
+    public void deletePaymentOptionById(Integer id) {
+        hasPaymentOptions.removeIf(paymentOption -> paymentOption.getId().equals(id));      //find card by id to delete
+    }
+
+    public void updatePaymentOption(Integer payId, PaymentOption paymentOption){
+        for(int i=0; i<hasPaymentOptions.size(); i++){
+            PaymentOption p = hasPaymentOptions.get(i);
+            if(p.getId() == payId){
+                hasPaymentOptions.set(i, paymentOption);
+            }
+        }
+    }
+
+    public List<Review> getReviews(){
         return reviews;
     }
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public List<Wishlist> getWishlists() {
+        return wishlists;
+    }
+
+    public void setWishlists(List<Wishlist> wishlists) {
+        this.wishlists = wishlists;
     }
 }
 

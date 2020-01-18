@@ -6,6 +6,7 @@ import {
   Dropdown,
   SplitButton
 } from "react-bootstrap";
+import DropdownMenu from "react-bootstrap/DropdownMenu";
 
 class WishlistCards extends Component {
   constructor(props) {
@@ -30,11 +31,11 @@ class WishlistCards extends Component {
     if (this.state.Books.length === 0) {
       return (
         <Card
-          className="p-3"
+          className="wishlist-cards"
           style={{
             top: "80px",
             width: "800px",
-            left: "20%"
+            left: "30%"
           }}
         >
           <Card.Body>
@@ -46,16 +47,17 @@ class WishlistCards extends Component {
       let listcard = this.state.Books.map(item => (
         <div>
           <Card
-            className="p-3"
+            className="wishlist-cards"
             style={{
               top: "80px",
               width: "800px",
-              left: "20%"
+              left: "30%",
+              height: "200px"
             }}
           >
             <Card.Body>
               <img
-                src={item.cover}
+                src={item.img_url}
                 height="150"
                 width="100"
                 padding="20px"
@@ -68,26 +70,42 @@ class WishlistCards extends Component {
                   top: "80px"
                 }}
               >
-                <SplitButton
-                  title="Move to Cart"
-                  onClick={e => this.state.handleMoveToCart()}
-                >
-                  {this.state.Options.map(option => (
-                    <Dropdown.Item
-                      value={option.listid}
-                      onClick={e =>
-                        this.state.handleMove(option.listid, item.id)
-                      }
-                    >
-                      {option.listName}
-                    </Dropdown.Item>
-                  ))}
-                </SplitButton>
+                <Dropdown title="Move-to-list">
+                  <Dropdown.Toggle variant="primary" id="dropdown-change-list">
+                    Change List
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {this.state.Options.map(option => (
+                      <Dropdown.Item
+                        value={option.listid}
+                        onClick={e =>
+                          this.state.handleMove(option.listid, item.id)
+                        }
+                      >
+                        {option.listName}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
               </ButtonToolbar>
+              <Button
+                title="Move to Cart"
+                style={{
+                  position: "absolute",
+                  right: "138px",
+                  top: "120px"
+                }}
+                onClick={e => this.state.handleMoveToCart()}
+              >
+                <img
+                  src="https://cdn0.iconfinder.com/data/icons/shopping-icons-5/100/Cart-512.png"
+                  height="25"
+                />
+              </Button>
               <Button
                 style={{
                   position: "absolute",
-                  right: "70px",
+                  right: "85px",
                   top: "120px"
                 }}
                 onClick={e => this.state.handleDelete(item.id)}
@@ -103,16 +121,18 @@ class WishlistCards extends Component {
                 style={{
                   position: "absolute",
                   top: "70px",
-                  left: "200px"
+                  left: "150px",
+                  maxWidth: "350px"
                 }}
               >
-                <h1
+                <p1
                   style={{
-                    fontweight: "bold"
+                    fontweight: "bold",
+                    maxWidth: "10px"
                   }}
                 >
-                  {item.bookName}
-                </h1>
+                  {item.title}
+                </p1>
                 {item.author}
                 <br />${item.price}
               </Card.Text>

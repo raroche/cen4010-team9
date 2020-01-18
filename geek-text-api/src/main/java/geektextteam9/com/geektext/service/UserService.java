@@ -14,11 +14,6 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-
-//    public UserService(@Qualifier("fakeData") UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-
     public void createUser(User user){
         userRepository.save(user);
     }
@@ -31,15 +26,23 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public void updateUser(User updatedUser){
-        Optional<User> userToBeUpdated = userRepository.findById(updatedUser.getId());
-        if(userToBeUpdated.isPresent()){
-            updatedUser = userToBeUpdated.get();
-        };
-        userRepository.save(updatedUser);
+    public void updateUser(Integer userId, User updatedUser){
+        getAllUsers().stream().forEach(user -> {
+            if(user.getId() == userId){
+                userRepository.save(updatedUser);
+            }
+        });
+
     }
 
     public void deleteUser(Integer id){
         userRepository.deleteById(id);
     }
+
+    public User findById(int id) {
+        return userRepository.getOne(id);
+    }
+
+    public User save(User wishlist) {
+        return userRepository.save(wishlist);    }
 }
