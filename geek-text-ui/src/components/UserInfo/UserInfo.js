@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faSave } from '@fortawesome/free-solid-svg-icons';
@@ -194,19 +195,48 @@ class usersInfo extends Component{
 
         if(loading){
             return <div>Loading...</div>;
-        }
 
-        if(!users){
-            return <div>No users.</div>;
         }
+      })
+      .then(users => {
+        this.setState({ users: users, loading: false });
+      })
+      .catch(error => this.setState({ error: error }));
+  }
+
+  render() {
+    const { loading, error, users } = this.state;
+
+    if (error) {
+      return <div>{error.message}</div>;
+    }
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
 
         if(this.state.editing){
             return this.editMode();
         }else{
             return this.displayMode();
         }
-        
+
     }
+
+    return (
+      <div>
+        <div>
+          {users.map(user => (
+            <div>{user.first_name}</div>
+          ))}
+        </div>
+        <div>Email: </div>
+        <div>usersname: </div>
+        <div>Password: </div>
+      </div>
+    );
+  }
 }
 
 export default usersInfo;

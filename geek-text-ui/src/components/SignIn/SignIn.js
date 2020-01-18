@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import './SignIn.css';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import "./SignIn.css";
 
 class SignIn extends Component {
-    constructor(props){
-        super(props);
+  constructor(props) {
+    super(props);
 
         this.state = {
             username: "",
@@ -41,13 +41,29 @@ class SignIn extends Component {
         console.log(this.state);
     }
 
-    render() {
-        return (
-            <div className="inner-container">
 
-                <div className="header">
-                    Sign In
-                </div>
+  handleChange = e => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  };
+
+  submitLogin(e) {
+    e.preventDefault();
+    const { username, password } = this.state;
+    this.state.users.map(user => {
+      if (user.username === this.state.username) {
+        if (user.password === this.state.password) {
+          this.props.handleSuccessfulAccount(user);
+        } else {
+          this.setState({ loginError: "Incorrect password." }); //fix bug
+        }
+      } else {
+        this.setState({ loginError: "Account does not exist." });
+      }
+    });
+    console.log(this.state);
+  }
 
                 <form className="box" onSubmit={this.submitLogin}>
                 
@@ -75,12 +91,30 @@ class SignIn extends Component {
                     {this.state.loginError}
                     <button type="submit" className="login-btn" onClick={this.submitLogin}>Sign In</button>
 
-                </form>
 
-            </div>
-        );
-    }
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              onChange={this.handleChange}
+              required
+              className="login-input"
+              placeholder="Password"
+            />
+          </div>
+          {this.state.loginError}
+          <button
+            type="button"
+            className="login-btn"
+            onClick={this.submitLogin}
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
+    );
+  }
 }
-
 
 export default SignIn;
