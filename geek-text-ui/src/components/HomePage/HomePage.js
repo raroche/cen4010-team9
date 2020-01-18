@@ -20,7 +20,9 @@ class HomePage extends Component {
   // Fetch a book from the API
   async fetchFeaturedBooks() {
     try {
-      const response = await fetch("http://localhost:8090/api/");
+      const response = await fetch(
+        "https://geek-text-team9.herokuapp.com/api/"
+      );
 
       if (response.ok) {
         const data = await response.json();
